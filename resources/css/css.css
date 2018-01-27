@@ -1,0 +1,101 @@
+body, html {
+	margin: 0 auto;
+	font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+	min-width: 1000px;
+	width: 100%;
+	
+}
+
+
+#tbl tr:nth-child(even) {background-color: #f2f2f2}
+table, td, th {
+	
+	border-bottom: 1px solid #ddd;
+	
+}
+
+#tbl {
+	width: 100%;
+	border-collapse: collapse;
+	min-width: 1000px;
+	position:relative;
+	margin-bottom: 50px;
+	
+}
+
+#tbl td {font-size: 12px; text-align: left;}
+
+
+th {
+	
+	padding: 5px;
+	height: 10px;
+	text-align: center;
+	background-color: #F2552C;
+	color: white;
+	border: 1px solid #fff;
+	font-size: 14px;
+	
+}
+
+td {
+	
+	padding: 3px;
+	
+}
+
+#container{
+	
+	position: relative;
+	width: 100%;
+	background-color: white;
+	margin-top: 10px;
+	margin-left: 10px;
+	min-width: 1000px;
+	
+	
+}
+#tbl tr:hover {background-color: #f00; color: white;}
+#container table: { background-color: white; }
+
+
+input[type=text]{
+	font-size: 14px;
+	padding: 5px;
+	width: 100%;
+	
+}
+
+select {
+	font-size: 14px;
+	padding: 2px;
+	width: 100%;
+	
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}	
+
+input[type=number]{
+	width: 100%;
+	font-size: 12px;
+	padding: 5px;
+}
+#hide {
+
+    border-radius: 12px;
+    
+}
+#show {
+	
+    border-radius: 12px;
+    
+}
+#toggle-wrap{
+	
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
