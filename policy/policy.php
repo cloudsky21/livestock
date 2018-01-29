@@ -67,75 +67,10 @@ else if($animal=="Goat-Breeder" || $animal=="Goat-Fattener"){
 	<link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<link rel="stylesheet" href="../resources/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-	<!--
-	<link href="mypdf.css" type="text/css" rel="stylesheet" media="mpdf" />
--->
-<script src="../resources/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
-<script src="../resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-	<!--
-	<script language="javascript" type="text/javascript">
-  /* <![CDATA[ */
-    document.write('<a href="makepdf.php?url=' + encodeURIComponent(location.href) +'">');
-    document.write('Create PDF file of this page');
-    document.write('</a>');
 	
-  /* ]]> */
-</script>
--->
-<!---
-<style>
-@page {
-  size: A4;
-  margin: 1in;
-}
-@media print {
-  html, body {
-    width: 210mm;
-    height: 297mm;
-	
-  }
-  
+	<script src="../resources/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
+	<script src="../resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
-	 
-  
-}
-body, html {
-	margin: 0;
-	font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
-}
-
-#border {
-	border: 1px solid black;
-	width: 100%;
-	
-}
-#img-holder {
-	width: 100%;
-	
-}
-
-#table1 td { 
-padding: 5px;
-}
-
-#table1 {
-border-collapse: collapse;	
-}
-#table2 {
-width: 100%;
-vertical-align: bottom;
-border-collapse: collapse;	
-}
-
-#table2 td {
-padding-top: 15px;
-padding-left: 5px;
-border-bottom: 1px solid #ddd;
-}
-
-
-</style>
--->
 </head>
 <body>
 	<div id = "border">
@@ -258,6 +193,4 @@ border-bottom: 1px solid #ddd;
 							</div>
 						</body>
 						</html>
-						<?php
-						exec('wkhtmltopdf policy.php google.pdf');
-						?>
+						
