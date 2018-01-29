@@ -1,6 +1,6 @@
 <?PHP 
 session_start();
-require("connection/conn.php");
+require_once("connection/conn.php");
 date_default_timezone_set('Asia/Manila');
 if(!isset($_SESSION['isLogin']) && (!isset($_COOKIE["lx"]))) 
 { 
@@ -18,11 +18,11 @@ if(isset($_POST['delete_account'])){
 	
 	$get_record = $_POST['recorded'];
 	
-	$result = $db->prepare("DELETE FROM account WHERE account_id = ?");
+	$result = $db->prepare("DELETE FROM users WHERE usrid = ?");
 	$result->execute([$get_record]);
 
 	unset($_POST);
-	header("location: ".$_SERVER['PHP_SELF']);
+	header("location: ".$_SERVER[REQUEST_URI]);
 
 }
 
@@ -35,7 +35,10 @@ if(isset($_POST['addAccount'])){
 
 
 		$userid = htmlentities($_POST['usr'], ENT_QUOTES);
-		$userpas = sha1($_POST['pwd']);
+
+		$userpas = password_hash($_POST['pwd'], PASSWORD_BCRYPT, array("cost" => 10));
+
+
 		$surname = strtoupper(htmlentities($_POST['sname'], ENT_QUOTES));
 		$given_name = strtoupper(htmlentities($_POST['gname'], ENT_QUOTES));
 		$middlename = strtoupper(htmlentities($_POST['mname'], ENT_QUOTES));
@@ -55,23 +58,11 @@ if(isset($_POST['addAccount'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link rel="shortcut icon" href="favicon.ico">
-	<link rel="apple-touch-icon" sizes="57x57" href="images/apple-icon-57x57.png">
-	<link rel="apple-touch-icon" sizes="60x60" href="images/apple-icon-60x60.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-icon-72x72.png">
-	<link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon-76x76.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-icon-114x114.png">
-	<link rel="apple-touch-icon" sizes="120x120" href="images/apple-icon-120x120.png">
-	<link rel="apple-touch-icon" sizes="144x144" href="images/apple-icon-144x144.png">
-	<link rel="apple-touch-icon" sizes="152x152" href="images/apple-icon-152x152.png">
-	<link rel="apple-touch-icon" sizes="180x180" href="images/apple-icon-180x180.png">
-	<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-	<link rel="stylesheet" href="bootswatch/solar/bootstrap.min.css">
-	<script src="bootstrap-3.3.7-dist/js/jquery.min.js"></script>
-	<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="stylesheet" href="resources/bootswatch/solar/bootstrap.min.css">
+	<link rel="stylesheet" href="resources/css/font-awesome/css/font-awesome.css">
+	<script src="resources/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
+	<script src="resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>Accounts</title>
@@ -84,7 +75,7 @@ if(isset($_POST['addAccount'])){
 				$.ajax({
 					cache: false,
 					type : 'post',
-            url : 'delete_account.php', //Here you will fetch records 
+            url : 'bin/delete_account.php', //Here you will fetch records 
             data :  'rowid='+ rowid, //Pass $id
             success : function(data){
             $('.edit-data').html(data);//Show fetched data from database
@@ -251,8 +242,8 @@ if(isset($_POST['addAccount'])){
 
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#" data-toggle="modal" data-target="#addAccount"><span class="glyphicon glyphicon-plus"></span></a></li>
-				<li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>&nbsp;<span class="caret"></span></a>
+				<li><a href="#" data-toggle="modal" data-target="#addAccount"><span class="fa fa-plus"></span></a></li>
+				<li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-user"></span>&nbsp;<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="#" style="color:gray; pointer-events: none; border-bottom: 1px solid #ddd" tabindex="-1"><?PHP echo $_SESSION['isLoginName']; ?></a></li>
 						<li><a href="year">Insurance Year</a></li>
@@ -299,7 +290,7 @@ if(isset($_POST['addAccount'])){
 							echo '<td>'.$row['pswd'].'</td>';
 							echo '<td>'.$row['firstname']."\n".$row['surname'].'</td>';
 							echo '<td>'.$row['actype'].'</td>';
-							echo '<td><button type="submit" class="btn btn-danger btn-xs" name="btn_delete" data-id="'.$row['usrid'].'" data-toggle="modal" data-target="#delAccount"><span class="glyphicon glyphicon-trash"></span></button>';
+							echo '<td><button type="submit" class="btn btn-danger btn-xs" name="btn_delete" data-id="'.$row['usrid'].'" data-toggle="modal" data-target="#delAccount"><span class="fa fa-trash"></span></button>';
 							echo '</tr>';
 
 						}

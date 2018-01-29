@@ -2,7 +2,7 @@
 session_start();
 require_once("connection/conn.php");
 date_default_timezone_set('Asia/Manila');
-
+$get_result = "";
 
 if(isset($_COOKIE["lx"]) && isset($_COOKIE["lp"]) && isset($_COOKIE["rrrrassdawds"])){
 	
@@ -65,6 +65,7 @@ else if(isset($_SESSION['isLogin'])){
 
 ?>
 
+<!-- on login -->
 
 <?PHP
 if($_SERVER["REQUEST_METHOD"]=="POST"){
@@ -74,6 +75,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
 	/*Encrypts Password*/
 	$userpas = sha1($_POST['password']);
+
 	
 	/*Checks if Year is not null*/
 	
@@ -84,8 +86,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 	
 	
 	/*Checks username and password in database*/
-	$result = $db->prepare("SELECT * FROM users WHERE usrid = ? && pswd = ? LIMIT 1");
-	$result->execute([$userid, $userpas]);
+	$result = $db->prepare("SELECT * FROM users WHERE usrid = ? LIMIT 1");
+	$result->execute([$userid]);
 
 	if($result->rowcount() > 0) {
 		
@@ -93,38 +95,40 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 		
 		foreach($result as $row){
 
+			if(password_verify($_POST['password'], $row['pswd'])) {
 
-			$name_account = $row['firstname'].' '.$row['middlename'].' '.$row['surname'];
-			$id = $row['usrid'];
-			$stat = $row['actype'];
-			$officeDes = $row['office'];
-			
+				$name_account = $row['firstname'].' '.$row['middlename'].' '.$row['surname'];
+				$id = $row['usrid'];
+				$stat = $row['actype'];
+				$officeDes = $row['office'];
+
+
+				$_SESSION['office'] = $officeDes;
+				$_SESSION['isLogin'] = 1;
+				$_SESSION['isLoginID'] = $id;
+				$_SESSION['stat'] = $stat;
+				$_SESSION['isLoginName'] = $name_account;
+
+
+
+				/*Set Cookie*/
+				$cookie_name = "lx";
+				$cookie_value = $userid;
+				$cookie_p = $userpas;
+				$cookie_rrs = $_SESSION['insurance'];
+
+
+				$_SESSION['xValue'] = $userid;
+				$_SESSION['pValue'] = $cookie_p;
+				setcookie($cookie_name, $cookie_value,  time()+86400);
+				setcookie("lp", $cookie_p,  time()+86400);
+				setcookie("rrrrassdawds", $cookie_rrs,  time()+86400);
+
+
+
+		header("location: home");
+			}
 		}
-
-		$_SESSION['office'] = $officeDes;
-		$_SESSION['isLogin'] = 1;
-		$_SESSION['isLoginID'] = $id;
-		$_SESSION['stat'] = $stat;
-		$_SESSION['isLoginName'] = $name_account;
-
-		
-
-		/*Set Cookie*/
-		$cookie_name = "lx";
-		$cookie_value = $userid;
-		$cookie_p = $userpas;
-		$cookie_rrs = $_SESSION['insurance'];
-		
-		
-		$_SESSION['xValue'] = $userid;
-		$_SESSION['pValue'] = $cookie_p;
-		setcookie($cookie_name, $cookie_value,  time()+86400);
-		setcookie("lp", $cookie_p,  time()+86400);
-		setcookie("rrrrassdawds", $cookie_rrs,  time()+86400);
-		
-		
-		
-		//header("location: home");
 	}
 	
 
@@ -132,7 +136,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 	{
 		
 		$get_result = '<div id="flash-msg" class="alert alert-danger">Account Not Found!</div>';
-		echo sha1('chen');
 		unset($_POST);
 	}
 	
@@ -148,9 +151,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Livestock | Control System</title>
 	<link rel="shortcut icon" href="images/favicon.ico"/>
-	<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
-	<script src="bootstrap-3.3.7-dist/js/jquery.min.js"></script>
-	<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="resources/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+	<script src="resources/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
+	<script src="resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	<script>
 		$(document).ready(function () {
 			$("#flash-msg").delay(3000).fadeOut("slow");
