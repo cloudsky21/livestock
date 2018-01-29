@@ -1,7 +1,7 @@
 <?PHP
 session_start();
-include("convert.php");
-require_once("connection/conn.php");
+include("../convert.php");
+require_once("../connection/conn.php");
 date_default_timezone_set('Asia/Manila');
 $table = 'control'.$_SESSION['insurance'];
 $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
@@ -52,26 +52,26 @@ else if($animal=="Goat-Breeder" || $animal=="Goat-Fattener"){
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Policy Printing <?PHP echo $lslb ?></title>
-	<link rel="apple-touch-icon" sizes="57x57" href="images/apple-icon-57x57.png">
-	<link rel="apple-touch-icon" sizes="60x60" href="images/apple-icon-60x60.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-icon-72x72.png">
-	<link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon-76x76.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-icon-114x114.png">
-	<link rel="apple-touch-icon" sizes="120x120" href="images/apple-icon-120x120.png">
-	<link rel="apple-touch-icon" sizes="144x144" href="images/apple-icon-144x144.png">
-	<link rel="apple-touch-icon" sizes="152x152" href="images/apple-icon-152x152.png">
-	<link rel="apple-touch-icon" sizes="180x180" href="images/apple-icon-180x180.png">
-	<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+	<link rel="apple-touch-icon" sizes="57x57" href="../images/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="../images/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="../images/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="../images/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="../images/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="../images/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="../images/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="../images/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="../images/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="../images/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="../images/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../resources/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 	<!--
 	<link href="mypdf.css" type="text/css" rel="stylesheet" media="mpdf" />
 -->
-<script src="bootstrap-3.3.7-dist/js/jquery.min.js"></script>
-<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="../resources/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
+<script src="../resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	<!--
 	<script language="javascript" type="text/javascript">
   /* <![CDATA[ */
