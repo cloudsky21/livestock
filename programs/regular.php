@@ -792,7 +792,7 @@ if(!isset($_SESSION['isLogin']) && (!isset($_COOKIE["lx"]))) { header("location:
 		<link rel="shortcut icon" href="../images/favicon.ico">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta charset="utf8">		
-		<link rel="stylesheet" href="../resources/bootswatch/lumen/bootstrap.css">
+		<link rel="stylesheet" href="../resources/bootswatch/solar/bootstrap.css">
 		<link rel="stylesheet" href="../resources/css/font-awesome/css/font-awesome.css">
 		<link rel="stylesheet" href="../resources/css/local.css">
 		<script src="../resources/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
@@ -940,7 +940,7 @@ if(!isset($_SESSION['isLogin']) && (!isset($_COOKIE["lx"]))) { header("location:
 	<body>
 
 		<div class="container-fluid">
-			<nav class="navbar navbar-inverse navbar-fixed-top">
+			<nav class="navbar navbar-default navbar-fixed-top">
 				<div class="container-fluid">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -949,7 +949,7 @@ if(!isset($_SESSION['isLogin']) && (!isset($_COOKIE["lx"]))) { header("location:
 							<span class="icon-bar"></span>                        
 						</button>
 
-						<a class="navbar-brand" href="home">Livestock Control</a>
+						<a class="navbar-brand" href="../home">Livestock Control</a>
 					</div>
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav navbar-right">
@@ -966,7 +966,7 @@ if(!isset($_SESSION['isLogin']) && (!isset($_COOKIE["lx"]))) { header("location:
 										<li><a href="#">SAAD</a></li>
 									</ul>
 								</li>
-								<li class="navbar-form"><input type="text" id="srch" name="srch" class="form-control" placeholder="Search/ i= IDS, f=farmer" oninput="find_ids(this.value);" ></li>	
+								<li class="navbar-form"><input type="text" id="srch" name="srch" class="form-control" placeholder="Search" oninput="find_ids(this.value);" ></li>	
 								<li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-gears"></span> <span class="caret"></span></a>
 									<ul class="dropdown-menu">
 										<li><a href="#" style="color:gray; pointer-events: none; border-bottom: 1px solid #ddd" tabindex="-1"><?PHP echo $_SESSION['isLoginName']; ?></a></li>
@@ -1039,15 +1039,15 @@ if(!isset($_SESSION['isLogin']) && (!isset($_COOKIE["lx"]))) { header("location:
 								if($page <=1){
 									echo "<li class='disabled'><a href='#'>Previous</a></li>";
 								}
-								else echo "<li style='cursor:pointer'><a href='indexR?page=".($page-1)."'>Previous</a></li>";
+								else echo "<li style='cursor:pointer'><a href='regular?page=".($page-1)."'>Previous</a></li>";
 									for ($x=max($page-5, 1); $x<=max(1, min($total_pages,$page+5)); $x++)
 									{
 
-										if($page == $x){ echo '<li class="active"><a href="indexR?page='.$x.'">'.$x.'</a></li>';} 
-										else { echo '<li><a href="indexR?page='.($x).'">'.$x.'</a></li>';}
+										if($page == $x){ echo '<li class="active"><a href="regular?page='.$x.'">'.$x.'</a></li>';} 
+										else { echo '<li><a href="regular?page='.($x).'">'.$x.'</a></li>';}
 									}
 									if($page < $total_pages){
-										echo "<li style='cursor:pointer'><a href='indexR?page=".($page+1)."'>Next</a></li>";
+										echo "<li style='cursor:pointer'><a href='regular?page=".($page+1)."'>Next</a></li>";
 
 									}
 									else echo '<li class="disabled"><a href="#">Next</a></li>';
@@ -1097,9 +1097,9 @@ if(!isset($_SESSION['isLogin']) && (!isset($_COOKIE["lx"]))) { header("location:
 												echo '<td>'.$row['town'].', '.$row['province'].'</td>';
 												echo '<td>'.$row['animal'].'</td>';
 												if($row['lslb'] != "0") { echo '<td><a class="btn btn-default btn-xs" href="policyR.php?lslb='.$row['lslb'].'" target="_blank">'.$row['lslb'].'</a></td>'; } else {echo '<td><a class="btn btn-default btn-xs disabled" href="policyR.php?lslb='.$row['lslb'].'" target="_blank">'.$row['lslb'].'</a></td>';}
-												echo '<td><a class="btn btn-default btn-xs" href="processingslip?ids='.$row['idsnumber'].'RRRR" target="_blank"><span class="glyphicon glyphicon-list"> </span></a></td>';
-												echo '<td><a class="btn btn-default btn-xs" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static" data-keyboard="false"><span class="glyphicon glyphicon-pencil"></span></a></td>';
-												echo '<td><a class="btn btn-default btn-xs" href="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static" data-keyboard="false"><span class="glyphicon glyphicon-trash"></span></a></td>';
+												echo '<td><a class="btn btn-default btn-xs" href="processingslip?ids='.$row['idsnumber'].'RRRR" target="_blank"><span class="fa fa-list"> </span></a></td>';
+												echo '<td><a class="btn btn-default btn-xs" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static" data-keyboard="false"><span class="fa fa-edit"></span></a></td>';
+												echo '<td><a class="btn btn-default btn-xs" href="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static" data-keyboard="false"><span class="fa fa-trash"></span></a></td>';
 
 												echo '</tr>';
 											}
@@ -1112,9 +1112,9 @@ if(!isset($_SESSION['isLogin']) && (!isset($_COOKIE["lx"]))) { header("location:
 												echo '<td>'.$row['town'].', '.$row['province'].'</td>';
 												echo '<td>'.$row['animal'].'</td>';
 												if($row['lslb'] != "0") { echo '<td><a class="btn btn-default btn-xs" href="policyR.php?lslb='.$row['lslb'].'" target="_blank">'.$row['lslb'].'</a></td>'; } else {echo '<td><a class="btn btn-default btn-xs disabled" href="policyR.php?lslb='.$row['lslb'].'" target="_blank" readonly>'.$row['lslb'].'</a></td>';}
-												echo '<td><a class="btn btn-default btn-xs" href="processingslip?ids='.$row['idsnumber'].'RRRR" target="_blank"><span class="glyphicon glyphicon-list"> </span></a></td>';
-												echo '<td><a class="btn btn-default btn-xs" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static" data-keyboard="false"><span class="glyphicon glyphicon-pencil"></span></a></td>';
-												echo '<td><a class="btn btn-default btn-xs" href="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static" data-keyboard="false"><span class="glyphicon glyphicon-trash"></span></a></td>';
+												echo '<td><a class="btn btn-default btn-xs" href="processingslip?ids='.$row['idsnumber'].'RRRR" target="_blank"><span class="fa fa-list"> </span></a></td>';
+												echo '<td><a class="btn btn-default btn-xs" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static" data-keyboard="false"><span class="fa fa-edit"></span></a></td>';
+												echo '<td><a class="btn btn-default btn-xs" href="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static" data-keyboard="false"><span class="fa fa-trash"></span></a></td>';
 
 												echo '</tr>';
 											}
