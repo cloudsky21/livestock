@@ -18,15 +18,16 @@ if(!isset($_SESSION['isLogin']) || (!isset($_COOKIE["lx"]))) {
 <!DOCTYPE html>
 <html>
 <head>
+	<title>Livestock Control <?php echo $_SESSION['insurance'] ?></title>
 	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
 	<link rel="manifest" href="/manifest.json">
 	<meta http-equiv="refresh" content="30">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="bootswatch/lumen/bootstrap.css">
-	<link rel="stylesheet" href="css/font-awesome/css/font-awesome.css">
-	<script src="bootstrap-3.3.7-dist/js/jquery.min.js"></script>
-	<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="resources/bootswatch/solar/bootstrap.css">
+	<link rel="stylesheet" href="resources/css/font-awesome/css/font-awesome.css">
+	<script src="resources/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
+	<script src="resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	<meta http-equiv="content-type" content="text/html; charset=utf8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 </head>
@@ -34,7 +35,7 @@ if(!isset($_SESSION['isLogin']) || (!isset($_COOKIE["lx"]))) {
 
 
 	<div class="container-fluid">
-		<nav class="navbar navbar-inverse navbar-fixed-top">
+		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -53,10 +54,10 @@ if(!isset($_SESSION['isLogin']) || (!isset($_COOKIE["lx"]))) {
 						<li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i>
 							<span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="/L/programs/rsbsa">RSBSA</a></li>
-								<li><a href="indexR">Regular Program</a></li>
-								<li><a href="apcp">APCP</a></li>
-								<li><a href="acpc">Punla</a></li>
+								<li><a href="programs/rsbsa">RSBSA</a></li>
+								<li><a href="programs/regular">Regular Program</a></li>
+								<li><a href="programs/apcp">APCP</a></li>
+								<li><a href="programs/acpc">Punla</a></li>
 								<li><a href="#">AGRI-AGRA</a></li>
 								<li><a href="#">SAAD</a></li>
 							</ul>
