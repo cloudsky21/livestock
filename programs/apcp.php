@@ -213,7 +213,7 @@ if(isset($_POST['submit_index_update'])){
 	<link rel="shortcut icon" href="../images/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" href="../resources/bootswatch/lumen/bootstrap.css">
+	<link rel="stylesheet" href="../resources/bootswatch/solar/bootstrap.css">
 	<link rel="stylesheet" href="../resources/css/font-awesome/css/font-awesome.css">
 	<link rel="stylesheet" href="../resources/css/local.css">
 	<script src="../resources/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
@@ -351,7 +351,7 @@ if(isset($_POST['submit_index_update'])){
 
 <body>
 	<div class="container-fluid">
-		<nav class="navbar navbar-inverse navbar-fixed-top">
+		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -360,7 +360,7 @@ if(isset($_POST['submit_index_update'])){
 						<span class="icon-bar"></span>                        
 					</button>
 
-					<a class="navbar-brand" href="home">Livestock Control</a>
+					<a class="navbar-brand" href="../home">Livestock Control</a>
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-right">
@@ -370,14 +370,14 @@ if(isset($_POST['submit_index_update'])){
 							<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="rsbsa">RSBSA</a></li>
-								<li><a href="indexR">Regular Program</a></li>
-								<li class="active"><a href="apcp">APCP</a></li>
+								<li><a href="regular">Regular Program</a></li>
+								<li class="active"><a href="#">APCP</a></li>
 								<li><a href="acpc">Punla</a></li>
 								<li><a href="#">AGRI-AGRA</a></li>
 								<li><a href="#">SAAD</a></li>
 							</ul>
 						</li>
-						<li class="navbar-form"><input type="text" id="srch" name="srch" class="form-control" placeholder="Search/ i= IDS, f=farmer" oninput="find_ids(this.value);" ></li>	
+						<li class="navbar-form"><input type="text" id="srch" name="srch" class="form-control" placeholder="Search" oninput="find_ids(this.value);" ></li>	
 						<li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-gears"></span> <span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="#" style="color:gray; pointer-events: none; border-bottom: 1px solid #ddd" tabindex="-1"><?PHP echo $_SESSION['isLoginName']; ?></a></li>

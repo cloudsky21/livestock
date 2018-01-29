@@ -743,7 +743,7 @@ if(!isset($_SESSION['isLogin']) || (!isset($_COOKIE["lx"]))) { header("location:
 		<link rel="shortcut icon" href="../images/favicon.ico">
 			
 		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="../resources/bootswatch/lumen/bootstrap.css">
+		<link rel="stylesheet" href="../resources/bootswatch/solar/bootstrap.css">
 		<link rel="stylesheet" href="../resources/css/font-awesome/css/font-awesome.css">
 		<link rel="stylesheet" href="../resources/css/local.css">
 		<link rel="stylesheet" href="../resources/multi-select/bootstrap-multiselect.css">
@@ -1127,7 +1127,7 @@ if(!isset($_SESSION['isLogin']) || (!isset($_COOKIE["lx"]))) { header("location:
 	<body>
 
 		<div class="container-fluid">
-			<nav class="navbar navbar-inverse navbar-fixed-top">
+			<nav class="navbar navbar-default navbar-fixed-top">
 				<div class="container-fluid">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -1136,7 +1136,7 @@ if(!isset($_SESSION['isLogin']) || (!isset($_COOKIE["lx"]))) { header("location:
 							<span class="icon-bar"></span>                        
 						</button>
 
-						<a class="navbar-brand" href="home">Livestock Control</a>
+						<a class="navbar-brand" href="../home">Livestock Control</a>
 					</div>
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav navbar-right">
@@ -1291,10 +1291,10 @@ if(!isset($_SESSION['isLogin']) || (!isset($_COOKIE["lx"]))) { header("location:
 									echo '<td>'.$row['town'].', '.$row['province'].'</td>';
 									echo '<td>'.$row['animal'].'</td>';
 
-									if (!$row['lslb']=="0") { echo '<td><a class="btn btn-default btn-xs" href="policy?lslb='.$row['lslb'].'" target="_blank">'.$row['lslb'].'</a></td>';}else {echo '<td><a class="btn btn-default btn-xs disabled" href="#">'.$row['lslb'].'</a></td>';}
-									echo '<td><a class="btn btn-default btn-xs" href="processingslip?ids='.$row['idsnumber'].'PPPP" target="_blank"><span class="glyphicon glyphicon-list"> </span></a></td>';
+									if (!$row['lslb']=="0") { echo '<td><a class="btn btn-default btn-xs" href="../policy/policy?lslb='.$row['lslb'].'" target="_blank">'.$row['lslb'].'</a></td>';}else {echo '<td><a class="btn btn-default btn-xs disabled" href="#">'.$row['lslb'].'</a></td>';}
+									echo '<td><a class="btn btn-default btn-xs" href="processingslip?ids='.$row['idsnumber'].'PPPP" target="_blank"><span class="fa fa-list"> </span></a></td>';
 									echo '<td><a class="btn btn-default btn-xs" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><i class="fa fa-edit"></i></a></td>';		
-									echo '<td><a class="btn btn-default btn-xs" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-trash"/></span></a></td>';
+									echo '<td><a class="btn btn-default btn-xs" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="fa fa-trash"/></span></a></td>';
 
 									echo '</tr>';
 								}
