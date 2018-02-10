@@ -19,6 +19,9 @@ if((!isset($_SESSION['isLogin'])) && (!isset($_COOKIE["lx"]))) { header("locatio
 			$tb_reg = "controlr".$pyear;
 			$tb_apcp = "controla".$pyear;
 			$tb_pnl = "controlacpc".$pyear;
+			$tbl_agri = 'agriagra'.$pyear;
+			$tbl_saad = 'saad'.$pyear;
+			$tbl_yrrp = 'yrrp'.$pyear;
 
 			$result = $db->prepare("INSERT INTO year(year) VALUES(?)");
 			$result->execute([$pyear]);	
@@ -41,7 +44,7 @@ if((!isset($_SESSION['isLogin'])) && (!isset($_COOKIE["lx"]))) { header("locatio
 				assured VARCHAR(300) NOT NULL,
 				farmers DECIMAL(20,0) NOT NULL,
 				heads DECIMAL(20,0) NOT NULL,
-				animal DECIMAL(20,0) NOT NULL,
+				animal VARCHAR(300) NOT NULL,
 				premium DECIMAL(20,2) NOT NULL,
 				amount_cover DECIMAL(20,2) NOT NULL,
 				rate DECIMAL(20,0) NOT NULL,
@@ -56,6 +59,106 @@ if((!isset($_SESSION['isLogin'])) && (!isset($_COOKIE["lx"]))) { header("locatio
 			);");
 
 			$result->execute();
+//AGRI-AGRA
+			$result = $db->prepare("
+				CREATE TABLE `$tbl_agri` ( 
+				Year VARCHAR(4) NOT NULL,
+				date_r DATE NOT NULL,
+				program VARCHAR(20) NOT NULL,
+				groupName VARCHAR(300) NOT NULL,
+				ids1 VARCHAR(30) NOT NULL,	
+				idsnumber INT(4) NOT NULL AUTO_INCREMENT,
+				idsprogram VARCHAR(4) NOT NULL DEFAULT 'AGRI',
+				lsp VARCHAR(20) NOT NULL,
+				status TEXT(20) NOT NULL,
+				office_assignment VARCHAR(200) NOT NULL,
+				province VARCHAR(300) NOT NULL,
+				town VARCHAR(300) NOT NULL,
+				assured VARCHAR(300) NOT NULL,
+				farmers DECIMAL(20,0) NOT NULL,
+				heads DECIMAL(20,0) NOT NULL,
+				animal VARCHAR(300) NOT NULL,
+				premium DECIMAL(20,2) NOT NULL,
+				amount_cover DECIMAL(20,2) NOT NULL,
+				rate DECIMAL(20,0) NOT NULL,
+				Dfrom DATE NOT NULL,
+				Dto DATE NOT NULL,
+				lslb INT(4),
+				imagepath VARCHAR(300) NOT NULL,
+				loading VARCHAR(500) NOT NULL,
+				iu VARCHAR(200) NOT NULL,
+				prepared VARCHAR(200) NOT NULL,
+				PRIMARY KEY (idsnumber)
+			);");
+
+			$result->execute();
+//SAAD
+			$result = $db->prepare("
+				CREATE TABLE `$tbl_saad` ( 
+				Year VARCHAR(4) NOT NULL,
+				date_r DATE NOT NULL,
+				program VARCHAR(20) NOT NULL,
+				groupName VARCHAR(300) NOT NULL,
+				ids1 VARCHAR(30) NOT NULL,	
+				idsnumber INT(4) NOT NULL AUTO_INCREMENT,
+				idsprogram VARCHAR(4) NOT NULL DEFAULT 'SAAD',
+				lsp VARCHAR(20) NOT NULL,
+				status TEXT(20) NOT NULL,
+				office_assignment VARCHAR(200) NOT NULL,
+				province VARCHAR(300) NOT NULL,
+				town VARCHAR(300) NOT NULL,
+				assured VARCHAR(300) NOT NULL,
+				farmers DECIMAL(20,0) NOT NULL,
+				heads DECIMAL(20,0) NOT NULL,
+				animal VARCHAR(300) NOT NULL,
+				premium DECIMAL(20,2) NOT NULL,
+				amount_cover DECIMAL(20,2) NOT NULL,
+				rate DECIMAL(20,0) NOT NULL,
+				Dfrom DATE NOT NULL,
+				Dto DATE NOT NULL,
+				lslb INT(4),
+				imagepath VARCHAR(300) NOT NULL,
+				loading VARCHAR(500) NOT NULL,
+				iu VARCHAR(200) NOT NULL,
+				prepared VARCHAR(200) NOT NULL,
+				PRIMARY KEY (idsnumber)
+			);");
+
+			$result->execute();
+
+//YRRP
+			$result = $db->prepare("
+				CREATE TABLE `$tbl_yrrp` ( 
+				Year VARCHAR(4) NOT NULL,
+				date_r DATE NOT NULL,
+				program VARCHAR(20) NOT NULL,
+				groupName VARCHAR(300) NOT NULL,
+				ids1 VARCHAR(30) NOT NULL,	
+				idsnumber INT(4) NOT NULL AUTO_INCREMENT,
+				idsprogram VARCHAR(4) NOT NULL DEFAULT 'YRRP',
+				lsp VARCHAR(20) NOT NULL,
+				status TEXT(20) NOT NULL,
+				office_assignment VARCHAR(200) NOT NULL,
+				province VARCHAR(300) NOT NULL,
+				town VARCHAR(300) NOT NULL,
+				assured VARCHAR(300) NOT NULL,
+				farmers DECIMAL(20,0) NOT NULL,
+				heads DECIMAL(20,0) NOT NULL,
+				animal VARCHAR(300) NOT NULL,
+				premium DECIMAL(20,2) NOT NULL,
+				amount_cover DECIMAL(20,2) NOT NULL,
+				rate DECIMAL(20,0) NOT NULL,
+				Dfrom DATE NOT NULL,
+				Dto DATE NOT NULL,
+				lslb INT(4),
+				imagepath VARCHAR(300) NOT NULL,
+				loading VARCHAR(500) NOT NULL,
+				iu VARCHAR(200) NOT NULL,
+				prepared VARCHAR(200) NOT NULL,
+				PRIMARY KEY (idsnumber)
+			);");
+
+			$result->execute();			
 
 //REGULAR
 
@@ -77,7 +180,7 @@ if((!isset($_SESSION['isLogin'])) && (!isset($_COOKIE["lx"]))) { header("locatio
 				assured VARCHAR(300) NOT NULL,
 				farmers DECIMAL(20,0) NOT NULL,
 				heads DECIMAL(20,0) NOT NULL,
-				animal DECIMAL(20,0) NOT NULL,
+				animal VARCHAR(300) NOT NULL,
 				premium DECIMAL(20,2) NOT NULL,
 				amount_cover DECIMAL(20,2) NOT NULL,
 				rate DECIMAL(20,0) NOT NULL,
@@ -116,7 +219,7 @@ if((!isset($_SESSION['isLogin'])) && (!isset($_COOKIE["lx"]))) { header("locatio
 				assured VARCHAR(300) NOT NULL,
 				farmers DECIMAL(20,0) NOT NULL,
 				heads DECIMAL(20,0) NOT NULL,
-				animal DECIMAL(20,0) NOT NULL,
+				animal VARCHAR(300) NOT NULL,
 				premium DECIMAL(20,2) NOT NULL,
 				amount_cover DECIMAL(20,2) NOT NULL,
 				rate DECIMAL(20,0) NOT NULL,
@@ -147,7 +250,7 @@ if((!isset($_SESSION['isLogin'])) && (!isset($_COOKIE["lx"]))) { header("locatio
 				assured VARCHAR(300) NOT NULL,
 				farmers DECIMAL(20,0) NOT NULL,
 				heads DECIMAL(20,0) NOT NULL,
-				animal DECIMAL(20,0) NOT NULL,
+				animal VARCHAR(300) NOT NULL,
 				premium DECIMAL(20,2) NOT NULL,
 				amount_cover DECIMAL(20,2) NOT NULL,
 				rate DECIMAL(20,0) NOT NULL,
@@ -200,9 +303,11 @@ if((!isset($_SESSION['isLogin'])) && (!isset($_COOKIE["lx"]))) { header("locatio
 	<head>
 		<title>Livestock | Control</title>
 		<link rel="shortcut icon" href="images/favicon.ico"/>
-		<link rel="stylesheet" href="bootswatch/solar/bootstrap.min.css">
-		<script src="bootstrap-3.3.7-dist/js/jquery.min.js"></script>
-		<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="resources/bootswatch/lumen/bootstrap.min.css">
+		<link rel="stylesheet" href="resources/css/font-awesome/css/font-awesome.css">
+		<link rel="stylesheet" type="text/css" href="resources/css/local.css">
+		<script src="resources/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
+		<script src="resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">		
 	</head>
@@ -221,11 +326,13 @@ if((!isset($_SESSION['isLogin'])) && (!isset($_COOKIE["lx"]))) { header("locatio
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav navbar-right">
 							
-							<li><a href="rsbsa">RSBSA</a></li>
-							<li><a href="indexR">Regular Program</a></li>
-							<li><a href="apcp">APCP</a></li>
-							<li><a href="acpc">Punla</a></li>
-							<li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <span class="caret"></span></a>
+							<li><a href="programs/rsbsa">RSBSA</a></li>
+							<li><a href="programs/agriagra">AGRI-AGRA</a></li>
+							<li><a href="programs/regular">Regular Program</a></li>
+							<li><a href="programs/apcp">APCP</a></li>
+							<li><a href="programs/acpc">Punla</a></li>
+
+							<li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-user"></span> <span class="caret"></span></a>
 								<ul class="dropdown-menu">
 									<li><a href="#" style="color:gray; pointer-events: none; border-bottom: 1px solid #ddd" tabindex="-1"><?PHP echo $_SESSION['isLoginName']; ?></a></li>
 									<?php 

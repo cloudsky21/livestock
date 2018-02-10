@@ -2,7 +2,7 @@
 session_start();
 require_once("../connection/conn.php");
 date_default_timezone_set('Asia/Manila');
-$table = "controlr";
+$table = "controlr".$_SESSION['insurance'];
 
 
 if(!isset($_SESSION['isLogin']) && (!isset($_COOKIE["lx"]))) { header("location: logmeOut");}
@@ -791,8 +791,9 @@ if(!isset($_SESSION['isLogin']) && (!isset($_COOKIE["lx"]))) { header("location:
 		<meta charset="utf8">
 		<link rel="shortcut icon" href="../images/favicon.ico">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta charset="utf8">		
-		<link rel="stylesheet" href="../resources/bootswatch/solar/bootstrap.css">
+		<link rel="stylesheet" href="../resources/bootswatch-3/sandstone/bootstrap.css">
 		<link rel="stylesheet" href="../resources/css/font-awesome/css/font-awesome.css">
 		<link rel="stylesheet" href="../resources/css/local.css">
 		<script src="../resources/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
@@ -819,7 +820,7 @@ if(!isset($_SESSION['isLogin']) && (!isset($_COOKIE["lx"]))) { header("location:
 
 					$.ajax({
 						type : 'post',
-            url : 'updater.php', //Here you will fetch records 
+            url : '../bin/update/updater.php', //Here you will fetch records 
             data :  'rowid='+ rowid, //Pass $id
             success : function(data){
             $('.fetched-data').html(data);//Show fetched data from database
@@ -920,7 +921,7 @@ if(!isset($_SESSION['isLogin']) && (!isset($_COOKIE["lx"]))) { header("location:
 
 				$.ajax({
 					type : 'post',
-					url : 'ajax_address.php', 
+					url : '../ajax_address.php', 
 					data :  { id:i }, /*$('#farmersform').serialize(), */
 					success : function(data){
 						$('#town').html(data);
@@ -1271,7 +1272,7 @@ if(!isset($_SESSION['isLogin']) && (!isset($_COOKIE["lx"]))) { header("location:
 									<div class="form-group row">
 										<div class="col-xs-4">
 											<label for="address">Province</label>
-											<select id="province" name="province" placeholder="Leyte" class="form-control" onfocus="getaddress(this.value);" tabindex="6">
+											<select id="province" name="province" placeholder="Leyte" class="form-control" onchange="getaddress(this.value);" tabindex="6">
 												<option value="Leyte">LEYTE</option>
 												<option value="Southern Leyte">SOUTHERN LEYTE</option>
 												<option value="Biliran">BILIRAN</option>

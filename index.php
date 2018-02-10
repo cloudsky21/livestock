@@ -14,7 +14,7 @@ if(isset($_COOKIE["lx"]) && isset($_COOKIE["lp"]) && isset($_COOKIE["rrrrassdawd
 		
 
 		
-		foreach($result as $row){
+		foreach($result as $row){	
 
 
 			$name_account = $row['firstname'].' '.$row['middlename'].' '.$row['surname'];
@@ -80,7 +80,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 	/*Checks if Year is not null*/
 	
 
-	if(!empty($_POST['i_year'])){
+	if(!empty($_POST['i_year'])){	
 		$_SESSION['insurance'] = $_POST['i_year'];
 	}
 	

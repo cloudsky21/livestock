@@ -15,15 +15,15 @@ $result->execute();
 
 
 
-header("location: rsbsa.php");
+header("location:".$_SERVER[REQUEST_URI]);
 }
 ?>
 
 
-<form action="delete.php" method="POST">
+<form action="" method="POST">
 <p>Delete record?</p>
 <input type="hidden" value="<?PHP echo htmlentities($_POST['rowid']); ?>" name="recorded">
-<button type="submit" name="submit" class="btn btn-success">Submit</button>
+<button type="submit" name="delete_records" class="btn btn-success">Submit</button>
 
 </form>
 

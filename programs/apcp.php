@@ -2,7 +2,7 @@
 session_start();
 require_once("../connection/conn.php");
 date_default_timezone_set('Asia/Manila');
-
+$table = "controla".$_SESSION['insurance'];
 
 
 $server = $_SERVER['SERVER_ADDR'];
@@ -82,7 +82,7 @@ if(isset($_POST['submiter']))
 	$fromDate = date("Y-m-d", strtotime($_POST['effectivity-date']));
 	$toDate = date("Y-m-d", strtotime($_POST['expiry-date']));
 
-	$result = $db->prepare("INSERT INTO controla (
+	$result = $db->prepare("INSERT INTO $table (
 		Year,
 		date_r,
 		program,
@@ -163,7 +163,7 @@ if(isset($_POST['submit_index_update'])){
 
 		$LSP = "LI-RO8-".substr($_SESSION['insurance'],-2)."-"."GO-";
 	}		
-	$rs = $db->prepare("UPDATE controla SET 
+	$rs = $db->prepare("UPDATE $table SET 
 		groupName=?, assured=?,	province=?,	town=?,	farmers=?,heads=?,	animal=?,lsp=?,	premium=?,	rate=?,	amount_cover=?,	Dfrom=?,
 		Dto=?,	status=?, lslb=? WHERE idsnumber=?");
 
@@ -213,7 +213,7 @@ if(isset($_POST['submit_index_update'])){
 	<link rel="shortcut icon" href="../images/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" href="../resources/bootswatch/solar/bootstrap.css">
+	<link rel="stylesheet" href="../resources/bootswatch/darkly/bootstrap.css">
 	<link rel="stylesheet" href="../resources/css/font-awesome/css/font-awesome.css">
 	<link rel="stylesheet" href="../resources/css/local.css">
 	<script src="../resources/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
@@ -239,7 +239,7 @@ if(isset($_POST['submit_index_update'])){
 
 				$.ajax({
 					type : 'post',
-				url : 'updateapcp.php', //Here you will fetch records 
+				url : '../bin/update/updateapcp.php', //Here you will fetch records 
 				data :  'rowid='+ rowid, //Pass $id
 				success : function(data){
 					$('.fetched-data').html(data);//Show fetched data from database
@@ -310,7 +310,7 @@ if(isset($_POST['submit_index_update'])){
 
 			$.ajax({
 				type: 'POST',
-				url: 'searchapcp.php',
+				url: '../searchapcp.php',
 				data: 'ids='+ xz,
 				success: function(e){
 					$('#displaydata > tbody').html(e);
@@ -335,7 +335,7 @@ if(isset($_POST['submit_index_update'])){
 
 			$.ajax({
 				type : 'post',
-				url : 'ajax_address.php', 
+				url : '../ajax_address.php', 
 				data :  { id:i }, /*$('#farmersform').serialize(), */
 				success : function(data){
 					$('#town').html(data);
@@ -366,7 +366,7 @@ if(isset($_POST['submit_index_update'])){
 					<ul class="nav navbar-nav navbar-right">
 						
 						<li><a href="#" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false"><i class="fa fa-plus"></i></a></li>
-						<li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i>
+						<li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Programs <i class="fa fa-bars"></i>
 							<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="rsbsa">RSBSA</a></li>
@@ -591,7 +591,7 @@ if(isset($_POST['submit_index_update'])){
 		if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page = 1; };
 		$start_from = ($page - 1) * $results_per_page;
 
-		$rs3 = $db->prepare("SELECT COUNT(idsnumber) AS total FROM controla");
+		$rs3 = $db->prepare("SELECT COUNT(idsnumber) AS total FROM $table");
 		$rs3->execute();
 		foreach($rs3 as $row){
 			$getcount = $row['total'];
@@ -655,7 +655,7 @@ $total_pages = ceil(round($getcount) / $results_per_page); // calculate total pa
 
 						<?PHP
 
-						$rs = $db->prepare("SELECT * FROM controla ORDER BY idsnumber DESC LIMIT ?, ?");
+						$rs = $db->prepare("SELECT * FROM $table ORDER BY idsnumber DESC LIMIT ?, ?");
 						$rs->execute([$start_from, $results_per_page]);
 
 						foreach($rs as $row){
@@ -671,8 +671,8 @@ $total_pages = ceil(round($getcount) / $results_per_page); // calculate total pa
 								echo '<td>'.$row['animal'].'</td>';
 								
 								if (!$row['lslb']=="0") { echo '<td><a class="btn btn-default btn-xs" href="policya.php?lslb='.$row['lslb'].'" target="_blank">'.$row['lslb'].'</a></td>';}else {echo '<td><a class="btn btn-default btn-xs disabled" href="#">'.$row['lslb'].'</a></td>';}
-								if($server == "127.0.0.1"){	echo '<td><a class="btn btn-default btn-xs" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-edit"/></span></a></td>';		
-								echo '<td><a class="btn btn-default btn-xs" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-trash"/></span></a></td>';} else {}
+								if($server == "127.0.0.1"){	echo '<td><a class="btn btn-default btn-xs" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="fa fa-edit"/></span></a></td>';		
+								echo '<td><a class="btn btn-default btn-xs" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="fa fa-trash"/></span></a></td>';} else {}
 								
 								echo '</tr>';
 							}
@@ -688,7 +688,7 @@ $total_pages = ceil(round($getcount) / $results_per_page); // calculate total pa
 								echo '<td>'.$row['animal'].'</td>';
 								if (!$row['lslb']=="0") { echo '<td><a class="btn btn-default btn-xs" href="policya.php?lslb='.$row['lslb'].'" target="_blank">'.$row['lslb'].'</a></td>';}else {echo '<td><a class="btn btn-default btn-xs disabled" href="#">'.$row['lslb'].'</a></td>';}
 								if($server == "127.0.0.1"){	echo '<td><a class="btn btn-default btn-xs" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-edit"/></span></a></td>';		
-								echo '<td><a class="btn btn-default btn-xs" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-trash"/></span></a></td>';} else {}
+								echo '<td><a class="btn btn-default btn-xs" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="fa fa-trash"/></span></a></td>';} else {}
 								
 								echo '</tr>';
 							}

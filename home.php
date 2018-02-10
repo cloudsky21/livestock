@@ -23,11 +23,16 @@ if(!isset($_SESSION['isLogin']) || (!isset($_COOKIE["lx"]))) {
 	<link rel="manifest" href="/manifest.json">
 	<meta http-equiv="refresh" content="30">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="resources/bootswatch/solar/bootstrap.css">
+	<link rel="stylesheet" href="resources/bootswatch/materia/bootstrap.css">
 	<link rel="stylesheet" href="resources/css/font-awesome/css/font-awesome.css">
-	<script src="resources/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
-	<script src="resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="resources/css/local.css">
+	<link rel="stylesheet" href="resources/multi-select/bootstrap-multiselect.css">
+	<script src="resources/bootstrap-4/js/jquery.js"></script>
+	<script src="resources/bootstrap-4/umd/js/popper.js"></script>
+	<script src="resources/bootstrap-4/js/bootstrap.js"></script>
+	<script type="text/javascript" src="resources/multi-select/bootstrap-multiselect.js"></script>
 	<meta http-equiv="content-type" content="text/html; charset=utf8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 </head>
@@ -35,64 +40,74 @@ if(!isset($_SESSION['isLogin']) || (!isset($_COOKIE["lx"]))) {
 
 
 	<div class="container-fluid">
-		<nav class="navbar navbar-default navbar-fixed-top">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>                        
-					</button>
-					<a class="navbar-brand" href="home">Livestock Control</a>
-				</div>
-				<div class="collapse navbar-collapse" id="myNavbar">
-					<ul class="nav navbar-nav">
+		<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+				<!-- Brand -->
+				<div class="container">
+					<a class="navbar-brand" href="home">
+						<img src="images/android-icon-48x48-1.png" alt="Logo" style="width:40px;"> Livestock Control</a>
 
+					<!-- Toggler/collapsibe Button -->
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<!-- Navbar links -->
+					<div class="collapse navbar-collapse" id="collapsibleNavbar">
+						
+						<ul class="navbar-nav ml-auto">
+							
+							
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle dropdown-toggle-split" href="#" id="navbardrop" data-toggle="dropdown">
+									Programs 
+								</a>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a class="dropdown-item" href="programs/rsbsa">RSBSA</a>
+									<a class="dropdown-item" href="programs/regular">Regular Program</a>
+									<a class="dropdown-item" href="programs/apcp">APCP</a>
+									<a class="dropdown-item" href="programs/acpc">Punla</a>
+									<a class="dropdown-item" href="programs/agriagra">AGRI-AGRA</a>
+									<a class="dropdown-item" href="#">SAAD</a>
+								</div>
+							</li>
+
+							<li class="nav-item dropdown">
+
+								<a class="nav-link dropdown-toggle dropdown-toggle-split" href="#" data-toggle="dropdown">
+									<span class="fa fa-gears"></span>
+								</a>
+								<div class="dropdown-menu dropdown-menu-right">
+									
+									<?php 
+									echo '<a class="dropdown-item disabled" href="#">'.$_SESSION['isLoginName'].'</a>';
+									echo '<div class="dropdown-divider"></div>';
+									if($_SESSION['stat']=="Admin") { ?>
+									<a class="dropdown-item" href="year">Insurance Year</a>
+
+									<a class="dropdown-item" href="farmers">Farmers List</a>
+									<a class="dropdown-item" href="accounts">Accounts</a>
+									<?php 
+								}
+								?>
+								<a class="dropdown-item" href="comments">Comments</a>
+								<a class="dropdown-item" href="locations">Locations</a>
+							</div>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="logmeOut"><i class="fa fa-sign-out" style="font-size:20px"></i></a></li>  
 					</ul>
 
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i>
-							<span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="programs/rsbsa">RSBSA</a></li>
-								<li><a href="programs/regular">Regular Program</a></li>
-								<li><a href="programs/apcp">APCP</a></li>
-								<li><a href="programs/acpc">Punla</a></li>
-								<li><a href="#">AGRI-AGRA</a></li>
-								<li><a href="#">SAAD</a></li>
-							</ul>
-						</li>
-						
+					
 
-						<li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-gears"></i> <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#" style="color:gray; pointer-events: none; border-bottom: 1px solid #ddd" tabindex="-1"><?PHP echo $_SESSION['isLoginName']; ?></a></li>
-								<?php 
-								if($_SESSION['stat']=="Admin") { ?>
-								<li><a href="year">Insurance Year</a></li>
-
-								<li><a href="farmers">Farmers List</a></li>
-								<li><a href="accounts">Accounts</a></li>
-								<?php 
-							}
-							?>
-							<li><a href="comments">Comments</a></li>
-							<li><a href="locations">Locations</a></li>
-							
-						</ul>
-					</li>
-					<li><a href="logmeOut"><i class="fa fa-sign-out"></i></a></li>
-				</ul>
-
+				</div>
 			</div>
-		</div>
-	</nav>
+		</nav> 
 	<?php
 // control variable
 	$rsbsa_cnt = "control".$_SESSION['insurance'];
-	$regular_cnt = "controlr";
-	$apcp_cnt = "controla";
-	$pnl_cnt = "controlacpc";
+	$regular_cnt = "controlr".$_SESSION['insurance'];
+	$apcp_cnt = "controla".$_SESSION['insurance'];
+	$pnl_cnt = "controlacpc".$_SESSION['insurance'];
 
 	$query = "SELECT 
 	(SELECT COUNT(*) FROM $rsbsa_cnt) as RSBSA,

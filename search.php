@@ -15,11 +15,11 @@ if(isset($_POST['ids'])){
 	
 	$tobeSrch = htmlentities($_POST['ids']);
 
-	$str1 = substr($tobeSrch,0,2);
-	$str2 = substr($tobeSrch, 2);
+	$str1 = substr($tobeSrch,0,1);
+	$str2 = substr($tobeSrch, 1);
 	if(!empty($tobeSrch)){
 		switch ($str1) {
-			case "f=":
+			case "f":
 			# code...
 			echo $str1.'<br>';
 
@@ -47,10 +47,10 @@ if(isset($_POST['ids'])){
 					echo '<td>'.$row['town'].', '.$row['province'].'</td>';
 					echo '<td>'.$row['animal'].'</td>';
 
-					if (!$row['lslb']=="0") { echo '<td><a class="btn btn-default btn-xs" href="policy.php?lslb='.$row['lslb'].'" target="_blank">'.$row['lslb'].'</a></td>';}else {echo '<td><a class="btn btn-default btn-xs disabled" href="#">'.$row['lslb'].'</a></td>';}
-					echo '<td><a class="btn btn-default btn-xs" href="processingslip?ids='.$row['idsnumber'].'PPPP" target="_blank"><span class="glyphicon glyphicon-list"> </span></a></td>';
-					if($server == "127.0.0.1"){	echo '<td><a class="btn btn-default btn-xs" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-edit"/></span></a></td>';		
-					echo '<td><a class="btn btn-default btn-xs" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-trash"/></span></a></td>';} else {}
+					if (!$row['lslb']=="0") { echo '<td><a class="btn btn-outline-primary btn-sm" href="policy.php?lslb='.$row['lslb'].'" target="_blank">'.$row['lslb'].'</a></td>';}else {echo '<td><a class="btn btn-outline-primary btn-sm disabled" href="#">'.$row['lslb'].'</a></td>';}
+					echo '<td><a class="btn btn-outline-primary btn-sm" href="../processingslip?ids='.$row['idsnumber'].'PPPP" target="_blank"><i class="fa fa-file-o"> </i></a></td>';
+					if($server == "127.0.0.1"){	echo '<td><a class="btn btn-outline-primary btn-sm" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><i class="fa fa-edit"></i></a></td>';		
+					echo '<td><a class="btn btn-outline-primary btn-sm" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><i class="fa fa-trash-o"></i></a></td>';} else {}
 
 					echo '</tr>';
 				}
@@ -64,10 +64,10 @@ if(isset($_POST['ids'])){
 					//echo '<td><a class="btn btn-xs" role="button" href="#" data-toggle="modal" data-target="#aF" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-plus" ></span></a></td>';
 					echo '<td>'.$row['town'].', '.$row['province'].'</td>';
 					echo '<td>'.$row['animal'].'</td>';
-					if (!$row['lslb']=="0") { echo '<td><a class="btn btn-default btn-xs" href="policy.php?lslb='.$row['lslb'].'" target="_blank">'.$row['lslb'].'</a></td>';}else {echo '<td><a class="btn btn-default btn-xs disabled" href="#">'.$row['lslb'].'</a></td>';}
-					echo '<td><a class="btn btn-default btn-xs" href="processingslip?ids='.$row['idsnumber'].'PPPP" target="_blank"><span class="glyphicon glyphicon-list"> </span></a></td>';
-					if($server == "127.0.0.1"){	echo '<td><a class="btn btn-default btn-xs" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-edit"/></span></a></td>';		
-					echo '<td><a class="btn btn-default btn-xs" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-trash"/></span></a></td>';} else {}
+					if (!$row['lslb']=="0") { echo '<td><a class="btn btn-outline-primary btn-sm" href="policy.php?lslb='.$row['lslb'].'" target="_blank">'.$row['lslb'].'</a></td>';}else {echo '<td><a class="btn btn-outline-primary btn-sm disabled" href="#">'.$row['lslb'].'</a></td>';}
+					echo '<td><a class="btn btn-outline-primary btn-sm" href="../processingslip?ids='.$row['idsnumber'].'PPPP" target="_blank"><span class="glyphicon glyphicon-list"> </span></a></td>';
+					if($server == "127.0.0.1"){	echo '<td><a class="btn btn-outline-primary btn-sm" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-edit"/></span></a></td>';		
+					echo '<td><a class="btn btn-outline-primary btn-sm" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-trash"/></span></a></td>';} else {}
 
 					echo '</tr>';
 				}
@@ -77,7 +77,7 @@ if(isset($_POST['ids'])){
 
 			break;
 
-			case "i=":
+			case "i":
 			# code...
 			echo $str1."<br";
 
@@ -105,10 +105,10 @@ if(isset($_POST['ids'])){
 					echo '<td>'.$row['town'].', '.$row['province'].'</td>';
 					echo '<td>'.$row['animal'].'</td>';
 
-					if (!$row['lslb']=="0") { echo '<td><a class="btn btn-default btn-xs" href="policy.php?lslb='.$row['lslb'].'" target="_blank">'.$row['lslb'].'</a></td>';}else {echo '<td><a class="btn btn-default btn-xs disabled" href="#">'.$row['lslb'].'</a></td>';}
-					echo '<td><a class="btn btn-default btn-xs" href="processingslip?ids='.$row['idsnumber'].'PPPP" target="_blank"><span class="glyphicon glyphicon-list"> </span></a></td>';
-					if($server == "127.0.0.1"){	echo '<td><a class="btn btn-default btn-xs" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-edit"/></span></a></td>';		
-					echo '<td><a class="btn btn-default btn-xs" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-trash"/></span></a></td>';} else {}
+					if (!$row['lslb']=="0") { echo '<td><a class="btn btn-outline-primary btn-sm" href="policy.php?lslb='.$row['lslb'].'" target="_blank">'.$row['lslb'].'</a></td>';}else {echo '<td><a class="btn btn-outline-primary btn-sm disabled" href="#">'.$row['lslb'].'</a></td>';}
+					echo '<td><a class="btn btn-outline-primary btn-sm" href="../processingslip?ids='.$row['idsnumber'].'PPPP" target="_blank"><i class="fa fa-file-o"> </i></a></td>';
+					if($server == "127.0.0.1"){	echo '<td><a class="btn btn-outline-primary btn-sm" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="fa fa-edit"/></span></a></td>';		
+					echo '<td><a class="btn btn-outline-primary btn-sm" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="fa fa-trash"/></span></a></td>';} else {}
 
 					echo '</tr>';
 				}
@@ -122,10 +122,10 @@ if(isset($_POST['ids'])){
 					//echo '<td><a class="btn btn-xs" role="button" href="#" data-toggle="modal" data-target="#aF" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-plus" ></span></a></td>';
 					echo '<td>'.$row['town'].', '.$row['province'].'</td>';
 					echo '<td>'.$row['animal'].'</td>';
-					if (!$row['lslb']=="0") { echo '<td><a class="btn btn-default btn-xs" href="policy.php?lslb='.$row['lslb'].'" target="_blank">'.$row['lslb'].'</a></td>';}else {echo '<td><a class="btn btn-default btn-xs disabled" href="#">'.$row['lslb'].'</a></td>';}
-					echo '<td><a class="btn btn-default btn-xs" href="processingslip?ids='.$row['idsnumber'].'PPPP" target="_blank"><span class="glyphicon glyphicon-list"> </span></a></td>';
-					if($server == "127.0.0.1"){	echo '<td><a class="btn btn-default btn-xs" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-edit"/></span></a></td>';		
-					echo '<td><a class="btn btn-default btn-xs" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-trash"/></span></a></td>';} else {}
+					if (!$row['lslb']=="0") { echo '<td><a class="btn btn-outline-primary btn-sm" href="policy.php?lslb='.$row['lslb'].'" target="_blank">'.$row['lslb'].'</a></td>';}else {echo '<td><a class="btn btn-outline-primary btn-sm disabled" href="#">'.$row['lslb'].'</a></td>';}
+					echo '<td><a class="btn btn-outline-primary btn-sm" href="../processingslip?ids='.$row['idsnumber'].'PPPP" target="_blank"><span class="glyphicon glyphicon-list"> </span></a></td>';
+					if($server == "127.0.0.1"){	echo '<td><a class="btn btn-outline-primary btn-sm" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="fa fa-edit"/></span></a></td>';		
+					echo '<td><a class="btn btn-outline-primary btn-sm" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="fa fa-trash"/></span></a></td>';} else {}
 
 					echo '</tr>';
 				}
@@ -134,7 +134,7 @@ if(isset($_POST['ids'])){
 
 			break;
 
-			case "l=":
+			case "l":
 			#code..
 
 			echo $str1."<br";
@@ -163,10 +163,10 @@ if(isset($_POST['ids'])){
 					echo '<td>'.$row['town'].', '.$row['province'].'</td>';
 					echo '<td>'.$row['animal'].'</td>';
 
-					if (!$row['lslb']=="0") { echo '<td><a class="btn btn-default btn-xs" href="policy.php?lslb='.$row['lslb'].'" target="_blank">'.$row['lslb'].'</a></td>';}else {echo '<td><a class="btn btn-default btn-xs disabled" href="#">'.$row['lslb'].'</a></td>';}
-					echo '<td><a class="btn btn-default btn-xs" href="processingslip?ids='.$row['idsnumber'].'PPPP" target="_blank"><span class="glyphicon glyphicon-list"> </span></a></td>';
-					if($server == "127.0.0.1"){	echo '<td><a class="btn btn-default btn-xs" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-edit"/></span></a></td>';		
-					echo '<td><a class="btn btn-default btn-xs" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-trash"/></span></a></td>';} else {}
+					if (!$row['lslb']=="0") { echo '<td><a class="btn btn-outline-primary btn-sm" href="policy.php?lslb='.$row['lslb'].'" target="_blank">'.$row['lslb'].'</a></td>';}else {echo '<td><a class="btn btn-outline-primary btn-sm disabled" href="#">'.$row['lslb'].'</a></td>';}
+					echo '<td><a class="btn btn-outline-primary btn-sm" href="../processingslip?ids='.$row['idsnumber'].'PPPP" target="_blank"><span class="fa fa-list"> </span></a></td>';
+					if($server == "127.0.0.1"){	echo '<td><a class="btn btn-outline-primary btn-sm" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="fa fa-edit"/></span></a></td>';		
+					echo '<td><a class="btn btn-outline-primary btn-sm" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="fa fa-trash"/></span></a></td>';} else {}
 
 					echo '</tr>';
 				}
@@ -180,10 +180,10 @@ if(isset($_POST['ids'])){
 					//echo '<td><a class="btn btn-xs" role="button" href="#" data-toggle="modal" data-target="#aF" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-plus" ></span></a></td>';
 					echo '<td>'.$row['town'].', '.$row['province'].'</td>';
 					echo '<td>'.$row['animal'].'</td>';
-					if (!$row['lslb']=="0") { echo '<td><a class="btn btn-default btn-xs" href="policy.php?lslb='.$row['lslb'].'" target="_blank">'.$row['lslb'].'</a></td>';}else {echo '<td><a class="btn btn-default btn-xs disabled" href="#">'.$row['lslb'].'</a></td>';}
-					echo '<td><a class="btn btn-default btn-xs" href="processingslip?ids='.$row['idsnumber'].'PPPP" target="_blank"><span class="glyphicon glyphicon-list"> </span></a></td>';
-					if($server == "127.0.0.1"){	echo '<td><a class="btn btn-default btn-xs" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-edit"/></span></a></td>';		
-					echo '<td><a class="btn btn-default btn-xs" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-trash"/></span></a></td>';} else {}
+					if (!$row['lslb']=="0") { echo '<td><a class="btn btn-outline-primary btn-sm" href="policy.php?lslb='.$row['lslb'].'" target="_blank">'.$row['lslb'].'</a></td>';}else {echo '<td><a class="btn btn-outline-primary btn-sm disabled" href="#">'.$row['lslb'].'</a></td>';}
+					echo '<td><a class="btn btn-outline-primary btn-sm" href="../processingslip?ids='.$row['idsnumber'].'PPPP" target="_blank"><span class="fa fa-list"> </span></a></td>';
+					if($server == "127.0.0.1"){	echo '<td><a class="btn btn-outline-primary btn-sm" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="fa fa-edit"/></span></a></td>';		
+					echo '<td><a class="btn btn-outline-primary btn-sm" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="fa fa-trash"/></span></a></td>';} else {}
 
 					echo '</tr>';
 				}

@@ -1175,7 +1175,7 @@ if(!isset($_SESSION['isLogin']) || (!isset($_COOKIE["lx"]))) { header("location:
 									?>
 									<li><a href="comments">Comments</a></li>
 									<li><a href="locations">Locations</a></li>
-									<li><a href="logmeOut">Log Out</a></li>
+									<li><a href="../logmeOut">Log Out</a></li>
 								</ul>
 							</li>      
 						</ul>

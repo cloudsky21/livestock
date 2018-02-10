@@ -50,9 +50,9 @@ if(isset($_POST['add'])){
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 	<link rel="shortcut icon" href="images/favicon.ico"/>
-	<link rel="stylesheet" href="bootswatch/lumen/bootstrap.min.css">
-	<script src="bootstrap-3.3.7-dist/js/jquery.min.js"></script>
-	<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="resources/bootswatch/lumen/bootstrap.min.css">
+	<script src="resources/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
+	<script src="resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
 	<script>
 		function address($val){
@@ -100,10 +100,10 @@ if(isset($_POST['add'])){
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="rsbsa">RSBSA</a></li>
-						<li><a href="indexR">Regular Program</a></li>
-						<li><a href="apcp">APCP</a></li>
-						<li><a href="acpc">Punla</a></li>
+						<li><a href="programs/rsbsa">RSBSA</a></li>
+						<li><a href="programs/regular">Regular Program</a></li>
+						<li><a href="programs/apcp">APCP</a></li>
+						<li><a href="programs/acpc">Punla</a></li>
 
 						<li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <span class="caret"></span></a>
 							<ul class="dropdown-menu">

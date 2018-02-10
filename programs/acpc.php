@@ -4,7 +4,7 @@ require_once("../connection/conn.php");
 date_default_timezone_set('Asia/Manila');
 
 $success = '';
-
+$table = "controlacpc".$_SESSION['insurance'];
 
 if(isset($_POST['submiter'])){
 	
@@ -71,7 +71,7 @@ if(isset($_POST['submiter'])){
 	$toDate = date("Y-m-d", strtotime($_POST['expiry-date']));
 
 
-	$result = $db->prepare("INSERT INTO controlacpc (
+	$result = $db->prepare("INSERT INTO $table (
 		Year,
 		date_r,
 		program,
@@ -191,7 +191,7 @@ if(isset($_POST['submit_index_update'])){
 	
 	
 	
-	$rs = $db->prepare("UPDATE controlacpc SET 
+	$rs = $db->prepare("UPDATE $table SET 
 		groupName=?, 
 		assured=?,
 		province=?,
@@ -284,10 +284,10 @@ if(isset($_POST['delete_records'])){
 
 
 
-	$result = $db->prepare("DELETE FROM controlacpc WHERE idsnumber = ?");
+	$result = $db->prepare("DELETE FROM $table WHERE idsnumber = ?");
 	$result->execute([$del]);
 
-	$result = $db->prepare("ALTER TABLE controlacpc AUTO_INCREMENT=1");
+	$result = $db->prepare("ALTER TABLE $table AUTO_INCREMENT=1");
 	$result->execute();
 
 
@@ -339,7 +339,7 @@ if(isset($_POST['delete_records'])){
 
 				$.ajax({
 					type : 'post',
-				url : 'updatea.php', //Here you will fetch records 
+				url : '../bin/update/updatea.php', //Here you will fetch records 
 				data :  'rowid='+ rowid, //Pass $id
 				success : function(data){
 					$('.fetched-data').html(data);//Show fetched data from database
@@ -425,7 +425,7 @@ if(isset($_POST['delete_records'])){
 
 			$.ajax({
 				type : 'post',
-				url : 'ajax_address.php', 
+				url : '../ajax_address.php', 
 				data :  { id:i }, /*$('#farmersform').serialize(), */
 				success : function(data){
 					$('#town').html(data);
@@ -471,7 +471,7 @@ if(isset($_POST['delete_records'])){
 						<span class="icon-bar"></span>                        
 					</button>
 
-					<a class="navbar-brand" href="home">Livestock Control</a>
+					<a class="navbar-brand" href="../home">Livestock Control</a>
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-right">
@@ -481,7 +481,7 @@ if(isset($_POST['delete_records'])){
 							<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="rsbsa">RSBSA</a></li>
-								<li><a href="indexR">Regular Program</a></li>
+								<li><a href="regular">Regular Program</a></li>
 								<li><a href="apcp">APCP</a></li>
 								<li class="active"><a href="acpc">Punla</a></li>
 								<li><a href="#">AGRI-AGRA</a></li>
@@ -531,7 +531,7 @@ if(isset($_POST['delete_records'])){
 		if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page = 1; };
 		$start_from = ($page - 1) * $results_per_page;
 
-		$rs3 = $db->prepare("SELECT COUNT(idsnumber) AS total FROM controlacpc");
+		$rs3 = $db->prepare("SELECT COUNT(idsnumber) AS total FROM $table");
 		$rs3->execute();
 		foreach($rs3 as $row){
 			$getcount = $row['total'];
@@ -591,7 +591,7 @@ $total_pages = ceil(round($getcount) / $results_per_page); // calculate total pa
 
 						<?PHP
 
-						$rs = $db->prepare("SELECT * FROM controlacpc ORDER BY idsnumber DESC LIMIT ?, ?");
+						$rs = $db->prepare("SELECT * FROM $table ORDER BY idsnumber DESC LIMIT ?, ?");
 						$rs->execute([$start_from, $results_per_page]);
 
 						foreach($rs as $row){
@@ -606,8 +606,8 @@ $total_pages = ceil(round($getcount) / $results_per_page); // calculate total pa
 								echo '<td>'.$row['animal'].'</td>';
 
 								if (!$row['lslb']=="0") { echo '<td><a class="btn btn-default btn-xs" href="policy.php?lslb='.$row['lslb'].'" target="_blank">'.$row['lslb'].'</a></td>';}else {echo '<td><a class="btn btn-default btn-xs disabled" href="#">'.$row['lslb'].'</a></td>';}
-								if($server == "127.0.0.1"){	echo '<td><a class="btn btn-default btn-xs" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-edit"/></span></a></td>';		
-								echo '<td><a class="btn btn-default btn-xs" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-trash"/></span></a></td>';} else {}
+								if($server == "127.0.0.1"){	echo '<td><a class="btn btn-default btn-xs" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="fa fa-edit"/></span></a></td>';		
+								echo '<td><a class="btn btn-default btn-xs" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="fa fa-trash"/></span></a></td>';} else {}
 
 								echo '</tr>';
 							}
@@ -621,8 +621,8 @@ $total_pages = ceil(round($getcount) / $results_per_page); // calculate total pa
 								echo '<td>'.$row['town'].', '.$row['province'].'</td>';
 								echo '<td>'.$row['animal'].'</td>';
 								if (!$row['lslb']=="0") { echo '<td><a class="btn btn-default btn-xs" href="policy.php?lslb='.$row['lslb'].'" target="_blank">'.$row['lslb'].'</a></td>';}else {echo '<td><a class="btn btn-default btn-xs disabled" href="#">'.$row['lslb'].'</a></td>';}
-								if($server == "127.0.0.1"){	echo '<td><a class="btn btn-default btn-xs" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-edit"/></span></a></td>';		
-								echo '<td><a class="btn btn-default btn-xs" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-trash"/></span></a></td>';} else {}
+								if($server == "127.0.0.1"){	echo '<td><a class="btn btn-default btn-xs" href="#editModal" id="edit_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="fa fa-edit"/></span></a></td>';		
+								echo '<td><a class="btn btn-default btn-xs" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="fa fa-trash"/></span></a></td>';} else {}
 
 								echo '</tr>';
 							}
