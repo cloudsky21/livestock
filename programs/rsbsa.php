@@ -725,9 +725,6 @@ if(!isset($_SESSION['isLogin']) || (!isset($_COOKIE["lx"]))) { header("location:
 						else echo '<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>';
 						echo '</ul>';
 
-
-
-
 						?>
 						<form method="post" action="../printbatchProcessingslipRSBSA" target="_blank">
 							<table class="table table-hover table-striped" id="displaydata">
