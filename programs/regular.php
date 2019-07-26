@@ -221,7 +221,6 @@ if (isset($_POST['delete_form'])) {
             $(window).scrollTop(sessionStorage.scrollTop);
         }
     });
-<<<<<<< HEAD
     $(document).ready(function() {
     $(window).scroll(function() {
         if ($(this).scrollTop() > 80) {
@@ -237,8 +236,6 @@ if (isset($_POST['delete_form'])) {
         return false;
     });
 });
-=======
->>>>>>> 2f7b070fceb186b0768dfabed342086e2db576da
     </script>
 
 
