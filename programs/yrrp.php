@@ -318,8 +318,7 @@ if (isset($_POST['printBtn'])) {
 					$('#assured-name').trigger(':reset');				
 					$('#province').trigger(':reset');
 					
-					$('#assured-name').prop('readonly', false);
-					
+					$('#assured-name').prop('readonly', false);					
 
 				}
 			},
