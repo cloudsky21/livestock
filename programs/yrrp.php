@@ -283,8 +283,6 @@ if (isset($_POST['printBtn'])) {
 			$('#assured-name').empty();				
 			$('#province').trigger(':reset');
 			
-
-
 			$.ajax({
 				type : 'post',
 				url : '../bin/search/search_farmer.php', //Here you will fetch records 
@@ -340,23 +338,6 @@ if (isset($_POST['printBtn'])) {
 
 	});
 
-  		/*
-  		$(document).ready(function () {
-  			$(window).scroll(function () {
-  				if ($(this).scrollTop() > 80) {
-  					$('#nav2').fadeIn();
-  				} else {
-  					$('#nav2').fadeOut();
-  				}  				
-  			});     
-  			$('.scrolledup').click(function () {
-  				$("html, body").animate({
-  					scrollTop: 0
-  				}, 600);
-  				return false;
-  			}); 
-  		});  
-  		*/
   	</script>
 
   </head>
