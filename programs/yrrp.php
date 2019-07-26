@@ -471,12 +471,17 @@ if (isset($_POST['printBtn'])) {
   	</div>
   </div>
 </nav>   
+
+<!-- scroll up button -->
 <a class="scrolledup" href="#" id="scrolledup"> <span class="fa fa-angle-up"></span> </a>
+<!--End-->
+
 <div class="container-fluid">
 	<div class="page-header" style="margin-top:50px;">
 		<h2 class="display-5">Yolanda Rehabilitation Program (YRRP)</h2>
 		<hr>
 	</div>
+
 
 	<?PHP 
 $results_per_page = 100;
