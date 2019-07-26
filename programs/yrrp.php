@@ -260,7 +260,21 @@ if (isset($_POST['printBtn'])) {
 
 	});
 
-	
+	$(document).ready(function() {
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 80) {
+            $('#scrolledup').fadeIn();
+        } else {
+            $('#scrolledup').fadeOut();
+        }
+    });
+    $('.scrolledup').click(function() {
+        $("html, body").animate({
+            scrollTop: 0
+        }, 600);
+        return false;
+    });
+});
 
 
 	$(document).ready(function(){
@@ -457,6 +471,7 @@ if (isset($_POST['printBtn'])) {
   	</div>
   </div>
 </nav>   
+<a class="scrolledup" href="#" id="scrolledup"> <span class="fa fa-angle-up"></span> </a>
 <div class="container-fluid">
 	<div class="page-header" style="margin-top:50px;">
 		<h2 class="display-5">Yolanda Rehabilitation Program (YRRP)</h2>
