@@ -209,7 +209,7 @@ if (isset($_POST['printBtn'])) {
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="../resources/bootswatch/<?php echo $_SESSION['mode']; ?>/bootstrap.css">
 	<link rel="stylesheet" href="../resources/css/font-awesome/css/font-awesome.css">
-	<link rel="stylesheet" href="../resources/css/local.css">
+	<link rel="stylesheet" href="../resources/css/local.css?v=<?=filemtime("../resources/css/local.css")?>">
 	<link rel="stylesheet" href="../resources/css/animate.css">
 	<link rel="stylesheet" href="../resources/multi-select/bootstrap-multiselect.css">
 	<link rel="stylesheet" href="../resources/jquery-ui-1.12.1.custom/jquery-ui.css">
