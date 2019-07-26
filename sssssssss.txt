@@ -1,0 +1,127 @@
+<table id="table2">	
+		<tr>
+			<td style="text-align:center; border-bottom: 2px solid black;" colspan=4><label><strong>Livestock Insurance Policy</strong></label></td>
+		</tr>	
+		
+		<tr>
+			<td style="width: 30%"><strong>POLICY NO.</td>
+			<td colspan=3><?PHP echo $policy_num; ?></td>
+		</tr>
+		
+		<tr>
+			<td style="width: 30%"><strong>POLICY OWNER</td>
+			<td colspan=3><?PHP echo $owner; ?></td>
+		</tr>
+		
+		<tr>
+			<td style="width: 30%"><strong>ADDRESS</td>
+			<td colspan=3><?PHP echo $address; ?></td>
+		</tr>
+		
+		<tr>
+			<td style="width: 30%"><strong>POLICY REFERENCE</strong></td>
+			<td colspan=3><strong><?PHP echo $policy_reference; ?></strong></td>
+		</tr>
+		<tr>
+			<td style="width: 30%"><strong>DATE ISSUED: </td>
+			<td colspan=3><?PHP echo date('F j, Y', strtotime($convertDate)); ?></td>
+		</tr>
+		
+		<tr>
+			<td><strong>START OF COVERAGE</td>
+			<td><?PHP echo date('F j, Y', strtotime($convertDate)); ?></td>
+			<td><strong>END OF COVERAGE</td>
+			<td><?PHP echo date('F j, Y', strtotime($convertDto)); ?></td>
+		</tr>
+		
+		<tr>
+			<td style="border-bottom: 2px solid black;">&nbsp;</td>
+			<td style="border-bottom: 2px solid black;">12:00 NOON</td>
+			<td style="border-bottom: 2px solid black;">&nbsp;</td>
+			<td style="border-bottom: 2px solid black;">12:00 NOON</td>
+		</tr>
+		
+		<tr>
+			<td style="border-bottom: 2px solid black;"><label><strong>NUMBER OF HEADS</strong></label></td>
+			<td style="border-bottom: 2px solid black;" colspan=3><?PHP echo $heads; ?></td>
+		</tr>	
+		<tr>
+			<td rowspan=3 style="border-bottom: 2px solid black;"><label><strong>SUM INSURED</strong></label></td>
+		</tr>
+		<tr>	
+			<td colspan=2><?PHP echo strtoupper($f->format($sumInsured)); ?> PESOS ONLY</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="border-bottom: 2px solid black;">&nbsp;</td>	
+			<td style="border-bottom: 2px solid black;">&nbsp;</td>
+			<td style="border-bottom: 2px solid black;"><strong>Php </strong> (<?PHP echo number_format($sumInsured,2); ?>)</td>
+		</tr>
+		<tr>
+			<td rowspan=4 style="vertical-align: bottom; border-bottom: 2px solid black;" ><label>PREMIUM DUE</label></td>
+			<td>Basic Premium: </td>
+			<td><?PHP echo number_format($bprem,2); ?></td>
+		</tr>
+		<tr>
+			<td>Premium Tax:</td>
+			<td><?PHP echo number_format($tax,2); ?></td>
+		</tr>
+		<tr>
+			<td>Documentary Stamp:</td>
+			<td><?PHP echo number_format($stamp,2); ?></td>
+		</tr>
+		<tr>
+			<td  style="border-bottom: 2px solid black;">TOTAL PREMIUM</td>
+			<td  style="border-bottom: 2px solid black;"><?PHP echo number_format($totalcharges,2); ?></td>
+			<td  style="border-bottom: 2px solid black;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td rowspan=2 style="border-bottom: none;">DEDUCTIBLE</td>
+		</tr>
+		<tr>
+			<td><?PHP echo $deduct; ?></td>
+			
+			
+		</tr>
+		<tr>
+			<td  style="border-bottom: 2px solid black;">&nbsp;</td>
+			<td  style="border-bottom: 2px solid black;">&nbsp;</td>
+			<td  style="border-bottom: 2px solid black;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan=4 style="border-bottom: none;">The undersigned as the duly authorized signatory of the Philippines Crop Insurance Corporation for the Policy hereby grants this coverage to the above declared policy holder subject to all terms and condictions on the attached sheets this <strong><?PHP echo $day; ?></strong> of <strong><?PHP echo $month; ?></strong>.</td>
+		</tr>
+		<tr>
+			<td style="border-bottom: none;">&nbsp;</td>
+			<td style="border-bottom: none;">&nbsp;</td>
+			<td style="border-bottom: none;">&nbsp;</td>
+			<td style="border-bottom: none;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="border-bottom: none;">&nbsp;</td>
+			<td style="border-bottom: none;">&nbsp;</td>
+			<td colspan=2 style="border-bottom: none;">PHILIPPINE CROP INSURANCE CORPORATION</td>
+		</tr>
+		<tr>
+			<td style="border-bottom: none;">&nbsp;</td>
+			<td style="border-bottom: none;">&nbsp;</td>
+			<td colspan=2 style="border-bottom: none;">By authority of the President</td>
+		</tr>
+		<tr>
+			<td style="border-bottom: none;">&nbsp;</td>
+			<td style="border-bottom: none;">&nbsp;</td>
+			<td style="border-bottom: none;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="border-bottom: none;">&nbsp;</td>
+			<td style="border-bottom: none;">&nbsp;</td>
+			<td style="border-bottom: none;text-align:center;">DOMINICO S. DIGAMON</td>
+		</tr>
+		<tr>
+			<td style="border-bottom: none;">&nbsp;</td>
+			<td style="border-bottom: none;">&nbsp;</td>
+			<td style="text-align: center; border-top: 1px solid black;">Authorized Signatory</td>
+		</tr>
+		
+	</table>
