@@ -221,6 +221,21 @@ if (isset($_POST['delete_form'])) {
             $(window).scrollTop(sessionStorage.scrollTop);
         }
     });
+    $(document).ready(function() {
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 80) {
+            $('#scrolledup').fadeIn();
+        } else {
+            $('#scrolledup').fadeOut();
+        }
+    });
+    $('.scrolledup').click(function() {
+        $("html, body").animate({
+            scrollTop: 0
+        }, 600);
+        return false;
+    });
+});
     </script>
 
 
@@ -342,6 +357,8 @@ if ($_SESSION['stat'] == "Main") {
         </div>
     </div>
     </nav>
+
+    <a class="scrolledup" href="#" id="scrolledup"> <span class="fa fa-angle-up"></span> </a>
 
     <div class="container-fluid">
         <div class="page-header" style="margin-top:50px;">
