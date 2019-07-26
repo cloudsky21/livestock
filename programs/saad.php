@@ -161,7 +161,7 @@ if (isset($_POST['delete_records'])) {
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="../resources/bootswatch/<?php echo $_SESSION['mode']; ?>/bootstrap.css">
     <link rel="stylesheet" href="../resources/css/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="../resources/css/local.css">
+    <link rel="stylesheet" href="../resources/css/local.css?v=<?=filemtime('../resources/css/local.css')?>">
     <link rel="stylesheet" href="../resources/css/animate.css">
     <link rel="stylesheet" href="../resources/jquery-ui-1.12.1.custom/jquery-ui.css">
     <script src="../resources/bootstrap-4/js/jquery.js"></script>
@@ -174,7 +174,7 @@ if (isset($_POST['delete_records'])) {
   				<script type='text/javascript' src="../resources/html5shiv/src/html5shiv.js"></script>
   				<script type='text/javascript' src="../resources/Respond/src/respond.js"></script>
   			<![endif]-->
-    <script type="text/javascript" language="javascript" src="../resources/js/saad.js"></script>
+    <script type="text/javascript" language="javascript" src="../resources/js/saad.js?v=<?filemtime('../resources/js/saad.js')?>"></script>
     <script type="text/javascript">
     $(document).ready(function() {
         $("#assured-id").change(function() {
@@ -234,6 +234,22 @@ if (isset($_POST['delete_records'])) {
             }
         });
     });
+    
+    $(document).ready(function() {
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 80) {
+            $('#scrolledup').fadeIn();
+        } else {
+            $('#scrolledup').fadeOut();
+        }
+    });
+    $('.scrolledup').click(function() {
+        $("html, body").animate({
+            scrollTop: 0
+        }, 600);
+        return false;
+    });
+});
     </script>
 
 </head>
@@ -354,6 +370,10 @@ if ($_SESSION['stat'] == "Main") {
         </div>
     </div>
     </nav>
+
+<!-- scroll up button -->
+<a class="scrolledup" href="#" id="scrolledup"> <span class="fa fa-angle-up"></span> </a>
+<!--End-->
 
     <div class="container-fluid">
         <div class="page-header" style="margin-top:50px;">

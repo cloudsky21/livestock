@@ -209,7 +209,7 @@ if (isset($_POST['printBtn'])) {
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="../resources/bootswatch/<?php echo $_SESSION['mode']; ?>/bootstrap.css">
 	<link rel="stylesheet" href="../resources/css/font-awesome/css/font-awesome.css">
-	<link rel="stylesheet" href="../resources/css/local.css">
+	<link rel="stylesheet" href="../resources/css/local.css?v=<?=filemtime("../resources/css/local.css")?>">
 	<link rel="stylesheet" href="../resources/css/animate.css">
 	<link rel="stylesheet" href="../resources/multi-select/bootstrap-multiselect.css">
 	<link rel="stylesheet" href="../resources/jquery-ui-1.12.1.custom/jquery-ui.css">
@@ -260,7 +260,21 @@ if (isset($_POST['printBtn'])) {
 
 	});
 
-	
+	$(document).ready(function() {
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 80) {
+            $('#scrolledup').fadeIn();
+        } else {
+            $('#scrolledup').fadeOut();
+        }
+    });
+    $('.scrolledup').click(function() {
+        $("html, body").animate({
+            scrollTop: 0
+        }, 600);
+        return false;
+    });
+});
 
 
 	$(document).ready(function(){
@@ -269,8 +283,6 @@ if (isset($_POST['printBtn'])) {
 			$('#assured-name').empty();				
 			$('#province').trigger(':reset');
 			
-
-
 			$.ajax({
 				type : 'post',
 				url : '../bin/search/search_farmer.php', //Here you will fetch records 
@@ -306,8 +318,7 @@ if (isset($_POST['printBtn'])) {
 					$('#assured-name').trigger(':reset');				
 					$('#province').trigger(':reset');
 					
-					$('#assured-name').prop('readonly', false);
-					
+					$('#assured-name').prop('readonly', false);					
 
 				}
 			},
@@ -326,23 +337,6 @@ if (isset($_POST['printBtn'])) {
 
 	});
 
-  		/*
-  		$(document).ready(function () {
-  			$(window).scroll(function () {
-  				if ($(this).scrollTop() > 80) {
-  					$('#nav2').fadeIn();
-  				} else {
-  					$('#nav2').fadeOut();
-  				}  				
-  			});     
-  			$('.scrolledup').click(function () {
-  				$("html, body").animate({
-  					scrollTop: 0
-  				}, 600);
-  				return false;
-  			}); 
-  		});  
-  		*/
   	</script>
 
   </head>
@@ -457,11 +451,17 @@ if (isset($_POST['printBtn'])) {
   	</div>
   </div>
 </nav>   
+
+<!-- scroll up button -->
+<a class="scrolledup" href="#" id="scrolledup"> <span class="fa fa-angle-up"></span> </a>
+<!--End-->
+
 <div class="container-fluid">
 	<div class="page-header" style="margin-top:50px;">
 		<h2 class="display-5">Yolanda Rehabilitation Program (YRRP)</h2>
 		<hr>
 	</div>
+
 
 	<?PHP 
 $results_per_page = 100;
