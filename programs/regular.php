@@ -221,6 +221,7 @@ if (isset($_POST['delete_form'])) {
             $(window).scrollTop(sessionStorage.scrollTop);
         }
     });
+<<<<<<< HEAD
     $(document).ready(function() {
     $(window).scroll(function() {
         if ($(this).scrollTop() > 80) {
@@ -236,6 +237,8 @@ if (isset($_POST['delete_form'])) {
         return false;
     });
 });
+=======
+>>>>>>> 2f7b070fceb186b0768dfabed342086e2db576da
     </script>
 
 
@@ -358,8 +361,11 @@ if ($_SESSION['stat'] == "Main") {
     </div>
     </nav>
 
+<<<<<<< HEAD
     <a class="scrolledup" href="#" id="scrolledup"> <span class="fa fa-angle-up"></span> </a>
 
+=======
+>>>>>>> 2f7b070fceb186b0768dfabed342086e2db576da
     <div class="container-fluid">
         <div class="page-header" style="margin-top:50px;">
             <h2 class="display-5">Regular Program</h2>
