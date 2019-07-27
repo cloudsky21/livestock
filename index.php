@@ -99,11 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } else {
 
-<<<<<<< HEAD
-        $get_result = '<div id="flash-msg" class="alert alert-danger">Account Not Found!!!</div>';
-=======
-        $get_result = '<div id="flash-msg" class="alert alert-danger">Account Not Found!</div>';
->>>>>>> 2f7b070fceb186b0768dfabed342086e2db576da
+        $get_result = '<div id="flash-msg" class="alert alert-danger">Account Not Found!!!</div>';        
         unset($_POST);
     }
 
