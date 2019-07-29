@@ -168,7 +168,7 @@ if (isset($_POST['submit_index_update'])) {
 
 	if ($count > 0) {
 		$url = $_SERVER['REQUEST_URI'];
-		//header("Location: ".$url);
+		header("Location: ".$url);
 
 
 	}
