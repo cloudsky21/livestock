@@ -2,6 +2,7 @@
 session_start();
 require("../connection/conn.php");
 require '../myload.php';
+
 date_default_timezone_set('Asia/Manila');
 $header = $_SERVER['REQUEST_URI'];
 
@@ -224,7 +225,7 @@ if (isset($_POST['printBtn'])) {
   <script type='text/javascript' src="../resources/Respond/src/respond.js"></script>
 <![endif]-->
 <script type="text/javascript" src="../resources/multi-select/bootstrap-multiselect.js"></script>
-<script type = "text/javascript" language = "javascript" src="../resources/js/yrrp.js"></script>
+<script type = "text/javascript" language = "javascript" src="../resources/js/yrrp.js?v=<?=filemtime('../resources/js/yrrp.js')?>"></script>
 <script type="text/javascript">
 	$(window).scroll(function() {
 		sessionStorage.scrollTop = $(this).scrollTop();  			
@@ -517,8 +518,6 @@ $total_pages = ceil(round($getcount) / $results_per_page);
 		?>
 				<form method="post" action="../printing/printbatchProcessingslipYRRP" target="_blank">
 					<table class="table table-hover table-condensed table-sm " id="displaydata">
-
-
 						<thead>
 							<tr>
 								<th><input type="submit" class="btn btn-outline-primary btn-sm" name="printBtn" value="print"></th>
@@ -528,22 +527,14 @@ $total_pages = ceil(round($getcount) / $results_per_page);
 								<th>Farmers ID</th>
 								<th>Address</th>
 								<th>Kind of Animal</th>
-								<th>Heads</th>
-								
+								<th>Heads</th>								
 								<th>&nbsp;</th>
 								<th>&nbsp;</th>
 								<th>&nbsp;</th>
 							</tr>
-
 						</thead>
-						<tbody>	
-
-
-
-
-
-							<?PHP
-
+						<tbody>
+							<?php
 						if ($_SESSION['office'] == "Regional Office") {
 							$rs = $db->prepare("SELECT * FROM $table ORDER BY idsnumber DESC LIMIT ?, ?");
 							$rs->execute([$start_from, $results_per_page]);
@@ -551,11 +542,7 @@ $total_pages = ceil(round($getcount) / $results_per_page);
 							$rs = $db->prepare("SELECT * FROM $table WHERE office_assignment = ? ORDER BY idsnumber DESC LIMIT ?, ?");
 							$rs->execute([$_SESSION['office'], $start_from, $results_per_page]);
 						}
-
-
-
 						foreach ($rs as $row) {
-
 							if ($row['status'] == "active") {
 
 								echo '<tr>';
@@ -621,15 +608,9 @@ $total_pages = ceil(round($getcount) / $results_per_page);
 								echo '<td>&nbsp;</td>';
 
 								echo '</tr>';
-
-
-
-
 							}
 						}
 						?>
-
-
 						</tbody>
 					</table>
 				</form>
@@ -646,48 +627,31 @@ $total_pages = ceil(round($getcount) / $results_per_page);
 			<div class="modal-header">
 				<h4 class="modal-title">Delete Record</h4>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-
-
 			</div>
-
 			<div class="modal-body">
-				<div class="fetched-data">
-
-
-				</div>
+				<div class="fetched-data"></div>
 			</div>
-
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
 			</div>
-
 		</div>
 	</div>
 </div>
 
 <div class="modal animated bounceIn faster" id="editModal">
 	<div class="modal-dialog">
-
 		<div class="modal-content">
 			<form method="post" action="" class="form-horizontal" enctype="multipart/form-data">
 				<div class="modal-header">
 					<h4 class="modal-title">Edit Details</h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-
 				</div>
-
 				<div class="modal-body">
-					<div class="fetched-data">
-
-
-					</div>
+					<div class="fetched-data"></div>
 				</div>
-
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					<button type="submit" class="btn btn-primary" name="submit_index_update">Save Changes</button>
-
 				</div>
 			</form>
 		</div>
@@ -696,113 +660,24 @@ $total_pages = ceil(round($getcount) / $results_per_page);
 
 <div class="modal animated fadeIn faster" id="infoModal" role="dialog">
 	<div class="modal-dialog" role="document">
-
 		<div class="modal-content">
-
 			<div class="modal-header">
 				<h4 class="modal-title">Livestock Details</h4>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-
-			</div>
-
+				<button type="button" class="close" data-dismiss="modal">&times;</button></div>
 			<div class="modal-body">
-				<div class="fetched-data">
-
-
-				</div>
+				<div class="fetched-data"></div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
-
-
 		</div>
 	</div>
 </div>
+</body>
+</html>	
 
-
-<div class="modal animated fadeIn faster" id="ids" role="dialog">
-	<div class="modal-dialog" role="document">
-
-		<div class="modal-content">
-			<form method="post" id="farmersform">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">ADD FARMERS</h4>
-				</div>
-
-				<div class="modal-body">
-
-					<table class="table borderless" id="farmeradd">
-						<tbody>
-							<tr>
-								<td style="border: none;"><label for="frmrid">Farmer ID:</label></td>
-								<td style="border: none;" colspan="3"><input type="number" class="form-control" name="frmrid" id="frmrid" placeholder="436158"></td>
-							</tr>
-							<tr>	
-								<td style="border: none;"><label for="agem">Age(M)</label></td>
-								<td style="border: none;"><input type="text" class="form-control" name="agem" id="agem" placeholder="3 Yrs Old"></td>
-								<td style="border: none;"><label for="hdsm">Heads</label></td>
-								<td style="border: none;"><input type="number" class="form-control" name="hdsm" id="hdsm" step="any" min="0" placeholder="0"></td>
-							</tr>
-
-							<tr>	
-								<td style="border: none;"><label for="agef">Age(F)</label></td>
-								<td style="border: none;"><input type="text" class="form-control" name="agef" id="agef" placeholder="3 Yrs Old"></td>
-								<td style="border: none;"><label for="hdsf">Heads</label></td>
-								<td style="border: none;"><input type="number" class="form-control" name="hdsf" id="hdsf"  step="any" min="0" placeholder="0"></td>
-							</tr>
-
-							<tr>
-								<td style="border: none;"><label for="breed">Brand / Breed</label></td>
-								<td style="border: none;" colspan="3"><input type="text" class="form-control" name="breed" id="breed" placeholder="Native"></td>
-							</tr>
-
-							<tr>
-								<td style="border: none;"><label for="tagn">Ear Tag No.</label></td>
-								<td style="border: none;" colspan="3"><input type="text" class="form-control" name="tagn" id="tagn"></td>
-							</tr>
-
-							<tr>
-								<td style="border: none;"><label for="certt">Certificate No.</label></td>
-								<td style="border: none;" colspan="3"><input type="number" class="form-control" name="certt" id="certt" step="any" min="0"></td>
-							</tr>
-							<tr>
-								<td style="border: none;"><label for="aCover">Amount Cover</label></td>
-								<td style="border: none;" colspan="3"><input type="number" class="form-control" name="aCover" id="aCover" step="any" min="0"></td>
-							</tr>
-							<tr>
-								<td style="border: none;"><label for="apremium">Premium</label></td>
-								<td style="border: none;" colspan="3"><input type="number" class="form-control" name="apremium" id="apremium" step="any" min="0"></td>
-							</tr>
-
-						</table>
-
-
-
-
-
-					</div>
-
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary" name="submitfrmrs" id="submitfrmrs" onclick="verifyFarmers();">Submit</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-
-
-
-
-
-	<!-- INSERT MODAL -->
-
-	<!-- Modal -->
-
-	<!-- Modal -->
-	<div class="modal animated zoomOutleft faster" id="myModal">
+<!-- Add Farmer Form Modal -->
+<div class="modal animated zoomOutleft faster" id="myModal">
 		<div class="modal-dialog">
 			<!-- Modal content-->
 			<div class="modal-content">
@@ -970,13 +845,3 @@ $total_pages = ceil(round($getcount) / $results_per_page);
 			</form>
 		</div> 
 	</div>
-
-
-
-
-
-
-
-</body>
-
-</html>	
