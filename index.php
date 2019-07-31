@@ -4,6 +4,7 @@ require 'myload.php';
 date_default_timezone_set('Asia/Manila');
 
 use Classes\token;
+use html\htmlTags;
 
 $token = new token();
 $get_result = "";
@@ -99,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } else {
 
-        $get_result = '<div id="flash-msg" class="alert alert-danger">Account Not Found!!!</div>';        
+        $get_result = '<div id="flash-msg" class="alert alert-danger">Account Not Found!!!</div>';
         unset($_POST);
     }
 
@@ -113,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Livestock | Control System</title>
-    <link rel="shortcut icon" href="images/favicon.ico" />
+    <link rel="shortcut icon" href="images//favicon.ico" />
 
     <link rel="stylesheet" href="resources/bootswatch/cyborg/bootstrap.css">
     <link rel="stylesheet" href="resources/css/font-awesome/css/font-awesome.css">
