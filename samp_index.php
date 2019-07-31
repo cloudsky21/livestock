@@ -14,4 +14,4 @@ $css = [
 ];
 $html->pageTitle("RSBSA | Livestock Control");
 $html->styleSheet($css);
-$html->renderHeader();
+$html->output();

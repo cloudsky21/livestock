@@ -50,7 +50,7 @@ class html
         /* Return CSS Stylesheets which is in an array */
         return $this->styleSheet;
     }
-    public function renderHeader()
+    public function output()
     {
         $html = '';
         $html = '
