@@ -189,11 +189,8 @@ if(isset($_POST['addAccount'])){
 								<option value="PEO W-Samar">Western Samar Extension</option>
 								<option value="PEO E-Samar">Eastern Samar Extension</option>
 								<option value="PEO N-Samar">Northern Samar Extension</option>
-							</select>
-							
+							</select>							
 						</div>
-
-
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -203,7 +200,6 @@ if(isset($_POST['addAccount'])){
 			</div>
 		</div>
 	</div>
-
 	<div class="modal" id="delAccount" role="dialog">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">

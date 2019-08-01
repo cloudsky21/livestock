@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $userid = htmlentities($_POST['name'], ENT_QUOTES);
 
     /*Encrypts Password*/
-    $userpas = sha1($_POST['password']);
+    #$userpas = sha1($_POST['password']);
 
     /*Checks if Year is not null*/
 
