@@ -52,8 +52,7 @@ if(isset($_POST['addAccount'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-		<title>Accounts | Livestock Control</title>	
-
+		<title>Accounts | Livestock Control</title>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta http-equiv="refresh" content="1800">

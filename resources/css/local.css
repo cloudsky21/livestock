@@ -54,13 +54,14 @@
 }
 
 .col-centered {
-    float: none;
     margin: 0 auto;
     margin-top: 150px;
+    margin-bottom: 150px;
 }
 
 .login {
     width: 50% !important;
+    height: 100% !important;
 }
 
 .color-1 {
