@@ -19,5 +19,5 @@ if (!function_exists('myAutoloader')) {
         require "$classFile.php";
     }
 }
-
+define('LOGOUT', '../logmeOut');
 spl_autoload_register('myAutoloader');

@@ -29,10 +29,7 @@ if(isset($_POST['addAccount'])){
 
 
 		$userid = htmlentities($_POST['usr'], ENT_QUOTES);
-
 		$userpas = password_hash($_POST['pwd'], PASSWORD_BCRYPT, array("cost" => 10));
-
-
 		$surname = strtoupper(htmlentities($_POST['sname'], ENT_QUOTES));
 		$given_name = strtoupper(htmlentities($_POST['gname'], ENT_QUOTES));
 		$middlename = strtoupper(htmlentities($_POST['mname'], ENT_QUOTES));
@@ -300,11 +297,7 @@ if(isset($_POST['addAccount'])){
 				$query = "SELECT * FROM `users` WHERE usrid != ? ORDER BY `usrid` ASC";
 				$result = $db->prepare($query);
 				$result->execute(["root"]);
-
-
-
 				foreach($result as $row) {
-
 					echo '<tr>';
 					echo '<td>'.$row['usrid'].'</td>';
 					echo '<td>'.$row['pswd'].'</td>';
@@ -312,17 +305,9 @@ if(isset($_POST['addAccount'])){
 					echo '<td>'.$row['actype'].'</td>';
 					echo '<td><button type="submit" class="btn btn-outline-danger btn-sm" name="btn_delete" data-id="'.$row['usrid'].'" data-toggle="modal" data-target="#delAccount"><span class="fa fa-trash-o"></span></button>';
 					echo '</tr>';
-
 				}
-
-
 				?>
-
-
-
 			</table>
-
-
 		</div>
 	</div>
 </body>

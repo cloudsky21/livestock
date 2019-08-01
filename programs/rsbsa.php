@@ -16,6 +16,7 @@ $unwanted = array("&NTILDE;" => "Ñ");
 
 if (!isset($_SESSION['token'])) {
     header("location: ../logmeOut");
+    exit();
 }
 
 if (isset($_POST['submiter'])) {
@@ -66,6 +67,7 @@ if (isset($_POST['submiter'])) {
     if ($result > 0) {
         $_SESSION['group'] = $group;
         header('Location: ' . $_SERVER['REQUEST_URI']);
+        exit();
     }
 }
 if (isset($_POST['submit_index_update'])) {
