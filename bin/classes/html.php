@@ -16,9 +16,7 @@ class html
     );
 
     public function __construct()
-    {
-
-    }
+    { }
     public function favIcon($icon)
     {
         /*use and SET private $icon variable*/
@@ -33,7 +31,6 @@ class html
     {
         /* use and SET private $title variable */
         $this->title = $title;
-
     }
     public function SetPageTitle()
     {
@@ -71,7 +68,6 @@ class html
         $html .= '</head>';
         echo $html;
     }
-
 }
 
 /*

@@ -55,13 +55,13 @@
 
 .col-centered {
     margin: 0 auto;
-    margin-top: 150px;
-    margin-bottom: 150px;
+    width: 50% !important;
+    height: 100% !important;
 }
 
 .login {
-    width: 50% !important;
-    height: 100% !important;
+    margin-top: 200px;
+    margin-bottom: 150px;
 }
 
 .color-1 {

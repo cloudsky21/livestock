@@ -103,7 +103,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $get_result = '<div id="flash-msg" class="alert alert-danger">Account Not Found!!!</div>';
         unset($_POST);
     }
-
 }
 ?>
 
@@ -116,9 +115,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Livestock | Control System</title>
     <link rel="shortcut icon" href="images//favicon.ico" />
 
-    <link rel="stylesheet" href="resources/bootswatch/cyborg/bootstrap.css">
+    <link rel="stylesheet" href="resources/bootstrap-3.3.7-dist/css/bootstrap.css">
     <link rel="stylesheet" href="resources/css/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="resources/css/local.css?v=<?=filemtime('resources/css/local.css')?>" type="text/css">
+    <link rel="stylesheet" href="resources/css/local.css?v=<?= filemtime('resources/css/local.css') ?>" type="text/css">
 
     <link rel="stylesheet" href="resources/multi-select/bootstrap-multiselect.css">
     <script src="resources/bootstrap-4/js/jquery.js"></script>
@@ -134,48 +133,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <div class="container">
-        <div class="login col-centered">
-            <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    echo $get_result;
-}?>
+        <div class="col-centered">
+            <div class="login">
+                <?php
+                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    echo $get_result;
+                } ?>
 
-            <form action="" Method="POST" role="form">
-                <div class="form-group">
-                    <label for="usr">Username:</label>
-                    <input type="text" class="form-control" id="usr" name="name" required placeholder="Username">
-                </div>
-                <div class="form-group">
-                    <label for="pwd">Password:</label>
-                    <input type="password" id="pwd" name="password" class="form-control" required
-                        placeholder="Password">
-                </div>
-                <div class="form-group">
-                    <label for="i_year">Year:</label>
-                    <select id="i_year" name="i_year" class="form-control">
-                        <?php
-$sql = "SELECT * FROM livestock.year order by yearid ASC;";
-$result = $db->prepare($sql);
-$result->execute();
-foreach ($result as $row) {
-    echo '<option value="' . $row['yearid'] . '" selected="selected">' . $row['year'] . '</option>';
-}
-?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="mode">Mode:</label>
-                    <select name="mode" class="form-control">
-                        <option value="solar">Night</option>
-                        <option value="lumen">Light</option>
-                        <option value="slate">Dark</option>
-                        <option value="pulse">Default</option>
-                        <option value="cyborg">Cyborg</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-outline-secondary btn-large form-control" name="letmein">Let me
-                    in.</button>
-            </form>
+                <form action="" Method="POST" role="form">
+                    <div class="form-group">
+                        <label for="usr">Username:</label>
+                        <input type="text" class="form-control" id="usr" name="name" required placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Password:</label>
+                        <input type="password" id="pwd" name="password" class="form-control" required
+                            placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="i_year">Year:</label>
+                        <select id="i_year" name="i_year" class="form-control">
+                            <?php
+                            $sql = "SELECT * FROM livestock.year order by yearid ASC;";
+                            $result = $db->prepare($sql);
+                            $result->execute();
+                            foreach ($result as $row) {
+                                echo '<option value="' . $row['yearid'] . '" selected="selected">' . $row['year'] . '</option>';
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mode">Mode:</label>
+                        <select name="mode" class="form-control">
+                            <option value="solar">Night</option>
+                            <option value="lumen">Light</option>
+                            <option value="slate">Dark</option>
+                            <option value="pulse">Default</option>
+                            <option value="cyborg">Cyborg</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="form-control btn-primary" name="letmein">Let me
+                        in.</button>
+                </form>
+            </div>
         </div>
     </div>
 </body>
