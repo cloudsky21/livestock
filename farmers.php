@@ -18,7 +18,7 @@ if (!isset($_SESSION['token'])) {
 
 function adjustFarmer_table($data, $listTbl, $db)
 {
-/*
+    /*
 @param office_assignment varchar(200) $assignment
 @param province varchar(300) $province
 @param town varchar(300) $city
@@ -56,9 +56,7 @@ if (isset($_POST['modify'])) {
     if ($result->rowcount() > 0) {
         $affected = adjustFarmer_table($data, $tables, $db);
         echo '<script>if(!alert("Success! Data has been saved. Tables affected: ' . $affected . ' ")){window.location.reload();}</script>';
-
     }
-
 }
 
 /* End Save Code */
@@ -100,7 +98,6 @@ if (isset($_POST['searchBtn'])) {
     } else {
         echo '<script>if( alert("No Data Found For : ' . $data . '") ){window.location.reload();}</script>';
     }
-
 }
 /* End of Search Code */
 
@@ -119,42 +116,42 @@ if (isset($_POST['searchBtn'])) {
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="resources/bootswatch/<?php echo $_SESSION['mode']; ?>/bootstrap.css" media="screen">
     <link rel="stylesheet" href="resources/css/font-awesome/css/font-awesome.css">
-    <link href="resources/css/local.css?v=<?=filemtime('resources/css/local.css')?>" rel="stylesheet">
+    <link href="resources/css/local.css?v=<?= filemtime('resources/css/local.css') ?>" rel="stylesheet">
     <link rel="stylesheet" href="resources/css/animate.css">
     <link rel="stylesheet" href="resources/jquery-ui-1.12.1.custom/jquery-ui.css">
 </head>
 
 <body>
     <?php switch ($_SESSION['mode']) {
-    case 'solar':
-        echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
-        break;
+        case 'solar':
+            echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
+            break;
 
-    case 'lumen':
-        echo '<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="top">';
-        break;
+        case 'lumen':
+            echo '<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="top">';
+            break;
 
-    case 'darkly':
-        echo '<nav class="navbar navbar-expand-lg navbar-light bg-light" id="top">';
-        break;
+        case 'darkly':
+            echo '<nav class="navbar navbar-expand-lg navbar-light bg-light" id="top">';
+            break;
 
-    case 'slate':
-        echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
-        break;
+        case 'slate':
+            echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
+            break;
 
-    case 'cyborg':
-        echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
-        break;
+        case 'cyborg':
+            echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
+            break;
 
-    case 'pulse':
-        echo '<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="top">';
-        break;
+        case 'pulse':
+            echo '<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="top">';
+            break;
 
-    case 'default':
-        echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
-        break;
-}
-?>
+        case 'default':
+            echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
+            break;
+    }
+    ?>
     <div class="container">
         <a class="navbar-brand mx-auto" href="home">
             <h3>Livestock</h3>
@@ -189,8 +186,8 @@ if (isset($_POST['searchBtn'])) {
                     </a>
                     <div class="dropdown-menu">
                         <?php
-if ($_SESSION['stat'] == "Main") {
-    ?>
+                        if ($_SESSION['stat'] == "Main") {
+                            ?>
                         <a class="dropdown-item" href="year">Insurance Year</a>
                         <a class="dropdown-item" href="farmers">Farmers List</a>
                         <a class="dropdown-item" href="accounts">Accounts</a>
@@ -199,8 +196,8 @@ if ($_SESSION['stat'] == "Main") {
                         <a class="dropdown-item" href="extract" target="_blank">Extract LIPs</a>
 
                         <?php
-}
-?>
+                        }
+                        ?>
                         <a class="dropdown-item" href="reports">Reports</a>
                         <a class="dropdown-item" href="locations">Locations</a>
                     </div>
@@ -234,17 +231,17 @@ if ($_SESSION['stat'] == "Main") {
         <!-- Body of Code -->
         <div style="margin-top: 50px;">
             <?php
-if (isset($_POST['searchBtn'])) {
-    ?>
+            if (isset($_POST['searchBtn'])) {
+                ?>
             <form method="post" action="">
                 <?php
-echo $html;
-    echo '<script>if ( window.history.replaceState ) {window.history.replaceState( null, null, window.location.href );}</script>';
-    ?>
+                    echo $html;
+                    echo '<script>if ( window.history.replaceState ) {window.history.replaceState( null, null, window.location.href );}</script>';
+                    ?>
             </form>
             <?php
-}
-?>
+            }
+            ?>
 
         </div>
         <!-- End of Body of Code -->

@@ -46,7 +46,7 @@ if (isset($_POST['submiter'])) {
 
     //check office_assignment
     $office_assignment = $acpc->office_assignment($province, $town);
-/* check if farmer id is register to farmers table*/
+    /* check if farmer id is register to farmers table*/
     $check_farmer = new farmers();
     $check_farmer->param($f_id, $assured, $office_assignment, $province, $town);
 
@@ -63,7 +63,6 @@ if (isset($_POST['submiter'])) {
 
     if ($result > 0) {
         header('Location: ' . $_SERVER[REQUEST_URI]);
-
     }
 }
 if (isset($_POST['submit_index_update'])) {
@@ -130,9 +129,7 @@ if (isset($_POST['submit_index_update'])) {
     if ($count > 0) {
         $url = $_SERVER['REQUEST_URI'];
         header("Location: " . $url);
-
     }
-
 }
 
 if (isset($_POST['delete_records'])) {
@@ -186,35 +183,35 @@ if (isset($_POST['delete_records'])) {
 
 <body>
     <?php switch ($_SESSION['mode']) {
-    case 'solar':
-        echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
-        break;
+        case 'solar':
+            echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
+            break;
 
-    case 'lumen':
-        echo '<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="top">';
-        break;
+        case 'lumen':
+            echo '<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="top">';
+            break;
 
-    case 'darkly':
-        echo '<nav class="navbar navbar-expand-lg navbar-light bg-light" id="top">';
-        break;
+        case 'darkly':
+            echo '<nav class="navbar navbar-expand-lg navbar-light bg-light" id="top">';
+            break;
 
-    case 'slate':
-        echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
-        break;
+        case 'slate':
+            echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
+            break;
 
-    case 'cyborg':
-        echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
-        break;
+        case 'cyborg':
+            echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
+            break;
 
-    case 'pulse':
-        echo '<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="top">';
-        break;
+        case 'pulse':
+            echo '<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="top">';
+            break;
 
-    default:
-        echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
-        break;
-}
-?>
+        default:
+            echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
+            break;
+    }
+    ?>
     <div class="container">
         <a class="navbar-brand mx-auto" href="../home">
             <h3>Livestock</h3>
@@ -249,15 +246,15 @@ if (isset($_POST['delete_records'])) {
                     </a>
                     <div class="dropdown-menu">
                         <?php
-if ($_SESSION['stat'] == "Main") {
-    ?>
+                        if ($_SESSION['stat'] == "Main") {
+                            ?>
                         <a class="dropdown-item" href="../year">Insurance Year</a>
                         <a class="dropdown-item" href="../farmers">Farmers List</a>
                         <a class="dropdown-item" href="../accounts">Accounts</a>
                         <a class="dropdown-item" href="../checkbox" target="_blank">Checklist</a>
                         <?php
-}
-?>
+                        }
+                        ?>
                         <a class="dropdown-item" href="comments">Comments</a>
                         <a class="dropdown-item" href="../locations">Locations</a>
                     </div>
@@ -306,29 +303,28 @@ if ($_SESSION['stat'] == "Main") {
         </div>
 
         <?PHP
-$results_per_page = 100;
+        $results_per_page = 100;
 
-if (isset($_GET["page"])) {
-    $page = $_GET["page"];
-} else {
-    $page = 1;
-}
-;
-$start_from = ($page - 1) * $results_per_page;
+        if (isset($_GET["page"])) {
+            $page = $_GET["page"];
+        } else {
+            $page = 1;
+        };
+        $start_from = ($page - 1) * $results_per_page;
 
-if ($_SESSION['office'] == "Regional Office") {
-    $rs3 = $db->prepare("SELECT COUNT(idsnumber) AS total FROM $table");
-    $rs3->execute();
-} else {
-    $rs3 = $db->prepare("SELECT COUNT(idsnumber) AS total FROM $table WHERE office_assignment = ?");
-    $rs3->execute([$_SESSION['office']]);
-}
-foreach ($rs3 as $row) {
-    $getcount = $row['total'];
-}
-// calculate total pages with results
-$total_pages = ceil(round($getcount) / $results_per_page);
-?>
+        if ($_SESSION['office'] == "Regional Office") {
+            $rs3 = $db->prepare("SELECT COUNT(idsnumber) AS total FROM $table");
+            $rs3->execute();
+        } else {
+            $rs3 = $db->prepare("SELECT COUNT(idsnumber) AS total FROM $table WHERE office_assignment = ?");
+            $rs3->execute([$_SESSION['office']]);
+        }
+        foreach ($rs3 as $row) {
+            $getcount = $row['total'];
+        }
+        // calculate total pages with results
+        $total_pages = ceil(round($getcount) / $results_per_page);
+        ?>
 
 
 
@@ -338,32 +334,31 @@ $total_pages = ceil(round($getcount) / $results_per_page);
             <span id="addfarmers"></span>
             <?PHP
 
-echo '<ul class="pagination pull-right">';
+            echo '<ul class="pagination pull-right">';
 
-if ($page <= 1) {
-    echo "<li class='page-item disabled'><a class='page-link' href='#'>Previous</a></li>";
-} else {
-    echo "<li class='page-item' style='cursor:pointer'><a class='page-link' href='acpc?page=" . ($page - 1) . "'>Previous</a></li>";
-}
+            if ($page <= 1) {
+                echo "<li class='page-item disabled'><a class='page-link' href='#'>Previous</a></li>";
+            } else {
+                echo "<li class='page-item' style='cursor:pointer'><a class='page-link' href='acpc?page=" . ($page - 1) . "'>Previous</a></li>";
+            }
 
-for ($x = max($page - 5, 1); $x <= max(1, min($total_pages, $page + 5)); $x++) {
+            for ($x = max($page - 5, 1); $x <= max(1, min($total_pages, $page + 5)); $x++) {
 
-    if ($page == $x) {
-        echo '<li class="page-item active"><a class="page-link" href="acpc?page=' . $x . '">' . $x . '</a></li>';
-    } else {
-        echo '<li class="page-item"><a class="page-link" href="acpc?page=' . ($x) . '">' . $x . '</a></li>';
-    }
-}
-if ($page < $total_pages) {
-    echo "<li class='page-item' style='cursor:pointer'><a class='page-link' href='acpc?page=" . ($page + 1) . "'>Next</a></li>";
+                if ($page == $x) {
+                    echo '<li class="page-item active"><a class="page-link" href="acpc?page=' . $x . '">' . $x . '</a></li>';
+                } else {
+                    echo '<li class="page-item"><a class="page-link" href="acpc?page=' . ($x) . '">' . $x . '</a></li>';
+                }
+            }
+            if ($page < $total_pages) {
+                echo "<li class='page-item' style='cursor:pointer'><a class='page-link' href='acpc?page=" . ($page + 1) . "'>Next</a></li>";
+            } else {
+                echo '<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>';
+            }
 
-} else {
-    echo '<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>';
-}
+            echo '</ul>';
 
-echo '</ul>';
-
-?>
+            ?>
 
             <form method="post" action="../printing/printbatchProcessingslipACPC" target="_blank">
                 <table class="table table-condensed table-hover table-sm" id="displaydata">
@@ -396,111 +391,110 @@ echo '</ul>';
 
                         <?PHP
 
-if ($_SESSION['office'] == "Regional Office") {
-    $rs = $db->prepare("SELECT * FROM $table ORDER BY idsnumber DESC LIMIT ?, ?");
-    $rs->execute([$start_from, $results_per_page]);
-} else {
-    $rs = $db->prepare("SELECT * FROM $table WHERE office_assignment = ? ORDER BY idsnumber DESC LIMIT ?, ?");
-    $rs->execute([$_SESSION['office'], $start_from, $results_per_page]);
-}
+                        if ($_SESSION['office'] == "Regional Office") {
+                            $rs = $db->prepare("SELECT * FROM $table ORDER BY idsnumber DESC LIMIT ?, ?");
+                            $rs->execute([$start_from, $results_per_page]);
+                        } else {
+                            $rs = $db->prepare("SELECT * FROM $table WHERE office_assignment = ? ORDER BY idsnumber DESC LIMIT ?, ?");
+                            $rs->execute([$_SESSION['office'], $start_from, $results_per_page]);
+                        }
 
-foreach ($rs as $row) {
+                        foreach ($rs as $row) {
 
-    if ($row['status'] == "active") {
+                            if ($row['status'] == "active") {
 
-        echo '<tr>';
+                                echo '<tr>';
 
-        echo '<td class="text-center"><input type="checkbox" name="chkPrint[]" value="' . $row['idsnumber'] . '" id="i' . $row['idsnumber'] . '" style="width:20px; height:20px; cursor: pointer;"></td>';
-        echo '<td>' . date("m/d/Y", strtotime($row['date_r'])) . '</td>';
-        echo '<td href="#infoModal" id="info_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><strong>' . $row['lsp'] . '' . sprintf("%04d", $row['idsnumber']) . '&nbsp;' . $row['idsprogram'] . '</strong></td>';
-        echo '<td href="#addmembers" id="members" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static">' . $row['assured'] . '</td>';
-        echo '<td class="text-success">' . $row['f_id'] . '</td>';
-        //echo '<td><a class="btn btn-xs" role="button" href="#" data-toggle="modal" data-target="#aF" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-plus" ></span></a></td>';
-        echo '<td>' . $row['town'] . ', ' . $row['province'] . '</td>';
-        echo '<td>' . $row['animal'] . '</td>';
-        echo '<td class="text-center">' . $row['heads'] . '</td>';
+                                echo '<td class="text-center"><input type="checkbox" name="chkPrint[]" value="' . $row['idsnumber'] . '" id="i' . $row['idsnumber'] . '" style="width:20px; height:20px; cursor: pointer;"></td>';
+                                echo '<td>' . date("m/d/Y", strtotime($row['date_r'])) . '</td>';
+                                echo '<td href="#infoModal" id="info_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><strong>' . $row['lsp'] . '' . sprintf("%04d", $row['idsnumber']) . '&nbsp;' . $row['idsprogram'] . '</strong></td>';
+                                echo '<td href="#addmembers" id="members" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static">' . $row['assured'] . '</td>';
+                                echo '<td class="text-success">' . $row['f_id'] . '</td>';
+                                //echo '<td><a class="btn btn-xs" role="button" href="#" data-toggle="modal" data-target="#aF" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-plus" ></span></a></td>';
+                                echo '<td>' . $row['town'] . ', ' . $row['province'] . '</td>';
+                                echo '<td>' . $row['animal'] . '</td>';
+                                echo '<td class="text-center">' . $row['heads'] . '</td>';
 
-        if (!$row['lslb'] == "0") {
-            echo '<td><a class="btn btn-primary btn-sm" href="../policy/policy?lslb=' . $row['lslb'] . '" target="_blank">' . $row['lslb'] . '</a></td>';
-        } else {
-            echo '<td><a class="btn btn-outline-primary btn-sm disabled" href="#">' . $row['lslb'] . '</a></td>';
-        }
+                                if (!$row['lslb'] == "0") {
+                                    echo '<td><a class="btn btn-primary btn-sm" href="../policy/policy?lslb=' . $row['lslb'] . '" target="_blank">' . $row['lslb'] . '</a></td>';
+                                } else {
+                                    echo '<td><a class="btn btn-outline-primary btn-sm disabled" href="#">' . $row['lslb'] . '</a></td>';
+                                }
 
-        echo '<td><a class="btn btn-outline-primary btn-sm" href="../printing/processingslip?ids=' . $row['idsnumber'] . 'PNL" target="_blank"><i class="fa fa-file-o"> </i></a></td>';
-        echo '<td><a class="btn btn-outline-warning btn-sm" href="#editModal" id="edit_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><i class="fa fa-edit"></i></a></td>';
-        echo '<td><a class="btn btn-outline-danger btn-sm" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><i class="fa fa-trash-o"/></i></a></td>';
+                                echo '<td><a class="btn btn-outline-primary btn-sm" href="../printing/processingslip?ids=' . $row['idsnumber'] . 'PNL" target="_blank"><i class="fa fa-file-o"> </i></a></td>';
+                                echo '<td><a class="btn btn-outline-warning btn-sm" href="#editModal" id="edit_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><i class="fa fa-edit"></i></a></td>';
+                                echo '<td><a class="btn btn-outline-danger btn-sm" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><i class="fa fa-trash-o"/></i></a></td>';
 
-        echo '</tr>';
-    } else if ($row['status'] == "cancelled") {
-        echo '<tr>';
-        echo '<td class="text-center"><input type="checkbox" name="chkPrint" style="width:20px; height:20px; cursor: pointer;"></td>';
-        echo '<td>' . date("m/d/Y", strtotime($row['date_r'])) . '</td>';
-        echo '<td href="#infoModal" id="info_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><strong>' . $row['lsp'] . '' . sprintf("%04d", $row['idsnumber']) . '&nbsp;' . $row['idsprogram'] . '</strong></td>';
-        echo '<td href="#addmembers" id="members" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static">' . $row['assured'] . '</td>';
-        echo '<td class="text-success">' . $row['f_id'] . '</td>';
-        //echo '<td><a class="btn btn-xs" role="button" href="#" data-toggle="modal" data-target="#aF" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-plus" ></span></a></td>';
+                                echo '</tr>';
+                            } else if ($row['status'] == "cancelled") {
+                                echo '<tr>';
+                                echo '<td class="text-center"><input type="checkbox" name="chkPrint" style="width:20px; height:20px; cursor: pointer;"></td>';
+                                echo '<td>' . date("m/d/Y", strtotime($row['date_r'])) . '</td>';
+                                echo '<td href="#infoModal" id="info_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><strong>' . $row['lsp'] . '' . sprintf("%04d", $row['idsnumber']) . '&nbsp;' . $row['idsprogram'] . '</strong></td>';
+                                echo '<td href="#addmembers" id="members" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static">' . $row['assured'] . '</td>';
+                                echo '<td class="text-success">' . $row['f_id'] . '</td>';
+                                //echo '<td><a class="btn btn-xs" role="button" href="#" data-toggle="modal" data-target="#aF" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-plus" ></span></a></td>';
 
-        echo '<td>' . $row['town'] . ', ' . $row['province'] . '</td>';
-        echo '<td>' . $row['animal'] . '</td>';
-        echo '<td class="text-center">' . $row['heads'] . '</td>';
+                                echo '<td>' . $row['town'] . ', ' . $row['province'] . '</td>';
+                                echo '<td>' . $row['animal'] . '</td>';
+                                echo '<td class="text-center">' . $row['heads'] . '</td>';
 
-        if (!$row['lslb'] == "0") {
-            echo '<td><a class="btn btn-outline-primary btn-sm" href="policy?lslb=' . $row['lslb'] . '" target="_blank">' . $row['lslb'] . '</a></td>';
-        } else {
-            echo '<td><a class="btn btn-outline-primary btn-sm disabled" href="#">' . $row['lslb'] . '</a></td>';
-        }
-        echo '<td>&nbsp;</td>';
-        echo '<td><a class="btn btn-outline-primary btn-sm" href="#editModal" id="edit_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><i class="fa fa-edit"></i></a></td>';
-        echo '<td><a class="btn btn-outline-primary btn-sm" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><i class="fa fa-trash"/></i></a></td>';
+                                if (!$row['lslb'] == "0") {
+                                    echo '<td><a class="btn btn-outline-primary btn-sm" href="policy?lslb=' . $row['lslb'] . '" target="_blank">' . $row['lslb'] . '</a></td>';
+                                } else {
+                                    echo '<td><a class="btn btn-outline-primary btn-sm disabled" href="#">' . $row['lslb'] . '</a></td>';
+                                }
+                                echo '<td>&nbsp;</td>';
+                                echo '<td><a class="btn btn-outline-primary btn-sm" href="#editModal" id="edit_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><i class="fa fa-edit"></i></a></td>';
+                                echo '<td><a class="btn btn-outline-primary btn-sm" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><i class="fa fa-trash"/></i></a></td>';
 
-        echo '</tr>';
-    } else if ($row['status'] == 'cancelled') {
-        echo '<tr>';
-        echo '<td><input type="checkbox" name="chkPrint[]" value="' . $row['idsnumber'] . '" style="width:20px; height:20px; cursor: pointer;"></td>';
-        echo '<td>' . date("m/d/Y", strtotime($row['date_r'])) . '</td>';
-        echo '<td href="#infoModal" id="info_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><strong>' . $row['lsp'] . '' . sprintf("%04d", $row['idsnumber']) . '&nbsp;' . $row['idsprogram'] . '</strong></td>';
-        echo '<td href="#addmembers" id="members" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static">' . $row['assured'] . '</td>';
-        echo '<td>' . $row['town'] . ', ' . $row['province'] . '</td>';
-        echo '<td>' . $row['animal'] . '</td>';
-        echo '<td class="text-center">' . $row['heads'] . '</td>';
+                                echo '</tr>';
+                            } else if ($row['status'] == 'cancelled') {
+                                echo '<tr>';
+                                echo '<td><input type="checkbox" name="chkPrint[]" value="' . $row['idsnumber'] . '" style="width:20px; height:20px; cursor: pointer;"></td>';
+                                echo '<td>' . date("m/d/Y", strtotime($row['date_r'])) . '</td>';
+                                echo '<td href="#infoModal" id="info_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><strong>' . $row['lsp'] . '' . sprintf("%04d", $row['idsnumber']) . '&nbsp;' . $row['idsprogram'] . '</strong></td>';
+                                echo '<td href="#addmembers" id="members" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static">' . $row['assured'] . '</td>';
+                                echo '<td>' . $row['town'] . ', ' . $row['province'] . '</td>';
+                                echo '<td>' . $row['animal'] . '</td>';
+                                echo '<td class="text-center">' . $row['heads'] . '</td>';
 
-        if (!$row['lslb'] == "0") {
-            echo '<td><a class="btn btn-outline-primary btn-sm" href="../policy/policy?lslb=' . $row['lslb'] . '" target="_blank">' . $row['lslb'] . '</a></td>';
-        } else {
-            echo '<td><a class="btn btn-outline-primary btn-sm disabled" href="#">' . $row['lslb'] . '</a></td>';
-        }
+                                if (!$row['lslb'] == "0") {
+                                    echo '<td><a class="btn btn-outline-primary btn-sm" href="../policy/policy?lslb=' . $row['lslb'] . '" target="_blank">' . $row['lslb'] . '</a></td>';
+                                } else {
+                                    echo '<td><a class="btn btn-outline-primary btn-sm disabled" href="#">' . $row['lslb'] . '</a></td>';
+                                }
 
-        echo '<td><a class="btn btn-outline-primary btn-sm" href="../printing/processingslip?ids=' . $row['idsnumber'] . 'PNL" target="_blank"><i class="fa fa-file-o"> </i></a></td>';
-        echo '<td><a class="btn btn-outline-warning btn-sm" href="#editModal" id="edit_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><i class="fa fa-edit"></i></a></td>';
-        echo '<td>&nbsp;</td>';
+                                echo '<td><a class="btn btn-outline-primary btn-sm" href="../printing/processingslip?ids=' . $row['idsnumber'] . 'PNL" target="_blank"><i class="fa fa-file-o"> </i></a></td>';
+                                echo '<td><a class="btn btn-outline-warning btn-sm" href="#editModal" id="edit_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><i class="fa fa-edit"></i></a></td>';
+                                echo '<td>&nbsp;</td>';
 
-        echo '</tr>';
-    } else if ($row['status'] == "evaluated") {
-        echo '<tr>';
-        echo '<td><span class="badge badge-warning">Evaluated</span></td>';
-        echo '<td>' . date("m/d/Y", strtotime($row['date_r'])) . '</td>';
-        echo '<td href="#infoModal" id="info_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><strong>' . $row['lsp'] . '' . sprintf("%04d", $row['idsnumber']) . '&nbsp;' . $row['idsprogram'] . '</strong></td>';
-        echo '<td href="#addmembers" id="members" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static">' . $row['assured'] . '</td>';
-        echo '<td class="text-success">' . $row['f_id'] . '</td>';
-        echo '<td>' . $row['town'] . ', ' . $row['province'] . '</td>';
-        echo '<td>' . $row['animal'] . '</td>';
-        echo '<td class="text-center">' . $row['heads'] . '</td>';
+                                echo '</tr>';
+                            } else if ($row['status'] == "evaluated") {
+                                echo '<tr>';
+                                echo '<td><span class="badge badge-warning">Evaluated</span></td>';
+                                echo '<td>' . date("m/d/Y", strtotime($row['date_r'])) . '</td>';
+                                echo '<td href="#infoModal" id="info_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><strong>' . $row['lsp'] . '' . sprintf("%04d", $row['idsnumber']) . '&nbsp;' . $row['idsprogram'] . '</strong></td>';
+                                echo '<td href="#addmembers" id="members" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static">' . $row['assured'] . '</td>';
+                                echo '<td class="text-success">' . $row['f_id'] . '</td>';
+                                echo '<td>' . $row['town'] . ', ' . $row['province'] . '</td>';
+                                echo '<td>' . $row['animal'] . '</td>';
+                                echo '<td class="text-center">' . $row['heads'] . '</td>';
 
-        if (!$row['lslb'] == "0") {
-            echo '<td><a class="btn btn-info btn-sm" href="../policy/policy?lslb=' . $row['lslb'] . '" target="_blank">' . $row['lslb'] . '</a></td>';
-        } else {
-            echo '<td><a class="btn btn-outline-primary btn-sm disabled"></a></td>';
-        }
+                                if (!$row['lslb'] == "0") {
+                                    echo '<td><a class="btn btn-info btn-sm" href="../policy/policy?lslb=' . $row['lslb'] . '" target="_blank">' . $row['lslb'] . '</a></td>';
+                                } else {
+                                    echo '<td><a class="btn btn-outline-primary btn-sm disabled"></a></td>';
+                                }
 
-        echo '<td><a class="btn btn-info btn-sm" href="../printing/processingslip?ids=' . $row['idsnumber'] . 'PPPP" target="_blank"><i class="fa fa-file-o"> </i></a></td>';
-        echo '<td><a class="btn btn-info btn-sm" href="#editModal" id="edit_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><i class="fa fa-edit"></i></a></td>';
-        echo '<td>&nbsp;</td>';
+                                echo '<td><a class="btn btn-info btn-sm" href="../printing/processingslip?ids=' . $row['idsnumber'] . 'PPPP" target="_blank"><i class="fa fa-file-o"> </i></a></td>';
+                                echo '<td><a class="btn btn-info btn-sm" href="#editModal" id="edit_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><i class="fa fa-edit"></i></a></td>';
+                                echo '<td>&nbsp;</td>';
 
-        echo '</tr>';
-
-    }
-}
-?>
+                                echo '</tr>';
+                            }
+                        }
+                        ?>
 
 
                     </tbody>
@@ -582,7 +576,7 @@ foreach ($rs as $row) {
                     <h4 class="modal-title">Livestock Details</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-                </div> 
+                </div>
 
                 <div class="modal-body">
                     <div class="fetched-data">
@@ -707,9 +701,9 @@ foreach ($rs as $row) {
                                 <td><input type="text" id="group-name" name="group-name" placeholder="DA/LGU or et. al."
                                         required maxlength="200" tabindex="2" class="form-control form-control-sm"
                                         value="<?php if (isset($_SESSION['group'])) {
-    echo $_SESSION['group'];
-} else {
-}?>" autofocus></td>
+                                                                                                                                                                                                                echo $_SESSION['group'];
+                                                                                                                                                                                                            } else { } ?>"
+                                        autofocus></td>
                             </tr>
                             <tr>
                                 <th scope="row"><label for="assured-id">Farmers ID</label></th>
@@ -723,8 +717,8 @@ foreach ($rs as $row) {
                                         class="form-control form-control-sm"></td>
                             </tr>
                             <?php
-if ($_SESSION['office'] == "Regional Office") {
-    ?>
+                            if ($_SESSION['office'] == "Regional Office") {
+                                ?>
                             <tr>
                                 <th scope="row"><label for="address">Province</label></th>
                                 <td><select id="province" name="province" placeholder="Leyte"
@@ -742,15 +736,15 @@ if ($_SESSION['office'] == "Regional Office") {
                             </tr>
                             <?php
 
-} else {
+                            } else {
 
-    ?>
+                                ?>
                             <tr>
                                 <th scope="row"><label for="address">Province</label></th>
                                 <td><select id="province" name="province" placeholder="Leyte" class="custom-select"
                                         tabindex="6" onfocus="getaddress(this.value);">
                                         <?php
-/*
+                                            /*
     $result = $db->prepare("SELECT province FROM location WHERE office = ? LIMIT 1");
     $result->execute([$_SESSION['office']]);
     foreach ($result as $row) {
@@ -758,7 +752,7 @@ if ($_SESSION['office'] == "Regional Office") {
     echo '<option value="' . $row['province'] . '" selected>' . $row['province'] . '</option>';
     }
      */
-    ?>
+                                            ?>
 
                                     </select>
                                 </td>
@@ -766,8 +760,8 @@ if ($_SESSION['office'] == "Regional Office") {
                             </tr>
                             <?php
 
-}
-?>
+                            }
+                            ?>
                             <tr>
                                 <th scope="row"><label for="address">Town</label></th>
                                 <td>
