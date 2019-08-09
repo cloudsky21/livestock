@@ -1,24 +1,9 @@
 <?php
 session_start();
-
 require_once "connection/conn.php";
 require 'myload.php';
 
 date_default_timezone_set('Asia/Manila');
-
-use Classes\programtables;
-
-$obj = new programtables();
-
-$rsbsa_cnt = $obj->rsbsa();
-$regular_cnt = $obj->regular();
-$apcp_cnt = $obj->apcp();
-$pnl_cnt = $obj->acpc();
-$agri_cnt = $obj->agriagra();
-$saad = $obj->saad();
-$yrrp = $obj->yrrp();
-
-
 
 
 if (!isset($_SESSION['token'])) {
@@ -26,22 +11,6 @@ if (!isset($_SESSION['token'])) {
 }
 
 
-if (isset($_POST['printFrm'])) {
-    if (!empty($_POST['chk'])) {
-
-        $row = $_POST['chk'];
-
-
-        #  var_dump($row);
-
-        /*
-        foreach ($row as $key => $value) {
-            $string = explode(",", $value);
-            print_r($string);
-        }
-        */
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -178,7 +147,7 @@ if (isset($_POST['printFrm'])) {
         <!-- Table two -->
 
         <div style="margin-top: 50px;">
-            <form method="post" action="">
+            <form method="post" action="printPage.php">
                 <table class="table table-condensed table-striped table-hover table-sm">
                     <thead>
                         <tr>
@@ -207,8 +176,8 @@ if (isset($_POST['printFrm'])) {
 
                     <tbody>
                         <?php
-                        $sql = $db->prepare('SELECT * FROM print WHERE  flag = ? AND status = ?');
-                        $sql->execute([0, 'active']);
+                        $sql = $db->prepare('SELECT * FROM print WHERE  (userid = ? AND flag = ?) AND status = ?');
+                        $sql->execute([$_SESSION['isLoginID'], 0, 'active']);
 
                         foreach ($sql as $row) {
 

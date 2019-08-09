@@ -1,28 +1,76 @@
 <?php
 session_start();
-require_once "../connection/conn.php";
-require '../myload.php';
-
-date_default_timezone_set('Asia/Manila');
+require_once "connection/conn.php";
+require 'myload.php';
 
 use Classes\programtables;
 
 $obj = new programtables();
 
-$table = $obj->rsbsa();
-$agriagratbl = $obj->agriagra();
+$rsbsa_cnt = $obj->rsbsa();
+$regular_cnt = $obj->regular();
+$apcp_cnt = $obj->apcp();
+$pnl_cnt = $obj->acpc();
+$agri_cnt = $obj->agriagra();
+$saad = $obj->saad();
+$yrrp = $obj->yrrp();
 
-if (isset($_POST['printBtn'])) {
 
-    if (!empty($_POST['chkPrint'])) {
 
-        $row = $_POST['chkPrint'];
+
+if (!isset($_SESSION['token'])) {
+    header("location: logmeOut");
+}
+
+
+if (isset($_POST['printFrm'])) {
+
+    if (!empty($_POST['chk'])) {
+
+        $row = $_POST['chk'];
 
         foreach ($row as $key => $value) {
+            $string = explode(",", $value);
+            #var_dump($string);
+            switch ($string[0]) {
+                case 'PPPP':
+                case 'PPPP-ARB':
+                    $table = $rsbsa_cnt;
+                    $title = "RSBSA";
+                    break;
 
-            $used_program = "RSBSA";
+                case 'AGRI':
+                case 'AGRI-ARB':
+                    $table = $agri_cnt;
+                    $title = "AGRI-AGRA";
+                    break;
+
+                case 'PNL':
+                    $table = $pnl_cnt;
+                    $title = "PUNLA";
+                    break;
+
+                case 'APCP':
+                    $table = $apcp_cnt;
+                    $title = "APCP";
+                    break;
+
+                case 'SAAD':
+                    $table = $saad;
+                    $title = "SAAD";
+                    break;
+
+                case 'YRRP':
+                    $table = $yrrp;
+                    $title = "YRRP";
+                    break;
+            } #END of SWITCH
+
             $result = $db->prepare("SELECT * FROM `$table` WHERE idsnumber = ?");
-            $result->execute([$value]);
+            $result->execute([$string[1]]);
+
+            update($string[2], $db);
+
             foreach ($result as $row) {
                 $assured = strtoupper($row['assured']);
                 $address = strtoupper($row['town']) . ', ' . strtoupper($row['province']);
@@ -95,7 +143,7 @@ if (isset($_POST['printBtn'])) {
 				<table class="table table-condensed table-bordered font-md">
 					<tr>
 						<td colspan="2"><h6>PHILIPPINE CROP INSURANCE CORPORATION - REGIONAL OFFICE VIII</h6></td>
-						<td colspan="2"><h5 class="text-center">LIVESTOCK PROCESSING SLIP <strong>(' . $used_program . ')</strong></h5></td>
+						<td colspan="2"><h5 class="text-center">LIVESTOCK PROCESSING SLIP <strong>(' . $title . ')</strong></h5></td>
 					</tr>
 					<tr>
 						<th scope="row"><label>NAME</label></th>
@@ -153,7 +201,7 @@ if (isset($_POST['printBtn'])) {
 					</tr>
 				</table>';
             }
-
+            #END OF FOREACH TOP
             ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -162,9 +210,9 @@ if (isset($_POST['printBtn'])) {
     <title>PROCESSING SLIP</title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <link rel="shortcut icon" href="../images/favicon.ico">
-    <link rel="stylesheet" href="../resources/bootswatch-3/solar/bootstrap.css">
-    <link rel="stylesheet" href="../resources/css/local.css">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="resources/bootswatch-3/solar/bootstrap.css">
+    <link rel="stylesheet" href="resources/css/local.css">
 
 </head>
 
@@ -200,32 +248,10 @@ if (isset($_POST['printBtn'])) {
         echo '<script type="text/javascript">setTimeout("window.close();", 3000);</script>';
     }
 }
-if (isset($_POST['t_agri'])) {
-    if (!empty($_POST['chkPrint'])) {
-        $transfer = $_POST['chkPrint'];
-        foreach ($transfer as $key => $value) {
-            try {
-                $db->beginTransaction();
-                $sql =
-                    "INSERT INTO
-					`$agriagratbl` (Year, date_r, groupName, ids1, lsp, status, office_assignment, province, town, assured, farmers, heads, animal, premium, amount_cover, rate, Dfrom, Dto, loading, iu, prepared, tag, f_id)
-					SELECT Year, date_r, groupName, ids1, lsp, status, office_assignment, province, town, assured, farmers, heads, animal, premium, amount_cover, rate, Dfrom, Dto, loading, iu, prepared, tag, f_id
-					FROM `$table` WHERE $table.idsnumber = ?";
-                $result = $db->prepare($sql);
-                $result->execute([$value]);
-                $lastInsert = $db->lastInsertId();
 
-                $update_result_rsbsa = $db->prepare("UPDATE `$table` SET status = ?, comments = ? WHERE idsnumber = ?");
-                $update_result_rsbsa->execute(["cancelled", "Moved to AGRI-AGRA", $value]);
-                $db->commit();
-                echo 'IDS Transferred';
-                echo '<script type="text/javascript">setTimeout("window.close();", 2000);</script>';
-            } catch (PDOException $e) {
-                $db->rollback();
-                echo "ERROR " . $e->getMessage();
-            }
-        }
-    }
-} else { }
-
+function update($status, $db)
+{
+    $result = $db->prepare('UPDATE print SET flag = 1 WHERE printId = ?');
+    $result->execute([$status]);
+}
 ?>
