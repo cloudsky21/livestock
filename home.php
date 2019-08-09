@@ -54,35 +54,35 @@ if (!isset($_SESSION['token'])) {
 
 <body>
     <?php switch ($_SESSION['mode']) {
-    case 'solar':
-        echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
-        break;
+        case 'solar':
+            echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
+            break;
 
-    case 'lumen':
-        echo '<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="top">';
-        break;
+        case 'lumen':
+            echo '<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="top">';
+            break;
 
-    case 'darkly':
-        echo '<nav class="navbar navbar-expand-lg navbar-light bg-light" id="top">';
-        break;
+        case 'darkly':
+            echo '<nav class="navbar navbar-expand-lg navbar-light bg-light" id="top">';
+            break;
 
-    case 'slate':
-        echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
-        break;
+        case 'slate':
+            echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
+            break;
 
-    case 'cyborg':
-        echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
-        break;
+        case 'cyborg':
+            echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
+            break;
 
-    case 'pulse':
-        echo '<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="top">';
-        break;
+        case 'pulse':
+            echo '<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="top">';
+            break;
 
-    default:
-        echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
-        break;
-}
-?>
+        default:
+            echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="top">';
+            break;
+    }
+    ?>
     <!-- Brand -->
     <div class="container">
         <a class="navbar-brand mx-auto" href="home">
@@ -128,20 +128,22 @@ if (!isset($_SESSION['token'])) {
                     <div class="dropdown-menu dropdown-menu-right">
 
                         <?php
-echo '<a class="dropdown-item disabled" href="#">' . $_SESSION['isLoginName'] . '</a>';
-echo '<div class="dropdown-divider"></div>';
-if ($_SESSION['stat'] == "Main") { ?>
+                        echo '<a class="dropdown-item disabled" href="#">' . $_SESSION['isLoginName'] . '</a>';
+                        echo '<div class="dropdown-divider"></div>';
+                        if ($_SESSION['stat'] == "Main") { ?>
                         <a class="dropdown-item" href="year">Insurance Year</a>
-                        <a class="dropdown-item" href="farmers">Farmers List</a>
+
                         <a class="dropdown-item" href="accounts">Accounts</a>
                         <a class="dropdown-item" href="masterlist">RSBSA List</a>
                         <a class="dropdown-item" href="checkbox" target="_blank">Checklist</a>
                         <a class="dropdown-item" href="extract" target="_blank">Extract LIPs</a>
                         <?php
-}
-?>
+                        }
+                        ?>
+                        <a class="dropdown-item" href="farmers">Farmers List</a>
                         <a class="dropdown-item" href="reports">Reports</a>
                         <a class="dropdown-item" href="locations">Locations</a>
+                        <a class="dropdown-item" href="printform">Batch Printing</a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -156,9 +158,9 @@ if ($_SESSION['stat'] == "Main") { ?>
 
     <div class="container-fluid">
         <?php
-try {
+        try {
 
-    $query = "SELECT
+            $query = "SELECT
 				(SELECT COUNT(*) FROM $rsbsa_cnt WHERE status != 'cancelled') as RSBSA,
 				(SELECT COUNT(*) FROM $regular_cnt WHERE status != 'cancelled') as REGULAR,
 				(SELECT COUNT(*) FROM $apcp_cnt WHERE status != 'cancelled') as APCP,
@@ -258,133 +260,132 @@ try {
 				(SELECT SUM(heads) FROM $pnl_cnt WHERE animal LIKE 'Swine%' and status != ' cancelled' ) as SWPNL,
 				(SELECT SUM(heads) FROM $pnl_cnt WHERE animal = 'Poultry-Broilers' and status != ' cancelled' ) as PMPNL,
 				(SELECT SUM(heads) FROM $pnl_cnt WHERE animal = 'Poultry-Layers' and status != ' cancelled' ) as PEPNL";
-    $result = $db->prepare($query);
-    $result->execute();
+            $result = $db->prepare($query);
+            $result->execute();
 
-    foreach ($result as $row) {
+            foreach ($result as $row) {
 
-        $TRsbsa = number_format($row['RSBSA']);
-        $TReg = number_format($row['REGULAR']);
-        $TApcp = number_format($row['APCP']);
-        $TPnl = number_format($row['PUNLA']);
-        $TAgri = number_format($row['AGRI']);
-        $TYrrp = number_format($row['YRRP']);
-        //PREMIUM
-        $RSBSA_prem = number_format($row['RSBSAPREMIUM'], 2);
-        $REG_prem = number_format($row['REGPREMIUM'], 2);
-        $APCP_prem = number_format($row['APCPPREMIUM'], 2);
-        $PNL_prem = number_format($row['PNLPREMIUM'], 2);
-        $AGRI_prem = number_format($row['AGRIPREMIUM'], 2);
-        //AC
-        $RSBSA_ac = number_format($row['RSBSAAC'], 2);
-        $REG_ac = number_format($row['REGAC'], 2);
-        $APCP_ac = number_format($row['APCPAC'], 2);
-        $PNL_ac = number_format($row['PNLAC'], 2);
-        $AGRI_ac = number_format($row['AGRIAC'], 2);
-        //Leyte 1 - 2
-        $LRsbsa = number_format($row['RSBSAL']);
-        $LReg = number_format($row['REGL']);
-        $LApcp = number_format($row['APCPL']);
-        $LPnl = number_format($row['PNLL']);
-        $LAgri = number_format($row['AGRIL']);
-        //PEO Ormoc
-        $ORsbsa = number_format($row['RSBSAO']);
-        $OReg = number_format($row['REGO']);
-        $OApcp = number_format($row['APCPO']);
-        $OPnl = number_format($row['PNLO']);
-        $OAgri = number_format($row['AGRIO']);
-        //PEO Abuyog
-        $ARsbsa = number_format($row['RSBSAA']);
-        $AReg = number_format($row['REGA']);
-        $AApcp = number_format($row['APCPA']);
-        $APnl = number_format($row['PNLA']);
-        $AAgri = number_format($row['AGRIA']);
-        //PEO Sogod
-        $SRsbsa = number_format($row['RSBSAS']);
-        $SReg = number_format($row['REGS']);
-        $SApcp = number_format($row['APCPS']);
-        $SPnl = number_format($row['PNLS']);
-        $SAgri = number_format($row['AGRIS']);
-        //PEO Western Samar
-        $WSRsbsa = number_format($row['RSBSAWS']);
-        $WSReg = number_format($row['REGWS']);
-        $WSApcp = number_format($row['APCPWS']);
-        $WSPnl = number_format($row['PNLWS']);
-        $WSAgri = number_format($row['AGRIWS']);
-        //PEO Eastern Samar
-        $ESRsbsa = number_format($row['RSBSAES']);
-        $ESReg = number_format($row['REGES']);
-        $ESApcp = number_format($row['APCPES']);
-        $ESPnl = number_format($row['PNLES']);
-        $ESAgri = number_format($row['AGRIES']);
-        //PEO Northern Samar
-        $NSRsbsa = number_format($row['RSBSANS']);
-        $NSReg = number_format($row['REGNS']);
-        $NSApcp = number_format($row['APCPNS']);
-        $NSPnl = number_format($row['PNLNS']);
-        $NSAgri = number_format($row['AGRINS']);
+                $TRsbsa = number_format($row['RSBSA']);
+                $TReg = number_format($row['REGULAR']);
+                $TApcp = number_format($row['APCP']);
+                $TPnl = number_format($row['PUNLA']);
+                $TAgri = number_format($row['AGRI']);
+                $TYrrp = number_format($row['YRRP']);
+                //PREMIUM
+                $RSBSA_prem = number_format($row['RSBSAPREMIUM'], 2);
+                $REG_prem = number_format($row['REGPREMIUM'], 2);
+                $APCP_prem = number_format($row['APCPPREMIUM'], 2);
+                $PNL_prem = number_format($row['PNLPREMIUM'], 2);
+                $AGRI_prem = number_format($row['AGRIPREMIUM'], 2);
+                //AC
+                $RSBSA_ac = number_format($row['RSBSAAC'], 2);
+                $REG_ac = number_format($row['REGAC'], 2);
+                $APCP_ac = number_format($row['APCPAC'], 2);
+                $PNL_ac = number_format($row['PNLAC'], 2);
+                $AGRI_ac = number_format($row['AGRIAC'], 2);
+                //Leyte 1 - 2
+                $LRsbsa = number_format($row['RSBSAL']);
+                $LReg = number_format($row['REGL']);
+                $LApcp = number_format($row['APCPL']);
+                $LPnl = number_format($row['PNLL']);
+                $LAgri = number_format($row['AGRIL']);
+                //PEO Ormoc
+                $ORsbsa = number_format($row['RSBSAO']);
+                $OReg = number_format($row['REGO']);
+                $OApcp = number_format($row['APCPO']);
+                $OPnl = number_format($row['PNLO']);
+                $OAgri = number_format($row['AGRIO']);
+                //PEO Abuyog
+                $ARsbsa = number_format($row['RSBSAA']);
+                $AReg = number_format($row['REGA']);
+                $AApcp = number_format($row['APCPA']);
+                $APnl = number_format($row['PNLA']);
+                $AAgri = number_format($row['AGRIA']);
+                //PEO Sogod
+                $SRsbsa = number_format($row['RSBSAS']);
+                $SReg = number_format($row['REGS']);
+                $SApcp = number_format($row['APCPS']);
+                $SPnl = number_format($row['PNLS']);
+                $SAgri = number_format($row['AGRIS']);
+                //PEO Western Samar
+                $WSRsbsa = number_format($row['RSBSAWS']);
+                $WSReg = number_format($row['REGWS']);
+                $WSApcp = number_format($row['APCPWS']);
+                $WSPnl = number_format($row['PNLWS']);
+                $WSAgri = number_format($row['AGRIWS']);
+                //PEO Eastern Samar
+                $ESRsbsa = number_format($row['RSBSAES']);
+                $ESReg = number_format($row['REGES']);
+                $ESApcp = number_format($row['APCPES']);
+                $ESPnl = number_format($row['PNLES']);
+                $ESAgri = number_format($row['AGRIES']);
+                //PEO Northern Samar
+                $NSRsbsa = number_format($row['RSBSANS']);
+                $NSReg = number_format($row['REGNS']);
+                $NSApcp = number_format($row['APCPNS']);
+                $NSPnl = number_format($row['PNLNS']);
+                $NSAgri = number_format($row['AGRINS']);
 
-        //Animal Count
-        $RSBSA_WB = number_format($row['CARBRSBSA']);
-        $RSBSA_CA = number_format($row['CATRSBSA']);
-        $RSBSA_HO = number_format($row['HORSBSA']);
-        $RSBSA_GO = number_format($row['GORSBSA']);
-        $RSBSA_SH = number_format($row['SHRSBSA']);
-        $RSBSA_SW = number_format($row['SWRSBSA']);
-        $RSBSA_PM = number_format($row['PMRSBSA']);
-        $RSBSA_PE = number_format($row['PERSBSA']);
+                //Animal Count
+                $RSBSA_WB = number_format($row['CARBRSBSA']);
+                $RSBSA_CA = number_format($row['CATRSBSA']);
+                $RSBSA_HO = number_format($row['HORSBSA']);
+                $RSBSA_GO = number_format($row['GORSBSA']);
+                $RSBSA_SH = number_format($row['SHRSBSA']);
+                $RSBSA_SW = number_format($row['SWRSBSA']);
+                $RSBSA_PM = number_format($row['PMRSBSA']);
+                $RSBSA_PE = number_format($row['PERSBSA']);
 
-        $AGRI_WB = number_format($row['CARBAGRI']);
-        $AGRI_CA = number_format($row['CATAGRI']);
-        $AGRI_HO = number_format($row['HOAGRI']);
-        $AGRI_GO = number_format($row['GOAGRI']);
-        $AGRI_SH = number_format($row['SHAGRI']);
-        $AGRI_SW = number_format($row['SWAGRI']);
-        $AGRI_PM = number_format($row['PMAGRI']);
-        $AGRI_PE = number_format($row['PEAGRI']);
+                $AGRI_WB = number_format($row['CARBAGRI']);
+                $AGRI_CA = number_format($row['CATAGRI']);
+                $AGRI_HO = number_format($row['HOAGRI']);
+                $AGRI_GO = number_format($row['GOAGRI']);
+                $AGRI_SH = number_format($row['SHAGRI']);
+                $AGRI_SW = number_format($row['SWAGRI']);
+                $AGRI_PM = number_format($row['PMAGRI']);
+                $AGRI_PE = number_format($row['PEAGRI']);
 
-        $REG_WB = number_format($row['CARBREG']);
-        $REG_CA = number_format($row['CATREG']);
-        $REG_HO = number_format($row['HOREG']);
-        $REG_GO = number_format($row['GOREG']);
-        $REG_SH = number_format($row['SHREG']);
-        $REG_SW = number_format($row['SWREG']);
-        $REG_PM = number_format($row['PMREG']);
-        $REG_PE = number_format($row['PEREG']);
+                $REG_WB = number_format($row['CARBREG']);
+                $REG_CA = number_format($row['CATREG']);
+                $REG_HO = number_format($row['HOREG']);
+                $REG_GO = number_format($row['GOREG']);
+                $REG_SH = number_format($row['SHREG']);
+                $REG_SW = number_format($row['SWREG']);
+                $REG_PM = number_format($row['PMREG']);
+                $REG_PE = number_format($row['PEREG']);
 
-        $APCP_WB = number_format($row['CARBAPCP']);
-        $APCP_CA = number_format($row['CATAPCP']);
-        $APCP_HO = number_format($row['HOAPCP']);
-        $APCP_GO = number_format($row['GOAPCP']);
-        $APCP_SH = number_format($row['SHAPCP']);
-        $APCP_SW = number_format($row['SWAPCP']);
-        $APCP_PM = number_format($row['PMAPCP']);
-        $APCP_PE = number_format($row['PEAPCP']);
+                $APCP_WB = number_format($row['CARBAPCP']);
+                $APCP_CA = number_format($row['CATAPCP']);
+                $APCP_HO = number_format($row['HOAPCP']);
+                $APCP_GO = number_format($row['GOAPCP']);
+                $APCP_SH = number_format($row['SHAPCP']);
+                $APCP_SW = number_format($row['SWAPCP']);
+                $APCP_PM = number_format($row['PMAPCP']);
+                $APCP_PE = number_format($row['PEAPCP']);
 
-        $PNL_WB = number_format($row['CARBPNL']);
-        $PNL_CA = number_format($row['CATPNL']);
-        $PNL_HO = number_format($row['HOPNL']);
-        $PNL_GO = number_format($row['GOPNL']);
-        $PNL_SH = number_format($row['SHPNL']);
-        $PNL_SW = number_format($row['SWPNL']);
-        $PNL_PM = number_format($row['PMPNL']);
-        $PNL_PE = number_format($row['PEPNL']);
+                $PNL_WB = number_format($row['CARBPNL']);
+                $PNL_CA = number_format($row['CATPNL']);
+                $PNL_HO = number_format($row['HOPNL']);
+                $PNL_GO = number_format($row['GOPNL']);
+                $PNL_SH = number_format($row['SHPNL']);
+                $PNL_SW = number_format($row['SWPNL']);
+                $PNL_PM = number_format($row['PMPNL']);
+                $PNL_PE = number_format($row['PEPNL']);
 
-        $YRRP_WB = number_format($row['CARBYRRP']);
-        $YRRP_CA = number_format($row['CATYRRP']);
-        $YRRP_HO = number_format($row['HOYRRP']);
-        $YRRP_GO = number_format($row['GOYRRP']);
-        $YRRP_SH = number_format($row['SHYRRP']);
-        $YRRP_SW = number_format($row['SWYRRP']);
-        $YRRP_PM = number_format($row['PMYRRP']);
-        $YRRP_PE = number_format($row['PEYRRP']);
-
-    }
-    ?>
+                $YRRP_WB = number_format($row['CARBYRRP']);
+                $YRRP_CA = number_format($row['CATYRRP']);
+                $YRRP_HO = number_format($row['HOYRRP']);
+                $YRRP_GO = number_format($row['GOYRRP']);
+                $YRRP_SH = number_format($row['SHYRRP']);
+                $YRRP_SW = number_format($row['SWYRRP']);
+                $YRRP_PM = number_format($row['PMYRRP']);
+                $YRRP_PE = number_format($row['PEYRRP']);
+            }
+            ?>
         <?php
-$date = date("Y-m-d");
-    $user = $_SESSION['isLoginName'];
-    $sqlQuery = "SELECT
+            $date = date("Y-m-d");
+            $user = $_SESSION['isLoginName'];
+            $sqlQuery = "SELECT
 				(SELECT SUM(farmers) FROM $rsbsa_cnt WHERE prepared = '$user' AND date_r = '$date') AS rsbsa,
 				(SELECT SUM(farmers) FROM $regular_cnt WHERE prepared = '$user' AND date_r = '$date') AS regular,
 				(SELECT SUM(farmers) FROM $apcp_cnt WHERE prepared = '$user' AND date_r = '$date') AS apcp,
@@ -393,17 +394,16 @@ $date = date("Y-m-d");
 				(SELECT SUM(farmers) FROM $saad WHERE prepared = '$user' AND date_r = '$date') AS saad,
 				(SELECT SUM(farmers) FROM $yrrp WHERE prepared = '$user' AND date_r = '$date') AS yrrp";
 
-    $result = $db->prepare($sqlQuery);
-    $result->execute();
+            $result = $db->prepare($sqlQuery);
+            $result->execute();
 
-    foreach ($result as $key => $values) {
-        $total_user_count = array_sum($values);
+            foreach ($result as $key => $values) {
+                $total_user_count = array_sum($values);
+            }
 
-    }
+            $sample_date = date("Y-m-d", strtotime('+1 year'));
 
-    $sample_date = date("Y-m-d", strtotime('+1 year'));
-
-    ?>
+            ?>
         <div style="margin-top: 50px;">
             <h3 class="text-center">Detailed Information<small> as of <?php echo $_SESSION['insurance'] ?></small></h3>
             <table class="table table-bordered table-condensed">
@@ -619,11 +619,11 @@ $date = date("Y-m-d");
 
     <?php
 
-} catch (Exception $e) {
-    echo '<div class="alert alert-danger" style="margin-top: 100px;">';
-    echo 'Error Found! ' . $e . '</div>';
-}
-?>
+    } catch (Exception $e) {
+        echo '<div class="alert alert-danger" style="margin-top: 100px;">';
+        echo 'Error Found! ' . $e . '</div>';
+    }
+    ?>
 
     <!--
 <audio autoplay></audio>
