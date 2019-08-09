@@ -1,4 +1,5 @@
 <?php
+
 namespace Classes;
 
 class apcp
@@ -24,8 +25,20 @@ class apcp
         );
 
         $result->execute($values);
+        $inserted_id = $db->lastInsertId();
+        $program = $values[2];
+        $status = $values[17];
+        $this->printForm($inserted_id, $program, $_SESSION['isLoginID'], $status);
         return $result->rowCount();
+    }
 
+    function printForm($series, $program, $userid, $status)
+    {
+        $myArray = array($series, $program, $userid, $status);
+        $db = $this->db;
+
+        $result = $db->prepare('INSERT INTO print (series, program, userid, status) VALUES (?,?,?,?)');
+        $result->execute($myArray);
     }
     public function getDate($date)
     {
@@ -288,7 +301,6 @@ class apcp
                     # code...
                     $office = "PEO Abuyog";
                     break;
-
             }
         } elseif ($peo == "NORTHERN SAMAR") {
             $office = "PEO N-Samar";

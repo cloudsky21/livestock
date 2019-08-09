@@ -122,34 +122,40 @@ foreach ($row as $key => $value) {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>PROCESSING SLIP</title>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-	<link rel="shortcut icon" href="../images/favicon.ico">
-	
-	<link rel="stylesheet" href="../resources/bootswatch-3/solar/bootstrap.css">
-	<link rel="stylesheet" href="../resources/css/local.css">
+    <title>PROCESSING SLIP</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <link rel="shortcut icon" href="../images/favicon.ico">
+
+    <link rel="stylesheet" href="../resources/bootswatch-3/solar/bootstrap.css">
+    <link rel="stylesheet" href="../resources/css/local.css">
 
 </head>
+
 <body>
-	
-
-	<?php echo $displaydata ?>
-	<div class="container">
-		<p class="col-xs-4"><strong>BENITA M. ALBERTO</strong> <br><small>OIC-CHIEF, Marketing and Sales Division</small></p>
-		<p class="col-xs-4"><?php echo $prepared ?> <br><small>Prepared By</small></p>
-		<p class="col-xs-4"><?php echo $iu ?> <br><small>IU/Solicitor/AT</small></p>
-	</div>
-
-	<p class="text-center">__________________________________________________________________________________________________________________________________________________________________________________________</p>
-
-	
 
 
-	
+    <?php echo $displaydata ?>
+    <div class="container">
+        <p class="col-xs-4"><strong>BENITA M. ALBERTO</strong> <br><small>OIC-CHIEF, Marketing and Sales
+                Division</small></p>
+        <p class="col-xs-4"><?php echo $prepared ?> <br><small>Prepared By</small></p>
+        <p class="col-xs-4"><?php echo $iu ?> <br><small>IU/Solicitor/AT</small></p>
+    </div>
+
+    <p class="text-center">
+        __________________________________________________________________________________________________________________________________________________________________________________________
+    </p>
+
+
+
+
+
 </body>
-</html>	
+
+</html>
 
 <?php
 }

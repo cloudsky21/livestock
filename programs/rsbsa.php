@@ -529,7 +529,7 @@ if (isset($_POST['delete_records'])) {
     </div>
 
 
-    <div class="modal animated rollIn faster" id="deleteModal">
+    <div class="modal animated fade faster" id="deleteModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -545,7 +545,7 @@ if (isset($_POST['delete_records'])) {
         </div>
     </div>
 
-    <div class="modal animated fadeIn faster" id="editModal">
+    <div class="modal animated fade faster" id="editModal">
         <div class="modal-dialog">
 
             <div class="modal-content">
@@ -573,7 +573,7 @@ if (isset($_POST['delete_records'])) {
         </div>
     </div>
 
-    <div class="modal animated headShake faster" id="infoModal" role="dialog">
+    <div class="modal animated fade faster" id="infoModal" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -590,7 +590,7 @@ if (isset($_POST['delete_records'])) {
 
 
     <!-- Add New Farmer -->
-    <div class="modal animated zoomOutleft faster" id="myModal">
+    <div class="modal animated fade faster" id="myModal">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">

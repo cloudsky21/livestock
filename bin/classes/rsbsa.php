@@ -13,7 +13,6 @@ class Rsbsa
         require '../connection/conn.php';
         $this->db = $db;
         $this->table = $table;
-
     }
     public static function longTitle()
     {
@@ -49,8 +48,25 @@ class Rsbsa
 
         $result->execute($values);
         $inserted_id = $db->lastInsertId();
+        $program = $values[25];
+        $status = $values[17];
+        $this->printForm($inserted_id, $program, $_SESSION['isLoginID'], $status);
         return $result->rowCount();
+    }
 
+    function printForm($series, $program, $userid, $status)
+    {
+        $myArray = array($series, $program, $userid, $status);
+        $db = $this->db;
+
+        $result = $db->prepare('INSERT INTO print (series, program, userid, status) VALUES (?,?,?,?)');
+        $result->execute($myArray);
+    }
+    function console_log($data)
+    {
+        echo '<script>';
+        echo 'console.log(' . json_encode($data) . ')';
+        echo '</script>';
     }
     public function getDate($date)
     {
@@ -318,7 +334,6 @@ class Rsbsa
                     # code...
                     $office = "PEO TACLOBAN";
                     break;
-
             }
         } elseif ($peo == "NORTHERN SAMAR") {
             $office = "PEO N-Samar";
@@ -389,7 +404,6 @@ class Rsbsa
             } elseif (preg_match('/\b(\w*Horse\w*)\b/', $animal, $matches)) {
                 $premLoading = "HMD-0.25,BLACK LEG-0.25,HEM. SEPTECIMIA-0.25";
             }
-
         } else if ($r_date >= $e_date) {
 
             if (preg_match('/\b(\w*Swine\w*)\b/', $animal, $matches)) {
@@ -406,7 +420,6 @@ class Rsbsa
         }
 
         return $premLoading;
-
     }
 
     public function delete($ids, $header)
@@ -419,7 +432,5 @@ class Rsbsa
         $result->execute();
 
         header("location:" . $header);
-
     }
-
 } // END Class

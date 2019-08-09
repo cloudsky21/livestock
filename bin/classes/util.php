@@ -1,4 +1,5 @@
 <?php
+
 namespace Classes;
 
 class util
@@ -15,7 +16,6 @@ class util
     public function table()
     {
         return $this->table;
-
     }
     public function getDate($date)
     {
@@ -70,7 +70,6 @@ class util
             } elseif (preg_match('/\b(\w*Horse\w*)\b/', $animal, $matches)) {
                 $premLoading = "HMD-0.25,BLACK LEG-0.25,HEM. SEPTECIMIA-0.25";
             }
-
         } else if ($r_date >= $e_date) {
 
             if (preg_match('/\b(\w*Swine\w*)\b/', $animal, $matches)) {
@@ -87,7 +86,6 @@ class util
         }
 
         return $premLoading;
-
     }
 
     public function office_assignment($peo, $town)
@@ -269,6 +267,7 @@ class util
                     break;
 
                 case 'BAYBAY CITY':
+                case 'BAYBAY':
                     # code...
                     $office = "PEO Ormoc";
                     break;
@@ -322,7 +321,6 @@ class util
                     # code...
                     $office = "PEO TACLOBAN";
                     break;
-
             }
         } elseif ($peo == "NORTHERN SAMAR") {
             $office = "PEO N-Samar";
@@ -360,9 +358,27 @@ class util
 
         $result->execute($values);
         $inserted_id = $db->lastInsertId();
+        $program = $values[25];
+        $status = $values[17];
+        $this->printForm($inserted_id, $program, $_SESSION['isLoginID'], $status);
         return $result->rowCount();
-
     }
+
+    function printForm($series, $program, $userid, $status)
+    {
+        $myArray = array($series, $program, $userid, $status);
+        $db = $this->db;
+
+        $result = $db->prepare('INSERT INTO print (series, program, userid, status) VALUES (?,?,?,?)');
+        $result->execute($myArray);
+    }
+    function console_log($data)
+    {
+        echo '<script>';
+        echo 'console.log(' . json_encode($data) . ')';
+        echo '</script>';
+    }
+
     public function update($values)
     {
 
@@ -390,7 +406,5 @@ class util
         $result->execute();
 
         header("location:" . $header);
-
     }
-
 }
