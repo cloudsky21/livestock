@@ -239,6 +239,7 @@ if (isset($_POST['delete_records'])) {
                         <a class="dropdown-item" href="../masterlist">RSBSA List</a>
                         <a class="dropdown-item" href="../checkbox" target="_blank">Checklist</a>
                         <a class="dropdown-item" href="../extract" target="_blank">Extract LIPs</a>
+                        <a class="dropdown-item" href="../printform">Batch Printing</a>
 
                         <?php
                         }
