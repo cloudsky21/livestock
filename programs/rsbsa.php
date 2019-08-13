@@ -159,7 +159,9 @@ if (isset($_POST['delete_records'])) {
     <!--[if IE]><link rel="shortcut icon" href="../images/favicon-32x32.ico" ><![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="../resources/bootswatch/<?php echo $_SESSION['mode']; ?>/bootstrap.css" media="screen">
+    <link rel="stylesheet"
+        href="../resources/bootswatch/<?php echo $_SESSION['mode']; ?>/bootstrap.css?v=<?= filemtime('../resources/bootswatch/' . $_SESSION['mode'] . '/bootstrap.css') ?>"
+        media="screen">
     <link rel="stylesheet" href="../resources/css/font-awesome/css/font-awesome.css">
     <link href="../resources/css/local.css?v=<?= filemtime('../resources/css/local.css') ?>" rel="stylesheet">
     <link rel="stylesheet" href="../resources/css/animate.css">

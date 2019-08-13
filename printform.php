@@ -14,7 +14,7 @@ if (!isset($_SESSION['token'])) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <title>Print Form</title>
@@ -23,7 +23,9 @@ if (!isset($_SESSION['token'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="resources/bootswatch/<?php echo $_SESSION['mode']; ?>/bootstrap.css">
+    <link rel="stylesheet"
+        href="resources/bootswatch/<?php echo $_SESSION['mode']; ?>/bootstrap.css?v=<?= filemtime('resources/bootswatch/' . $_SESSION['mode'] . '/bootstrap.css') ?>"
+        media="screen">
     <link rel="stylesheet" href="resources/css/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="resources/css/local.css">
     <link rel="stylesheet" href="resources/multi-select/bootstrap-multiselect.css">
@@ -148,9 +150,10 @@ if (!isset($_SESSION['token'])) {
 
         <div style="margin-top: 50px;">
             <form method="post" action="printPage.php">
-                <table class="table table-condensed table-striped table-hover table-sm">
+                <table class="table table-condensed table-hover table-sm">
                     <thead>
                         <tr>
+                            <th>&nbsp;</th>
                             <th class="text-center">
                                 <input type="checkbox" style="width:27px; height:27px; cursor: pointer;"
                                     onchange="checkAll(this)" class="btn btn-secondary btn-sm">
@@ -176,6 +179,7 @@ if (!isset($_SESSION['token'])) {
 
                     <tbody>
                         <?php
+                        $t = 1;
                         $sql = $db->prepare('SELECT * FROM print WHERE  (userid = ? AND flag = ?) AND status = ?');
                         $sql->execute([$_SESSION['isLoginID'], 0, 'active']);
 
@@ -206,6 +210,7 @@ if (!isset($_SESSION['token'])) {
                             }
 
                             echo '<tr>';
+                            echo '<td class="text-center">' . $t++ . '</td>';
                             echo '<td class="text-center"><input type="checkbox" name="chk[]" style="width:20px; height:20px; cursor: pointer;" value ="' . $row['program'] . ',' . $row['series'] . ',' . $row['printId'] . '">
                             </td>';
                             echo '<td>' . $row['series'] . '</td>';
@@ -220,6 +225,12 @@ if (!isset($_SESSION['token'])) {
                     </tbody>
                 </table>
             </form>
+            <!-- Footer-->
+
+            <p class="text-center"><small>© Copyrighted <?php echo $_SESSION['insurance']; ?></small>
+                <br><small>
+            </p>
+            <!-- end footer-->
         </div>
 </body>
 
