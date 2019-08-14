@@ -6503,7 +6503,7 @@ a.close.disabled {
     flex-direction: column;
     width: 100%;
     pointer-events: auto;
-    background-color: #073642;
+    background-color: #181a1b;
     background-clip: padding-box;
     border: 1px solid #002B36;
     border-radius: 0.3rem;
