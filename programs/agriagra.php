@@ -176,8 +176,9 @@ if (isset($_POST['delete_records'])) {
 
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="../resources/bootswatch/<?php echo $_SESSION['mode']; ?>/bootstrap.css"
-        type="text/css">
+    <link rel="stylesheet"
+        href="../resources/bootswatch/<?php echo $_SESSION['mode']; ?>/bootstrap.css?v=<?= filemtime('../resources/bootswatch/' . $_SESSION['mode'] . '/bootstrap.css') ?>"
+        media="screen">
     <!--<link rel="stylesheet" href="../resources/bootstrap-4/css/bootstrap.css">-->
     <link rel="stylesheet" href="../resources/css/local.css?v=<?=filemtime('../resources/css/local.css')?>"
         type="text/css">

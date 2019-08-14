@@ -151,7 +151,9 @@ if (isset($_POST['delete_records'])) {
     <link rel="shortcut icon" href="../images/favicon.ico">
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="../resources/bootswatch/<?php echo $_SESSION['mode']; ?>/bootstrap.css">
+    <link rel="stylesheet"
+        href="../resources/bootswatch/<?php echo $_SESSION['mode']; ?>/bootstrap.css?v=<?= filemtime('../resources/bootswatch/' . $_SESSION['mode'] . '/bootstrap.css') ?>"
+        media="screen">
     <link rel="stylesheet" href="../resources/css/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="../resources/css/local.css">
     <link rel="stylesheet" href="../resources/multi-select/bootstrap-multiselect.css">

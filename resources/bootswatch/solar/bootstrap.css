@@ -35,8 +35,8 @@
     --info: #268BD2;
     --warning: #CB4B16;
     --danger: #D33682;
-    --light: #FDF6E3;
-    --dark: #012630;
+    --light: rgb(85, 85, 84);
+    --dark: #001116;
     --breakpoint-xs: 0;
     --breakpoint-sm: 576px;
     --breakpoint-md: 768px;
@@ -81,7 +81,7 @@ body {
     line-height: 1.5;
     color: #616363;
     text-align: left;
-    background-color: rgb(1, 23, 29);
+    background-color: #1d1f20;
 }
 
 [tabindex="-1"]:focus {
@@ -7324,7 +7324,7 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-    background-color: #073642 !important;
+    background-color: #181a1b !important;
 }
 
 a.bg-dark:hover,

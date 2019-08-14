@@ -196,7 +196,9 @@ if (isset($_POST['delete_form'])) {
     <link rel="shortcut icon" href="../images/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../resources/bootswatch/<?php echo $_SESSION['mode']; ?>/bootstrap.css">
+    <link rel="stylesheet"
+        href="../resources/bootswatch/<?php echo $_SESSION['mode']; ?>/bootstrap.css?v=<?= filemtime('../resources/bootswatch/' . $_SESSION['mode'] . '/bootstrap.css') ?>"
+        media="screen">
     <link rel="stylesheet" href="../resources/css/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="../resources/css/local.css">
     <link rel="stylesheet" href="../resources/jquery-ui-1.12.1.custom/jquery-ui.css">
