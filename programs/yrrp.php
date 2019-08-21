@@ -85,6 +85,7 @@ if (isset($_POST['submiter'])) {
 	$result = $yrrp->insertData($values);
 
 	if ($result > 0) {
+        $_SESSION['group'] = $group;
 		header('Location: ' . $_SERVER[REQUEST_URI]);
 	}
 }
@@ -292,7 +293,7 @@ if (isset($_POST['printBtn'])) {
                         console.log(town);
 
                         $('#assured-name').val(obj[0]
-                        .name); //Show fetched data from database
+                            .name); //Show fetched data from database
                         $('#province option').each(function() {
                             if ($(this).text() == provinces) {
                                 $(this).parent().val($(this).val());
@@ -695,6 +696,7 @@ if (isset($_POST['printBtn'])) {
                             <th scope="row"><label for="group-name">Group Name</label></th>
                             <td><input type="text" id="group-name" name="group-name" placeholder="DA/LGU or et. al."
                                     required maxlength="200" tabindex="2" class="form-control form-control-sm"
+                                    value="<?php if(isset($_SESSION['group'])) { echo $_SESSION['group'];} else { } ?>"
                                     autofocus></td>
                         </tr>
                         <tr>

@@ -45,8 +45,9 @@ if (isset($_POST['submit_index'])) {
     if (empty($_POST['prem_loading'])) {
         $prem_loading = "";
     } else {
-        $prem_loading = $_POST['prem_loading'];
-        $prem_loading = htmlentities(implode(',', $prem_loading), ENT_QUOTES);
+        #$prem_loading = $_POST['prem_loading'];
+        $prem_loading = 'Normal Cover - Typhoon and Flood';
+        $prem_loading = htmlentities($prem_loading, ENT_QUOTES);
     }
 
     $rC_num = htmlentities($_POST['rcnum']);
@@ -224,20 +225,20 @@ if (isset($_POST['delete_form'])) {
         }
     });
     $(document).ready(function() {
-    $(window).scroll(function() {
-        if ($(this).scrollTop() > 80) {
-            $('#scrolledup').fadeIn();
-        } else {
-            $('#scrolledup').fadeOut();
-        }
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 80) {
+                $('#scrolledup').fadeIn();
+            } else {
+                $('#scrolledup').fadeOut();
+            }
+        });
+        $('.scrolledup').click(function() {
+            $("html, body").animate({
+                scrollTop: 0
+            }, 600);
+            return false;
+        });
     });
-    $('.scrolledup').click(function() {
-        $("html, body").animate({
-            scrollTop: 0
-        }, 600);
-        return false;
-    });
-});
     </script>
 
 
@@ -360,11 +361,8 @@ if ($_SESSION['stat'] == "Main") {
     </div>
     </nav>
 
-<<<<<<< HEAD
     <a class="scrolledup" href="#" id="scrolledup"> <span class="fa fa-angle-up"></span> </a>
 
-=======
->>>>>>> 2f7b070fceb186b0768dfabed342086e2db576da
     <div class="container-fluid">
         <div class="page-header" style="margin-top:50px;">
             <h2 class="display-5">Regular Program</h2>

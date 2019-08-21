@@ -615,6 +615,7 @@ if (isset($_POST['delete_records'])) {
                                     <select id="type_rsbsa" name="type_rsbsa" class="form-control form-control-sm">
                                         <option value="PPPP" selected>Default</option>
                                         <option value="PPPP-ARB">DAR</option>
+                                        <option value="PPPP-ACEF">ACEF</option>
                                     </select>
                                 </td>
                             </tr>
@@ -623,7 +624,8 @@ if (isset($_POST['delete_records'])) {
                                 <th scope="row"><label for="group-name">Group Name</label></th>
                                 <td><input type="text" id="group-name" name="group-name" placeholder="DA/LGU or et. al."
                                         required maxlength="200" tabindex="2" class="form-control form-control-sm"
-                                        value="<?php if (isset($_SESSION['group'])) {
+                                        value="<?php
+                                                                                                                                                                                                            if (isset($_SESSION['group'])) {
                                                                                                                                                                                                                 echo $_SESSION['group'];
                                                                                                                                                                                                             } else { } ?>"
                                         autofocus></td>
