@@ -192,6 +192,9 @@ if (!isset($_SESSION['token'])) {
                                 case 'PPPP-ARB':
                                     $program = 'RSBSA-ARB';
                                     break;
+                                case 'PPPP-ACEF':
+                                    $program = 'RSBSA-ACEF';
+                                    break;
                                 case 'AGRI':
                                     $program = 'AGRI-AGRA';
                                     break;

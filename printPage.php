@@ -35,6 +35,7 @@ if (isset($_POST['printFrm'])) {
             switch ($string[0]) {
                 case 'PPPP':
                 case 'PPPP-ARB':
+                case 'PPPP-ACEF':
                     $table = $rsbsa_cnt;
                     $title = "RSBSA";
                     break;

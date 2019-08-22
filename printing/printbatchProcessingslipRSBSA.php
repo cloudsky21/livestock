@@ -50,8 +50,10 @@ if (isset($_POST['printBtn'])) {
                 $prepared = $row['prepared'];
                 if ($row['idsprogram'] == 'PPPP') {
                     $or = '222222-' . substr($_SESSION['insurance'], -2) . '-' . sprintf("%04d", $row['idsnumber']) . '-L';
-                } else {
+                } else if ($row['idsprogram'] == 'PPPP-ARB') {
                     $or = '222ARB-' . substr($_SESSION['insurance'], -2) . '-' . sprintf("%04d", $row['idsnumber']) . '-L';
+                } else {
+                    $or = '222ACE-' . substr($_SESSION['insurance'], -2) . '-' . sprintf("%04d", $row['idsnumber']) . '-L';
                 }
                 $status = $row['status'];
                 $tag = $row['tag'];
