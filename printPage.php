@@ -97,11 +97,41 @@ if (isset($_POST['printFrm'])) {
                 $lslb = $row['lslb'];
                 $iu = $row['iu'];
                 $prepared = $row['prepared'];
-                if ($row['idsprogram'] == 'PPPP') {
-                    $or = '222222-' . substr($_SESSION['insurance'], -2) . '-' . sprintf("%04d", $row['idsnumber']) . '-L';
-                } else {
-                    $or = '222ARB-' . substr($_SESSION['insurance'], -2) . '-' . sprintf("%04d", $row['idsnumber']) . '-L';
+
+                switch ($row['idsprogram']) {
+                    case 'PPPP':
+                        $or = '222222-' . substr($_SESSION['insurance'], -2) . '-' . sprintf("%04d", $row['idsnumber']) . '-L';
+                        break;
+
+                    case 'PPPP-ARB':
+                        $or = '222ARB-' . substr($_SESSION['insurance'], -2) . '-' . sprintf("%04d", $row['idsnumber']) . '-L';
+                        break;
+
+                    case 'PPPP-ACEF':
+                        $or = '222ACE-' . substr($_SESSION['insurance'], -2) . '-' . sprintf("%04d", $row['idsnumber']) . '-L';
+                        break;
+
+                    case 'SAAD':
+                        $or = '222222-' . substr($_SESSION['insurance'], -2) . '-' . sprintf("%04d", $row['idsnumber']) . '-SAAD-L';
+                        break;
+
+                    case 'AGRI':
+                        $or = 'AA2018-' . substr($_SESSION['insurance'], -2) . '-' . sprintf("%04d", $row['idsnumber']) . '-L';
+                        break;
+
+                    case 'AGRI-ARB':
+                        $or = 'AARB18-' . substr($_SESSION['insurance'], -2) . '-' . sprintf("%04d", $row['idsnumber']) . '-L';
+                        break;
+
+                    case 'PNL':
+                        $or = 'PL2016-' . substr($_SESSION['insurance'], -2) . '-' . sprintf("%04d", $row['idsnumber']) . '-L';
+                        break;
+
+                    case 'APCP':
+                        $or = 'A99999-' . substr($_SESSION['insurance'], -2) . '-' . sprintf("%04d", $row['idsnumber']) . '-L';
+                        break;
                 }
+
                 $status = $row['status'];
                 $tag = $row['tag'];
                 $f_id = $row['f_id'];
