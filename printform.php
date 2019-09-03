@@ -119,9 +119,9 @@ if (!isset($_SESSION['token'])) {
                     <div class="dropdown-menu dropdown-menu-right">
 
                         <?php
-                        echo '<a class="dropdown-item disabled" href="#">' . $_SESSION['isLoginName'] . '</a>';
-                        echo '<div class="dropdown-divider"></div>';
-                        if ($_SESSION['stat'] == "Main") { ?>
+                            echo '<a class="dropdown-item disabled" href="#">' . $_SESSION['isLoginName'] . '</a>';
+                            echo '<div class="dropdown-divider"></div>';
+                            if ($_SESSION['stat'] == "Main") { ?>
                         <a class="dropdown-item" href="year">Insurance Year</a>
                         <a class="dropdown-item" href="farmers">Farmers List</a>
                         <a class="dropdown-item" href="accounts">Accounts</a>
@@ -129,8 +129,8 @@ if (!isset($_SESSION['token'])) {
                         <a class="dropdown-item" href="checkbox" target="_blank">Checklist</a>
                         <a class="dropdown-item" href="extract" target="_blank">Extract LIPs</a>
                         <?php
-                        }
-                        ?>
+                            }
+                            ?>
                         <a class="dropdown-item" href="reports">Reports</a>
                         <a class="dropdown-item" href="locations">Locations</a>
                     </div>
@@ -147,13 +147,66 @@ if (!isset($_SESSION['token'])) {
 
     <div class="container-fluid">
         <!-- Table two -->
+        <?php
+            /* ============== RESULTS DISPLAYED PER PAGE ==========  */
+            $results_per_page = 25;
+            /* =======================================================*/
+            if (isset($_GET["page"])) {
+                $page = $_GET["page"];
+            } else {
+                $page = 1;
+            }
+
+            $start_from = ($page - 1) * $results_per_page;
+
+            $rs3 = $db->prepare("SELECT COUNT(*) AS total FROM print WHERE  ((userid = ? AND flag = ?) AND status = ?)");
+            $rs3->execute([$_SESSION['isLoginID'], 0, 'active']);
+
+            foreach ($rs3 as $row) {
+                $getcount = $row['total'];
+            }
+            // calculate total pages with results
+            $total_pages = ceil(round($getcount) / $results_per_page);
+
+
+            echo '<ul class="pagination pull-right">';
+
+            if ($page <= 1) {
+                echo "<li class='page-item disabled'><a class='page-link' href='#'>Previous</a></li>";
+            } else {
+                echo "<li class='page-item' style='cursor:pointer'><a class='page-link' href='printform?page=" . ($page - 1) . "'>Previous</a></li>";
+            }
+
+            //5 = 9, 4 = 7, 3 = 5
+            for ($x = max($page - 3, 1); $x <= max(1, min($total_pages, $page + 3)); $x++) {
+
+                if ($page == $x) {
+                    echo '<li class="page-item active">
+         <a class="page-link" href="printform?page=' . $x . '">' . $x . '</a>
+         </li>';
+                } else {
+                    echo '<li class="page-item"><a class="page-link" href="printform?page=' . ($x) . '">' . $x . '</a></li>';
+                }
+            }
+            if ($page < $total_pages) {
+                echo "<li class='page-item' style='cursor:pointer'><a class='page-link' href='printform?page=" . ($page + 1) . "'>Next</a></li>";
+            } else {
+                echo '<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>';
+            }
+
+            echo '</ul>';
+
+
+
+
+
+            ?>
 
         <div style="margin-top: 50px;">
-            <form method="post" action="printPage.php">
+            <form method="post" action="printPage.php" target="_blank">
                 <table class="table table-condensed table-hover table-sm">
                     <thead>
                         <tr>
-                            <th>&nbsp;</th>
                             <th class="text-center">
                                 <input type="checkbox" style="width:27px; height:27px; cursor: pointer;"
                                     onchange="checkAll(this)" class="btn btn-secondary btn-sm">
@@ -165,7 +218,8 @@ if (!isset($_SESSION['token'])) {
                                         aria-haspopup="true" aria-expanded="false"></button>
                                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop2">
                                         <input type="submit" class="dropdown-item btn btn-outline-primary btn-sm"
-                                            name="printFrm" value="Print">
+                                            name="printFrm" value="Print"
+                                            onclick="setTimeout(function () { window.location.reload(); }, 3)">
                                     </div>
                                 </div>
                             </th>
@@ -179,50 +233,54 @@ if (!isset($_SESSION['token'])) {
 
                     <tbody>
                         <?php
-                        $t = 1;
-                        $sql = $db->prepare('SELECT * FROM print WHERE  (userid = ? AND flag = ?) AND status = ?');
-                        $sql->execute([$_SESSION['isLoginID'], 0, 'active']);
+                            $t = 1;
+                            #$sql = $db->prepare('SELECT * FROM print WHERE  (userid = ? AND flag = ?) AND status = ?');
+                            $sql = $db->prepare('SELECT * FROM print WHERE  ((userid = ? AND flag = ?) AND status = ?) ORDER BY date DESC LIMIT ?, ?');
+                            $sql->execute([$_SESSION['isLoginID'], 0, 'active', $start_from, $results_per_page]);
 
-                        foreach ($sql as $row) {
+                            foreach ($sql as $row) {
 
-                            switch ($row['program']) {
-                                case 'PPPP':
-                                    $program = 'RSBSA';
-                                    break;
-                                case 'PPPP-ARB':
-                                    $program = 'RSBSA-ARB';
-                                    break;
-                                case 'PPPP-ACEF':
-                                    $program = 'RSBSA-ACEF';
-                                    break;
-                                case 'AGRI':
-                                    $program = 'AGRI-AGRA';
-                                    break;
-                                case 'AGRI-ARB':
-                                    $program = 'AGRI-AGRA ARB';
-                                    break;
-                                case 'PNL':
-                                    $program = 'PUNLA';
-                                    break;
-                                case 'APCP':
-                                    $program = 'LBP-APCP';
-                                    break;
-                                case 'YRRP':
-                                    $program = 'YRRP';
-                                    break;
-                            }
+                                switch ($row['program']) {
+                                    case 'PPPP':
+                                        $program = 'RSBSA';
+                                        break;
+                                    case 'PPPP-ARB':
+                                        $program = 'RSBSA-ARB';
+                                        break;
+                                    case 'PPPP-ACEF':
+                                        $program = 'RSBSA-ACEF';
+                                        break;
+                                    case 'AGRI':
+                                        $program = 'AGRI-AGRA';
+                                        break;
+                                    case 'AGRI-ARB':
+                                        $program = 'AGRI-AGRA ARB';
+                                        break;
+                                    case 'PNL':
+                                        $program = 'PUNLA';
+                                        break;
+                                    case 'APCP':
+                                        $program = 'LBP-APCP';
+                                        break;
+                                    case 'YRRP':
+                                        $program = 'YRRP';
+                                        break;
+                                    case 'SAAD':
+                                        $program = 'SAAD';
+                                        break;
+                                }
 
-                            echo '<tr>';
-                            echo '<td class="text-center">' . $t++ . '</td>';
-                            echo '<td class="text-center"><input type="checkbox" name="chk[]" style="width:20px; height:20px; cursor: pointer;" value ="' . $row['program'] . ',' . $row['series'] . ',' . $row['printId'] . '">
+                                echo '<tr>';
+
+                                echo '<td class="text-center"><input type="checkbox" name="chk[]" style="width:20px; height:20px; cursor: pointer;" value ="' . $row['program'] . ',' . $row['series'] . ',' . $row['printId'] . '">
                             </td>';
-                            echo '<td>' . $row['series'] . '</td>';
-                            echo '<td>' . $program . '</td>';
-                            echo '<td>' . $row['status'] . '</td>';
-                            echo '<td>' . date("F d, Y h:m:s A", strtotime($row['date'])) . '</td>';
-                            echo '</tr>';
-                        }
-                        ?>
+                                echo '<td>' . $row['series'] . '</td>';
+                                echo '<td>' . $program . '</td>';
+                                echo '<td>' . $row['status'] . '</td>';
+                                echo '<td>' . date("F d, Y h:m:s A", strtotime($row['date'])) . '</td>';
+                                echo '</tr>';
+                            }
+                            ?>
 
 
                     </tbody>

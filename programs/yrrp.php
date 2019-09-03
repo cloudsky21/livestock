@@ -288,20 +288,22 @@ if (isset($_POST['printBtn'])) {
                     if (!data.trim() == '') {
 
                         var obj = $.parseJSON(data);
-                        var provinces = obj[0].province;
-                        var town = obj[0].town;
-                        console.log(town);
+                    var provinces = obj[0].province;
+                    var town = obj[0].town;
+                    console.log(provinces);
 
-                        $('#assured-name').val(obj[0]
-                            .name); //Show fetched data from database
-                        $('#province option').each(function() {
-                            if ($(this).text() == provinces) {
-                                $(this).parent().val($(this).val());
-
-                            }
-                        });
-                        $('#town option').val(town);
-                        //getaddress(provinces);
+                    $('#assured-name').val(obj[0].name); //Show fetched data from database
+                    
+                    $('#province').append($('<option>', {
+                        value: provinces,
+                        text: provinces
+                    }));
+                    $('#province').val(provinces);
+                    $('#town').append($('<option>', {
+                        value: town,
+                        text: town
+                    }));
+                    $('#town').val(town);
 
 
 

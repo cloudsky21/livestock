@@ -230,6 +230,7 @@ class yrrp
 					break;
 
 				case 'ORMOC CITY':
+				case 'ORMOC':
 					# code...
 					$office = "PEO Ormoc";
 					break;

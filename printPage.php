@@ -67,6 +67,7 @@ if (isset($_POST['printFrm'])) {
                     break;
             } #END of SWITCH
 
+
             $result = $db->prepare("SELECT * FROM `$table` WHERE idsnumber = ?");
             $result->execute([$string[1]]);
 
@@ -129,6 +130,9 @@ if (isset($_POST['printFrm'])) {
 
                     case 'APCP':
                         $or = 'A99999-' . substr($_SESSION['insurance'], -2) . '-' . sprintf("%04d", $row['idsnumber']) . '-L';
+                        break;
+                    case 'YRRP':
+                        $or = 'Y99999-' . substr($_SESSION['insurance'], -2) . '-' . sprintf("%04d", $row['idsnumber']) . '-L';
                         break;
                 }
 
