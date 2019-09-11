@@ -527,7 +527,7 @@ try {
                                                 <input type="submit" class="dropdown-item" name="activeBtn"
                                                     value="Set Active">
                                                 <input type="submit" class="dropdown-item" name="t_rsbsa"
-                                                    value="Move to RSBSA">
+                                                    value="Move to RSBSA" onclick="setTimeout(function () { window.location.reload(); }, 3)">
                                             </div>
                                         </div>
                                     </div>

@@ -6,8 +6,10 @@ require '../myload.php';
 date_default_timezone_set('Asia/Manila');
 
 use Classes\programtables;
+use Classes\util;
 
 $obj = new programtables();
+$util = new util('agriagra', $db);
 
 $table = $obj->rsbsa();
 $agriagratbl = $obj->agriagra();
@@ -196,38 +198,40 @@ if (isset($_POST['printBtn'])) {
 </html>
 
 <?php
+            }
+        } else {
+            echo 'Use checbox to select policy for processing slip. This tab will close after 3 seconds..';
+            echo '<script type="text/javascript">setTimeout("window.close();", 3000);</script>';
         }
-    } else {
-        echo 'Use checbox to select policy for processing slip. This tab will close after 3 seconds..';
-        echo '<script type="text/javascript">setTimeout("window.close();", 3000);</script>';
     }
-}
-if (isset($_POST['t_agri'])) {
-    if (!empty($_POST['chkPrint'])) {
-        $transfer = $_POST['chkPrint'];
-        foreach ($transfer as $key => $value) {
-            try {
-                $db->beginTransaction();
-                $sql =
-                    "INSERT INTO
+    if (isset($_POST['t_agri'])) {
+        if (!empty($_POST['chkPrint'])) {
+            $transfer = $_POST['chkPrint'];
+            foreach ($transfer as $key => $value) {
+                try {
+                    $db->beginTransaction();
+                    $sql =
+                        "INSERT INTO
 					`$agriagratbl` (Year, date_r, groupName, ids1, lsp, status, office_assignment, province, town, assured, farmers, heads, animal, premium, amount_cover, rate, Dfrom, Dto, loading, iu, prepared, tag, f_id)
 					SELECT Year, date_r, groupName, ids1, lsp, status, office_assignment, province, town, assured, farmers, heads, animal, premium, amount_cover, rate, Dfrom, Dto, loading, iu, prepared, tag, f_id
 					FROM `$table` WHERE $table.idsnumber = ?";
-                $result = $db->prepare($sql);
-                $result->execute([$value]);
-                $lastInsert = $db->lastInsertId();
+                    $result = $db->prepare($sql);
+                    $result->execute([$value]);
+                    $lastInsert = $db->lastInsertId();
 
-                $update_result_rsbsa = $db->prepare("UPDATE `$table` SET status = ?, comments = ? WHERE idsnumber = ?");
-                $update_result_rsbsa->execute(["cancelled", "Moved to AGRI-AGRA", $value]);
-                $db->commit();
-                echo 'IDS Transferred';
-                echo '<script type="text/javascript">setTimeout("window.close();", 2000);</script>';
-            } catch (PDOException $e) {
-                $db->rollback();
-                echo "ERROR " . $e->getMessage();
+                    $update_result_rsbsa = $db->prepare("UPDATE `$table` SET status = ?, comments = ? WHERE idsnumber = ?");
+                    $update_result_rsbsa->execute(["cancelled", "Moved to AGRI-AGRA", $value]);
+
+                    $update_print = $util->updatePrintForm($lastInsert, 'AGRI', $value, 'PPPP');
+                    $db->commit();
+                    echo 'IDS Transferred';
+                    echo '<script type="text/javascript">setTimeout("window.close();", 2000);</script>';
+                } catch (PDOException $e) {
+                    $db->rollback();
+                    echo "ERROR " . $e->getMessage();
+                }
             }
         }
-    }
-} else { }
+    } else { }
 
-?>
+    ?>
