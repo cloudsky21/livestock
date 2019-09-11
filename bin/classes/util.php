@@ -6,6 +6,7 @@ class util
 {
     private $table;
     private $_db;
+    private $columns;
 
     public function __construct($table = '', $db)
     {
@@ -340,11 +341,7 @@ class util
 
         $table = $this->table;
         $db = $this->_db;
-        $columns = array(
-            "Year", "date_r", "program", "groupName", "ids1", "lsp", "province", "town", "assured",
-            "farmers", "heads", "animal", "premium", "amount_cover", "rate", "Dfrom", "Dto", "status", "office_assignment",
-            "loading", "iu", "prepared", "tag", "f_id", "comments", "idsprogram",
-        );
+        $columns = $this->getColumns();
 
         $placeholders = substr(str_repeat('?,', sizeOf($columns)), 0, -1);
         $result = $db->prepare(
@@ -372,7 +369,7 @@ class util
         $result = $db->prepare('INSERT INTO print (series, program, userid, status) VALUES (?,?,?,?)');
         $result->execute($myArray);
     }
-    function console_log($data)
+    public function console_log($data)
     {
         echo '<script>';
         echo 'console.log(' . json_encode($data) . ')';
@@ -406,5 +403,22 @@ class util
         $result->execute();
 
         header("location:" . $header);
+    }
+    public function setColumns($columns)
+    {
+        $this->columns = $columns;
+    }
+    public function getColumns()
+    {
+        return $this->columns;
+    }
+
+    public function implodeColumns()
+    {
+
+        $getColumns = $this->getColumns();
+        $implodedColumns = implode("=?,", $getColumns);
+        #$lastEl = array_values(array_slice($array, -1))[0];
+        #$x = end($array); reset($array);
     }
 }

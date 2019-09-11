@@ -149,7 +149,7 @@ if (!isset($_SESSION['token'])) {
         <!-- Table two -->
         <?php
             /* ============== RESULTS DISPLAYED PER PAGE ==========  */
-            $results_per_page = 25;
+            $results_per_page = 27;
             /* =======================================================*/
             if (isset($_GET["page"])) {
                 $page = $_GET["page"];

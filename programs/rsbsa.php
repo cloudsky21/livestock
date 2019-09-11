@@ -9,7 +9,11 @@ use Classes\group;
 use Classes\util;
 
 $util = new util('rsbsa', $db);
+$util->setColumns(array("Year","date_r", "program", "groupName", "ids1", "lsp", "province", "town", "assured",
+"farmers", "heads", "animal", "premium", "amount_cover", "rate", "Dfrom", "Dto", "status", "office_assignment",
+"loading", "iu", "prepared", "tag", "f_id", "comments", "idsprogram"));
 $table = $util->table();
+
 
 //error trappings
 $unwanted = array("&NTILDE;" => "Ñ");
@@ -414,11 +418,15 @@ if (isset($_POST['delete_records'])) {
                             $rs = $db->prepare("SELECT * FROM $table WHERE office_assignment = ? ORDER BY idsnumber DESC LIMIT ?, ?");
                             $rs->execute([$_SESSION['office'], $start_from, $results_per_page]);
                         }
+                        
 
                         foreach ($rs as $row) {
 
+
+                           
+
                             if ($row['status'] == "active") {
-                                echo '<tr>';
+                                echo '<tr id="act_tr">';
                                 echo '<td class="text-center"><input type="checkbox" name="chkPrint[]" value="' . $row['idsnumber'] . '" id="i' . $row['idsnumber'] . '"  style="width:20px; height:20px; cursor: pointer;">
 				</td>';
                                 echo '<td>' . date("m/d/Y", strtotime($row['date_r'])) . '</td>';
@@ -886,6 +894,13 @@ $(document).ready(function() {
             $(this).addClass('table-active');
         }
     });
+});
+
+$(document).ready(function() {
+    setTimeout(function(){
+            $('#act_tr').removeClass('table-active');
+            //....and whatever else you need to do
+    }, 6000);
 });
 
 $(document).ready(function() {
