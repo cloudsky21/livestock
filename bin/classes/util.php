@@ -357,16 +357,26 @@ class util
         $inserted_id = $db->lastInsertId();
         $program = $values[25];
         $status = $values[17];
+
         $this->printForm($inserted_id, $program, $_SESSION['isLoginID'], $status);
         return $result->rowCount();
     }
 
-    function printForm($series, $program, $userid, $status)
+    public function printForm($series, $program, $userid, $status)
     {
         $myArray = array($series, $program, $userid, $status);
         $db = $this->_db;
 
         $result = $db->prepare('INSERT INTO print (series, program, userid, status) VALUES (?,?,?,?)');
+        $result->execute($myArray);
+    }
+
+    public function updatePrintForm($series, $program, $userid, $status)
+    {
+        $myArray = array($series, $program, $userid, $status);
+        $db = $this->_db;
+
+        $result = $db->prepare('UPDATE print SET series = ?, program = ? WHERE series = ? AND program = ?');
         $result->execute($myArray);
     }
     public function console_log($data)

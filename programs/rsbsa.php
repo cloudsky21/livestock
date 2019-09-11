@@ -390,7 +390,7 @@ if (isset($_POST['delete_records'])) {
                                             <input type="submit" class="dropdown-item btn btn-outline-primary btn-sm"
                                                 name="activeBtn" value="Set Active">
                                             <input type="submit" class="dropdown-item btn btn-outline-primary btn-sm"
-                                                name="t_agri" value="Move to AGRI-AGRA">
+                                                name="t_agri" value="Move to AGRI-AGRA" onclick="setTimeout(function () { window.location.reload(); }, 3)">
                                         </div>
                                     </div>
                             </th>

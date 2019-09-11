@@ -6,8 +6,10 @@ require '../myload.php';
 date_default_timezone_set('Asia/Manila');
 
 use Classes\programtables;
+use Classes\util;
 
 $obj = new programtables();
+$util = new util('rsbsa', $db);
 
 $table = $obj->agriagra();
 $rsbsatbl = $obj->rsbsa();
@@ -15,8 +17,7 @@ $rsbsatbl = $obj->rsbsa();
 if (isset($_POST['t_rsbsa'])) {
     if (!empty($_POST['chkPrint'])) {
         foreach ($_POST['chkPrint'] as $key => $value) {
-            try
-            {
+            try {
                 $db->beginTransaction();
                 $sql =
                     "INSERT INTO
@@ -29,6 +30,8 @@ if (isset($_POST['t_rsbsa'])) {
 
                 $update_result_agri = $db->prepare("UPDATE `$table` SET status = ?, comments = ? WHERE idsnumber = ?");
                 $update_result_agri->execute(["cancelled", "Moved to RSBSA", $value]);
+
+                $update_print = $util->updatePrintForm($lastInsert, 'PPPP', $value, 'AGRI');
                 $db->commit();
                 echo 'IDS Transferred';
                 echo '<script type="text/javascript">setTimeout("window.close();", 2000);</script>';
@@ -109,12 +112,15 @@ if (isset($_POST['evaluateBtn'])) {
                     $sum_insured_per_head = "";
                     $rate_per_head = "";
                 }
-
             }
 
             $rcount = $result->rowCount();
             if ($rcount > 0) {
-                if ($lslb == '0') {$lslb = "";} else { $lslb = $lslb;}
+                if ($lslb == '0') {
+                    $lslb = "";
+                } else {
+                    $lslb = $lslb;
+                }
                 switch ($status) {
                     case 'active':
                         # active
@@ -193,7 +199,6 @@ if (isset($_POST['evaluateBtn'])) {
 							<td>' . $heads . '</td>
 					</tr>
 				</table>';
-
             }
 
             ?>
@@ -235,11 +240,11 @@ if (isset($_POST['evaluateBtn'])) {
 </html>
 
 <?php
-}
-    } else {
-        echo 'Use checbox to select policy for processing slip. This tab will close after 3 seconds..';
-        echo '<script type="text/javascript">setTimeout("window.close();", 3000);</script>';
+            }
+        } else {
+            echo 'Use checbox to select policy for processing slip. This tab will close after 3 seconds..';
+            echo '<script type="text/javascript">setTimeout("window.close();", 3000);</script>';
+        }
     }
-}
 
-?>
+    ?>
