@@ -50,7 +50,7 @@ class acpc
     function printForm($series, $program, $userid, $status)
     {
         $myArray = array($series, $program, $userid, $status);
-        $db = $this->_db;
+        $db = $this->db;
 
         $result = $db->prepare('INSERT INTO print (series, program, userid, status) VALUES (?,?,?,?)');
         $result->execute($myArray);

@@ -189,6 +189,11 @@ class yrrp
 					$office = "PEO TACLOBAN";
 					break;
 
+				case 'MACARTHUR':
+					# code...
+					$office = "PEO TACLOBAN";
+					break;
+
 				case 'PASTRANA':
 					# code...
 					$office = "PEO TACLOBAN";
