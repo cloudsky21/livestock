@@ -246,6 +246,7 @@ if (isset($_POST['delete_records'])) {
                         <a class="dropdown-item" href="../checkbox" target="_blank">Checklist</a>
                         <a class="dropdown-item" href="../extract" target="_blank">Extract LIPs</a>
                         <a class="dropdown-item" href="../printform">Batch Printing</a>
+                        <a class="dropdown-item" href="../processmonitoring">PRODUCTION PROCESS MONITORING</a>
 
                         <?php
                         }
@@ -390,7 +391,8 @@ if (isset($_POST['delete_records'])) {
                                             <input type="submit" class="dropdown-item btn btn-outline-primary btn-sm"
                                                 name="activeBtn" value="Set Active">
                                             <input type="submit" class="dropdown-item btn btn-outline-primary btn-sm"
-                                                name="t_agri" value="Move to AGRI-AGRA" onclick="setTimeout(function () { window.location.reload(); }, 3)">
+                                                name="t_agri" value="Move to AGRI-AGRA"
+                                                onclick="setTimeout(function () { window.location.reload(); }, 3)">
                                         </div>
                                     </div>
                             </th>
@@ -897,9 +899,9 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    setTimeout(function(){
-            $('#act_tr').removeClass('table-active');
-            //....and whatever else you need to do
+    setTimeout(function() {
+        $('#act_tr').removeClass('table-active');
+        //....and whatever else you need to do
     }, 6000);
 });
 

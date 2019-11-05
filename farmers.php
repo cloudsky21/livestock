@@ -56,6 +56,8 @@ if (isset($_POST['modify'])) {
     if ($result->rowcount() > 0) {
         $affected = adjustFarmer_table($data, $tables, $db);
         echo '<script>if(!alert("Success! Data has been saved. Tables affected: ' . $affected . ' ")){window.location.reload();}</script>';
+    } else {
+        echo '<script>console.log( ' . json_encode($data) . ' );</script>';
     }
 }
 
@@ -186,8 +188,8 @@ if (isset($_POST['searchBtn'])) {
                     </a>
                     <div class="dropdown-menu">
                         <?php
-                        if ($_SESSION['stat'] == "Main") {
-                            ?>
+                            if ($_SESSION['stat'] == "Main") {
+                                ?>
                         <a class="dropdown-item" href="year">Insurance Year</a>
                         <a class="dropdown-item" href="farmers">Farmers List</a>
                         <a class="dropdown-item" href="accounts">Accounts</a>
@@ -196,8 +198,8 @@ if (isset($_POST['searchBtn'])) {
                         <a class="dropdown-item" href="extract" target="_blank">Extract LIPs</a>
 
                         <?php
-                        }
-                        ?>
+                            }
+                            ?>
                         <a class="dropdown-item" href="reports">Reports</a>
                         <a class="dropdown-item" href="locations">Locations</a>
                     </div>
@@ -231,17 +233,17 @@ if (isset($_POST['searchBtn'])) {
         <!-- Body of Code -->
         <div style="margin-top: 50px;">
             <?php
-            if (isset($_POST['searchBtn'])) {
-                ?>
+                if (isset($_POST['searchBtn'])) {
+                    ?>
             <form method="post" action="">
                 <?php
-                    echo $html;
-                    echo '<script>if ( window.history.replaceState ) {window.history.replaceState( null, null, window.location.href );}</script>';
-                    ?>
+                            echo $html;
+                            echo '<script>if ( window.history.replaceState ) {window.history.replaceState( null, null, window.location.href );}</script>';
+                            ?>
             </form>
             <?php
-            }
-            ?>
+                }
+                ?>
 
         </div>
         <!-- End of Body of Code -->
