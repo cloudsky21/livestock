@@ -116,7 +116,7 @@ if (!isset($_SESSION['token'])) {
                         <a class="dropdown-item" href="programs/agriagra">AGRI-AGRA</a>
                         <a class="dropdown-item" href="programs/saad">SAAD</a>
                         <a class="dropdown-item" href="programs/yrrp">YRRP</a>
-                        <a class="dropdown-item" href="programs/type?core=1">Sample</a>
+                        <a class="dropdown-item" href="programs/main">New Program</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="main_search"><span class="fa fa-search"></span> Farmer Search</a>
                     </div>

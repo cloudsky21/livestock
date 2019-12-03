@@ -48,9 +48,9 @@ $(document).ready(function() {
     });
 });
 
-function address($val) {
+function address(val) {
     $('#town').empty();
-    var dropselect = $val;
+    var dropselect = val;
 
     $.ajax({
         type: "POST",
@@ -107,47 +107,86 @@ window.onload = function() {
 
 $(document).ready(function() {
     $("#animal-type").change(function() {
-        var animalType = $("#animal-type option:selected").val();
+        var val = $("#animal-type option:selected").val();
+        var gHeads = parseFloat($('#head-count').val());
 
-        if (animalType == "Carabao-Draft" || animalType == "Carabao-Breeder" || animalType == "Carabao-Dairy" || animalType == "Carabao-Fattener") {
+        if (val == "Carabao-Draft" || val == "Carabao-Breeder" || val == "Carabao-Dairy" || val == "Carabao-Fattener") {
             $('#rate').val('5');
-
-
-        } else if (animalType == "Cattle-Draft" || animalType == "Cattle-Breeder" || animalType == "Cattle-Dairy" || animalType == "Cattle-Fattener") {
+            if(!isNaN(gHeads)) {
+                $('#cover').val(gHeads * 15000);	
+            }
+            else {
+                alert('Head-count is not a number');	
+            }
+    
+        }
+        else if (val == "Cattle-Draft" || val == "Cattle-Breeder" || val == "Cattle-Dairy" || val == "Cattle-Fattener"){
             $('#rate').val('5');
-
-        } else if (animalType == "Horse-Draft" || animalType == "Horse-Breeder" || animalType == "Horse-Working") {
+            if(!isNaN(gHeads)) {
+                $('#cover').val(gHeads * 15000);	
+            }
+            else {
+                alert('Head-count is not a number');	
+            }	
+        }
+        else if (val == "Horse-Draft" || val == "Horse-Breeder" || val == "Horse-Working"){	
             $('#rate').val('5');
-
-        } else if (animalType == "Swine-Breeder") {
+            if(!isNaN(gHeads)) {
+                $('#cover').val(gHeads * 15000);	
+            }
+            else {
+                alert('Head-count is not a number');	
+            }	
+        }
+        else if (val == "Swine-Breeder"){	
             $('#rate').val('3.5');
-
-        } else if (animalType == "Swine-Fattener") {
+            if(!isNaN(gHeads)) {
+                $('#cover').val(gHeads * 10000);	
+            }
+            else {
+                alert('Head-count is not a number');	
+            }	
+        }
+        else if (val == "Swine-Fattener"){	
             $('#rate').val('1.75');
-
-        } else if (animalType == "Goat-Fattener") {
+            if(!isNaN(gHeads)) {
+                $('#cover').val(gHeads * 7000);	
+            }
+            else {
+                alert('Head-count is not a number');	
+            }	
+        }
+        else if (val == "Goat-Fattener"){	
+            $('#rate').val('6');           
+        }
+        else if (val == "Goat-Milking"){	
             $('#rate').val('6');
-
-        } else if (animalType == "Goat-Milking") {
+           
+        }
+        else if (val == "Goat-Breeder"){	
             $('#rate').val('6');
-
-        } else if (animalType == "Goat-Breeder") {
+           
+        }
+        else if (val == "Sheep-Fattener"){	
             $('#rate').val('6');
-
-        } else if (animalType == "Sheep-Fattener") {
+            
+        }
+    else if (val == "Sheep-Breeder"){	
             $('#rate').val('6');
-
-        } else if (animalType == "Sheep-Breeder") {
-            $('#rate').val('6');
-
-        } else if (animalType == "Poultry-Layers") {
-            $('#rate').val('2.6');
-        } else if (animalType == "Poultry-Pullets") {
-            $('#rate').val('2.6');
-        } else if (animalType == "Poultry-Broilers") {
-            $('#rate').val('1');
-        } else {
-            $('#rate').val('0.00');
+            
+        }
+        else if (val == "Poultry-Layers"){	
+            $('#rate').val('2.6');            
+    
+        }
+        else if (val == "Poultry-Pullets"){	
+            $('#rate').val('2.6');	
+        }
+        else if (val == "Poultry-Broilers"){	
+            $('#rate').val('1');    
+        }
+        else {
+            $('#rate').val('0.00');	
         }
 
     });
@@ -236,10 +275,10 @@ function insertData() {
 }
 
 
-function typeAnimal($val) {
+function typeAnimal(val) {
     $('#purpose').empty();
 
-    if ($val == "Carabao" || $val == "Cattle") {
+    if (val == "Carabao" || val == "Cattle") {
 
         var items = [
 
@@ -273,7 +312,7 @@ function typeAnimal($val) {
 
 
 
-    } else if ($val == "Horse") {
+    } else if (val == "Horse") {
 
         var items = [
 
@@ -294,7 +333,7 @@ function typeAnimal($val) {
         });
 
 
-    } else if ($val == "Goat" || $val == "Sheep") {
+    } else if (val == "Goat" || val == "Sheep") {
 
         var items = [
 
@@ -323,7 +362,7 @@ function typeAnimal($val) {
         });
 
 
-    } else if ($val == "Swine") {
+    } else if (val == "Swine") {
 
         var items = [
 
@@ -348,7 +387,7 @@ function typeAnimal($val) {
         });
 
 
-    } else if ($val == "Poultry") {
+    } else if (val == "Poultry") {
 
         var items = [
 

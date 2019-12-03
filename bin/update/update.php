@@ -421,7 +421,7 @@ else {
         </th>
         <td>
             <input type="number" id="farmer-count" name="farmer-count" required min=0 step="any"
-                value="<?PHP echo $fCount; ?>" class="form-control form-control-sm">
+                value="<?PHP echo $fCount; ?>" class="form-control form-control-sm" readonly>
         </td>
     </tr>
     <tr>

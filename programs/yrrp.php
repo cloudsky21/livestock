@@ -142,7 +142,7 @@ if (isset($_POST['submit_index_update'])) {
 	//check office_assignment
 	$office_assignment = $yrrp->office_assignment($province, $town);
 	$tag = mb_strtoupper(htmlentities($_POST['tag']));
-	$f_id = htmlentities($_POST['assured-id']);
+	$f_id = htmlentities($_POST['assured_id']);
 	$notes = htmlentities($_POST['notes'], ENT_QUOTES);
 
 	$bpremium = ($_POST['rate'] / 100) * $_POST['cover'];
@@ -518,8 +518,32 @@ if (isset($_POST['printBtn'])) {
                     <table class="table table-hover table-condensed table-sm " id="displaydata">
                         <thead>
                             <tr>
-                                <th><input type="submit" class="btn btn-outline-primary btn-sm" name="printBtn"
-                                        value="print"></th>
+                            <th class="text-center">
+                                <div class="btn-group" role="group" aria-label="Action Button">
+                                    <div class="btn-group" role="group">
+                                        <button id="actionBtnDropList" type="button"
+                                            class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false"></button>
+                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop2">
+                                            <input type="submit" class="dropdown-item btn btn-outline-primary btn-sm"
+                                                name="printBtn" value="Print Processing Slip">
+                                            <input type="submit" class="dropdown-item btn btn-outline-primary btn-sm"
+                                                name="pIDSBtn" value="Print IDS">
+                                            <input type="submit" class="dropdown-item btn btn-outline-primary btn-sm"
+                                                name="evaluateBtn" value="Evaluate">
+                                            <input type="submit" class="dropdown-item btn btn-outline-primary btn-sm"
+                                                name="cancelBtn" value="Cancel">
+                                            <input type="submit" class="dropdown-item btn btn-outline-primary btn-sm"
+                                                name="activeBtn" value="Set Active">
+                                            <input type="submit" class="dropdown-item btn btn-outline-primary btn-sm"
+                                                name="t_agri" value="Move to AGRI-AGRA"
+                                                onclick="setTimeout(function () { window.location.reload(); }, 3)">
+                                            <input type="submit" class="dropdown-item btn btn-outline-primary btn-sm"
+                                                name="t_rsbsa" value="Move to RSBSA"
+                                                onclick="setTimeout(function () { window.location.reload(); }, 3)">
+                                        </div>
+                                    </div>
+                            </th>        
                                 <th>Date Received</th>
                                 <th>Livestock Policy Number</th>
                                 <th>Name Of Farmers / Assured</th>
@@ -569,20 +593,16 @@ if (isset($_POST['printBtn'])) {
 									echo '</tr>';
 								} else if ($row['status'] == "cancelled") {
 									echo '<tr>';
-									echo '<td><input type="checkbox" name="chkPrint"></td>';
+									echo '<td class="text-center text-danger">Cancelled</td>';
 									echo '<td>' . date("m/d/Y", strtotime($row['date_r'])) . '</td>';
 									echo '<td href="#infoModal" id="info_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><strong>' . $row['lsp'] . '' . sprintf("%04d", $row['idsnumber']) . '&nbsp;' . $row['idsprogram'] . '</strong></td>';
 									echo '<td href="#addmembers" id="members" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static">' . $row['assured'] . '</td>';
 									//echo '<td><a class="btn btn-xs" role="button" href="#" data-toggle="modal" data-target="#aF" data-id="'.$row['idsnumber'].'" data-backdrop="static"><span class="glyphicon glyphicon-plus" ></span></a></td>';
 									echo '<td>' . $row['town'] . ', ' . $row['province'] . '</td>';
 									echo '<td>' . $row['animal'] . '</td>';
-									if (!$row['lslb'] == "0") {
-										echo '<td><a class="btn btn-outline-primary btn-sm" href="policy?lslb=' . $row['lslb'] . '" target="_blank">' . $row['lslb'] . '</a></td>';
-									} else {
-										echo '<td><a class="btn btn-outline-primary btn-sm disabled" href="#">' . $row['lslb'] . '</a></td>';
-									}
-									echo '<td><a class="btn btn-outline-primary btn-sm" href="#editModal" id="edit_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><i class="fa fa-edit"></i></a></td>';
-									echo '<td><a class="btn btn-outline-primary btn-sm" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><i class="fa fa-trash"/></i></a></td>';
+									
+									echo '<td><a class="btn btn-danger btn-sm" href="#editModal" id="edit_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><i class="fa fa-edit"></i></a></td>';
+									echo '<td><a class="btn btn-danger btn-sm" data-target="#deleteModal" id="delete_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><i class="fa fa-trash"/></i></a></td>';
 
 									echo '</tr>';
 								} else {

@@ -235,6 +235,7 @@ if (!isset($_SESSION['token'])) {
                         <?php
                             $t = 1;
                             #$sql = $db->prepare('SELECT * FROM print WHERE  (userid = ? AND flag = ?) AND status = ?');
+
                             $sql = $db->prepare('SELECT * FROM print WHERE  ((userid = ? AND flag = ?) AND status = ?) ORDER BY date DESC LIMIT ?, ?');
                             $sql->execute([$_SESSION['isLoginID'], 0, 'active', $start_from, $results_per_page]);
 

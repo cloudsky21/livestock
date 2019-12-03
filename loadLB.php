@@ -71,7 +71,7 @@ if (isset($_POST['send_csv'])) {
     echo 'agriagra: ' . $aaCount . '<br>';
     echo 'yrrp: ' . $yrrpCount . '<br>';
     echo 'SAAD: ' . $saadCount . '<br>';
-        
+
     #var_dump($agriLb);
 }
 
@@ -80,9 +80,10 @@ if (isset($_POST['send_csv'])) {
 <html>
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>CSV</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
@@ -93,7 +94,6 @@ if (isset($_POST['send_csv'])) {
         <label for='csv2'>AGRIAGRA</label> <br><input type="file" name="csv2"><br><br>
         <label for='csv3'>YRRP</label> <br><input type="file" name="csv3"><br><br>
         <label for='csv4'>SAAD</label> <br><input type="file" name="csv4"><br><br>
-
         <input type="submit" name="send_csv">
     </form>
 </body>

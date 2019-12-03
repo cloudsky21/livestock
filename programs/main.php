@@ -8,13 +8,18 @@ use Classes\farmers;
 use Classes\group;
 use Classes\util;
 
-$util = new util('rsbsa', $db);
+$_SESSION['table'] = 'livestock2020';
+$table = $_SESSION['table'];
+
+
+$util = new util($table, $db);
 $util->setColumns(array(
     "Year", "date_r", "program", "groupName", "ids1", "lsp", "province", "town", "assured",
     "farmers", "heads", "animal", "premium", "amount_cover", "rate", "Dfrom", "Dto", "status", "office_assignment",
     "loading", "iu", "prepared", "tag", "f_id", "comments", "idsprogram"
 ));
-$table = $util->table();
+#$table = $util->table();
+
 
 //error trappings
 $unwanted = array("&NTILDE;" => "Ñ");
@@ -218,10 +223,13 @@ if (isset($_POST['delete_records'])) {
         <!-- Navbar links -->
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav mr-auto">
+
+                <!--
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                         <span class="fa fa-navicon"></span> Programs
                     </a>
+                    
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="rsbsa">RSBSA</a>
                         <a class="dropdown-item" href="regular">Regular Program</a>
@@ -231,6 +239,7 @@ if (isset($_POST['delete_records'])) {
                         <a class="dropdown-item" href="saad">SAAD</a>
                         <a class="dropdown-item" href="yrrp">YRRP</a>
                     </div>
+-->
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
@@ -297,7 +306,7 @@ if (isset($_POST['delete_records'])) {
 
     <div class="container-fluid">
         <div class="page-header" style="margin-top:50px;">
-            <h2 class="display-5">Registry System on Basic Sectors in Agriculture (RSBSA)</h2>
+            <h2 class="display-5">Livestock Records</h2>
             <div class="addbutton">
                 <button class="btn btn-sm btn-default" href="#" data-toggle="modal" data-target="#myModal"
                     data-backdrop="static" data-keyboard="false">
@@ -458,7 +467,7 @@ if (isset($_POST['delete_records'])) {
                                         echo '</tr>';
                                     } else if ($row['status'] == "cancelled") {
                                         echo '<tr>';
-                                        echo '<td class="text-center">Cancelled</td>';
+                                        echo '<td class="text-center"></td>';
                                         echo '<td id="i"' . $row['idsnumber'] . '>' . date("m/d/Y", strtotime($row['date_r'])) . '</td>';
                                         echo '<td href="#infoModal" id="info_id" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static"><strong class="text-danger">' . $row['lsp'] . '' . sprintf("%04d", $row['idsnumber']) . '-' . $row['idsprogram'] . '</strong></td>';
                                         echo '<td href="#addmembers" id="members" data-toggle="modal" data-id="' . $row['idsnumber'] . '" data-backdrop="static" disabled>' . $row['assured'] . '</td>';
@@ -621,12 +630,19 @@ if (isset($_POST['delete_records'])) {
                                         class="form-control form-control-sm"></td>
                             </tr>
                             <tr>
-                                <th scope="row"><label for="type_rsbsa">Type of RSBSA (optional):</label></th>
+                                <th scope="row"><label for="type">Program:</label></th>
                                 <td>
-                                    <select id="type_rsbsa" name="type_rsbsa" class="form-control form-control-sm">
-                                        <option value="PPPP" selected>Default</option>
-                                        <option value="PPPP-ARB">DAR</option>
-                                        <option value="PPPP-ACEF">ACEF</option>
+                                    <select id="type" name="type" class="form-control form-control-sm">
+                                        <option value="1" selected>RSBSA</option>
+                                        <option value="2">RSBSA-DAR</option>
+                                        <option value="3">RSBSA-ACEF</option>
+                                        <option value="4">AGRI-AGRA</option>
+                                        <option value="5">AGRI-DAR</option>
+                                        <option value="6">REGULAR</option>
+                                        <option value="7">LBP-APCP</option>
+                                        <option value="8">PUNLA</option>
+                                        <option value="9">SAAD</option>
+                                        <option value="10">YRRP</option>
                                     </select>
                                 </td>
                             </tr>
@@ -671,6 +687,7 @@ if (isset($_POST['delete_records'])) {
                                 </td>
                             </tr>
                             <?php
+
                                     } else {
 
                                         ?>
@@ -708,8 +725,8 @@ if (isset($_POST['delete_records'])) {
                             </tr>
                             <tr>
                                 <th scope="row"><label for="farmer-count">Farmers</label></th>
-                                <td><input type="number" id="farmer-count" name="farmer-count" required readonly min=0
-                                        step="any" tabindex="7" class="form-control form-control-sm" value="1"></td>
+                                <td><input type="number" id="farmer-count" name="farmer-count" required min=0 step="any"
+                                        tabindex="7" class="form-control form-control-sm"></td>
                             </tr>
                             <tr>
                                 <th scope="row"><label for="head-count">Heads</label></th>
@@ -844,16 +861,6 @@ $(document).ready(function() {
                         text: town
                     }));
                     $('#town').val(town);
-
-                    /*
-                    $('#province option').each(function(){
-                    	if ($(this).text() == provinces){
-                    		$(this).parent().val($(this).val());
-
-                    	}
-                    });
-                    $('#town option').val(town);
-                    */
 
 
                     $('#assured-name').prop('readonly', true);

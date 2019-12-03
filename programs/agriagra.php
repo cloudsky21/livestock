@@ -910,7 +910,7 @@ $result = $db->prepare("SELECT province FROM location WHERE office = ? LIMIT 1")
                             <tr>
                                 <th scope="row"><label for="farmer-count">Farmers</label></th>
                                 <td><input type="number" id="farmer-count" name="farmer-count" required min=0 step="any"
-                                        tabindex="8" class="form-control form-control-sm"></td>
+                                        tabindex="8" class="form-control form-control-sm" value="1" readonly></td>
                             </tr>
                             <tr>
                                 <th scope="row"><label for="head-count">Heads</label></th>

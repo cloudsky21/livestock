@@ -364,6 +364,7 @@ class util
 
     public function printForm($series, $program, $userid, $status)
     {
+
         $myArray = array($series, $program, $userid, $status);
         $db = $this->_db;
 
@@ -371,12 +372,13 @@ class util
         $result->execute($myArray);
     }
 
-    public function updatePrintForm($series, $program, $userid, $status)
+    public function updatePrintForm($series, $program,  $userid, $status)
     {
-        $myArray = array($series, $program, $userid, $status);
+        $today = date('Y-m-d H:i:s', time());
+        $myArray = array($series, $program, $today, $userid, $status);
         $db = $this->_db;
 
-        $result = $db->prepare('UPDATE print SET series = ?, program = ? WHERE series = ? AND program = ?');
+        $result = $db->prepare('UPDATE print SET series = ?, program = ?, date = ?, flag = 0 WHERE series = ? AND program = ?');
         $result->execute($myArray);
     }
     public function console_log($data)

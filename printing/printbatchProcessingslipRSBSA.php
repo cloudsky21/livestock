@@ -50,6 +50,7 @@ if (isset($_POST['printBtn'])) {
                 $lslb = $row['lslb'];
                 $iu = $row['iu'];
                 $prepared = $row['prepared'];
+                $note = $row['comments'];
                 if ($row['idsprogram'] == 'PPPP') {
                     $or = '222222-' . substr($_SESSION['insurance'], -2) . '-' . sprintf("%04d", $row['idsnumber']) . '-L';
                 } else if ($row['idsprogram'] == 'PPPP-ARB') {
@@ -80,7 +81,11 @@ if (isset($_POST['printBtn'])) {
                 switch ($status) {
                     case 'active':
                         # active
-                        $displaystat = "Note: Subject to possible changes.";
+                        if (empty($note)) {
+                            $displaystat = "Note: Subject to possible changes.";
+                        } else {
+                            $displaystat = "Note: " . $note . ".";
+                        }
                         break;
 
                     case 'cancelled':
@@ -154,7 +159,7 @@ if (isset($_POST['printBtn'])) {
 							<td>' . $farmers . '</td>
 						<th scope="row"><label>HEADS</label></th>
 							<td>' . $heads . '</td>
-					</tr>
+                    </tr>                   
 				</table>';
             }
 

@@ -32,7 +32,7 @@ class html
         /* use and SET private $title variable */
         $this->title = $title;
     }
-    public function SetPageTitle()
+    private function SetPageTitle()
     {
         /* Return title Page */
         return $this->title;
@@ -42,12 +42,12 @@ class html
         /* use private $styleSheet (array) variable */
         $this->styleSheet = $styleSheet;
     }
-    public function SetStyleSheet()
+    private function SetStyleSheet()
     {
         /* Return CSS Stylesheets which is in an array */
         return $this->styleSheet;
     }
-    public function output()
+    public function header()
     {
         $html = '';
         $html = '
@@ -67,6 +67,11 @@ class html
         }
         $html .= '</head>';
         echo $html;
+    }
+
+    public function footer()
+    {
+        echo '</html>';
     }
 }
 

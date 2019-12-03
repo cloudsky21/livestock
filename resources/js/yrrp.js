@@ -169,7 +169,7 @@ function getch($val){
 			alert('Head-count is not a number');	
 		}	
 	}
-	else if ($val == "Sheep-Breeder"){	
+else if ($val == "Sheep-Breeder"){	
 		$('#rate').val('5');
 		if(!isNaN(gHeads)) {
 			$('#cover').val(gHeads * 35000);	
