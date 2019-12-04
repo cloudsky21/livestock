@@ -5,6 +5,7 @@ namespace Classes;
 class util
 {
     private $table;
+    private $table2;
     private $_db;
     private $columns;
 
@@ -12,11 +13,15 @@ class util
     {
         $this->table = $table . $_SESSION['insurance'];
         $this->_db = $db;
+        $this->table($table);
     }
-
-    public function table()
+    function seTtable()
     {
-        return $this->table;
+        return $this->table2;
+    }
+    public function table($table)
+    {
+        $this->table2 = $table;
     }
     public function getDate($date)
     {
@@ -340,6 +345,32 @@ class util
     {
 
         $table = $this->table;
+        $db = $this->_db;
+        $columns = $this->getColumns();
+
+        $placeholders = substr(str_repeat('?,', sizeOf($columns)), 0, -1);
+        $result = $db->prepare(
+            sprintf(
+                "INSERT INTO %s (%s) VALUES (%s)",
+                $table,
+                implode(',', $columns),
+                $placeholders
+            )
+        );
+
+        $result->execute($values);
+        $inserted_id = $db->lastInsertId();
+        $program = $values[25];
+        $status = $values[17];
+
+        $this->printForm($inserted_id, $program, $_SESSION['isLoginID'], $status);
+        return $result->rowCount();
+    }
+
+    public function insertData2($values)
+    {
+
+        $table = $this->seTtable();
         $db = $this->_db;
         $columns = $this->getColumns();
 

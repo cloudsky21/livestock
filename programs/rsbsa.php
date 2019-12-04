@@ -8,13 +8,15 @@ use Classes\farmers;
 use Classes\group;
 use Classes\util;
 
+$table = "rsbsa" . $_SESSION['insurance'];
+
 $util = new util('rsbsa', $db);
 $util->setColumns(array(
     "Year", "date_r", "program", "groupName", "ids1", "lsp", "province", "town", "assured",
     "farmers", "heads", "animal", "premium", "amount_cover", "rate", "Dfrom", "Dto", "status", "office_assignment",
     "loading", "iu", "prepared", "tag", "f_id", "comments", "idsprogram"
 ));
-$table = $util->table();
+#$table = $util->table();
 
 //error trappings
 $unwanted = array("&NTILDE;" => "Ñ");

@@ -13,12 +13,14 @@ $table = $_SESSION['table'];
 
 
 $util = new util($table, $db);
+$util->table($table);
+
 $util->setColumns(array(
     "Year", "date_r", "program", "groupName", "ids1", "lsp", "province", "town", "assured",
     "farmers", "heads", "animal", "premium", "amount_cover", "rate", "Dfrom", "Dto", "status", "office_assignment",
     "loading", "iu", "prepared", "tag", "f_id", "comments", "idsprogram"
 ));
-#$table = $util->table();
+
 
 
 //error trappings
@@ -51,7 +53,7 @@ if (isset($_POST['submiter'])) {
     $assured = strtr(mb_strtoupper(htmlentities($_POST['assured-name'], ENT_QUOTES)), $unwanted);
     $province = strtr(mb_strtoupper(htmlentities($_POST['province'], ENT_QUOTES)), $unwanted);
     $town = strtr(mb_strtoupper(htmlentities($_POST['town'], ENT_QUOTES)), $unwanted);
-    $rsbsa_type = strtr(mb_strtoupper(htmlentities($_POST['type_rsbsa'], ENT_QUOTES)), $unwanted);
+    $rsbsa_type = strtr(mb_strtoupper(htmlentities($_POST['type'], ENT_QUOTES)), $unwanted);
 
     $bpremium = ($_POST['rate'] / 100) * $_POST['cover'];
     $fromDate = date("Y-m-d", strtotime($_POST['effectivity-date']));
@@ -73,7 +75,7 @@ if (isset($_POST['submiter'])) {
         $_POST['rate'], $fromDate, $toDate, "active",
         $office_assignment, $prem_loading, $iu, $prepared, $tag, $f_id, $notes, $rsbsa_type,
     );
-    $result = $util->insertData($values);
+    $result = $util->insertData2($values);
     if ($result > 0) {
         $_SESSION['group'] = $group;
         header('Location: ' . $_SERVER['REQUEST_URI']);
@@ -161,7 +163,7 @@ if (isset($_POST['delete_records'])) {
 <html>
 
 <head>
-    <title>RSBSA | Livestock Control</title>
+    <title>All Programs | Livestock Control</title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <!-- <meta http-equiv="refresh" content="180"> -->
@@ -695,17 +697,6 @@ if (isset($_POST['delete_records'])) {
                                 <th scope="row"><label for="address">Province</label></th>
                                 <td><select id="province" name="province" placeholder="Leyte" class="custom-select"
                                         tabindex="6" onfocus="getaddress(this.value);" required>
-                                        <?php
-                                                        /*
-    $result = $db->prepare("SELECT province FROM location WHERE office = ? LIMIT 1");
-    $result->execute([$_SESSION['office']]);
-    foreach ($result as $row) {
-
-    echo '<option value="' . $row['province'] . '" selected>' . $row['province'] . '</option>';
-    }
-     */
-                                                        ?>
-
                                     </select>
                                 </td>
 
@@ -726,7 +717,7 @@ if (isset($_POST['delete_records'])) {
                             <tr>
                                 <th scope="row"><label for="farmer-count">Farmers</label></th>
                                 <td><input type="number" id="farmer-count" name="farmer-count" required min=0 step="any"
-                                        tabindex="7" class="form-control form-control-sm"></td>
+                                        tabindex="7" class="form-control form-control-sm" value="1" readonly></td>
                             </tr>
                             <tr>
                                 <th scope="row"><label for="head-count">Heads</label></th>
