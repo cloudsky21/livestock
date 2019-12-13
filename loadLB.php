@@ -9,11 +9,15 @@ if (isset($_POST['send_csv'])) {
     $agriLb = $_FILES['csv2']['tmp_name'];
     $yrrpLb = $_FILES['csv3']['tmp_name'];
     $saadLb = $_FILES['csv4']['tmp_name'];
+    $apcpLb = $_FILES['csv5']['tmp_name'];
+    $punlaLb = $_FILES['csv6']['tmp_name'];
 
     $rsCount = 0;
     $aaCount = 0;
     $yrrpCount = 0;
     $saadCount = 0;
+    $apcpCount = 0;
+    $punlaCount = 0;
     try {
         $db->beginTransaction();
 
@@ -62,15 +66,41 @@ if (isset($_POST['send_csv'])) {
         } else {
             echo "SAAD is empty" . "<br>";
         }
+
+        if ($_FILES['csv5']['size'] > 0) {
+            $fileApcp = fopen($apcpLb, "r");
+            while (($getdata4 = fgetcsv($fileApcp, 10000, ",")) !== false) {
+                $result = $db->prepare("UPDATE apcp2019 SET lslb = ? WHERE idsnumber = ? AND (lslb is NULL OR lslb = 0) ");
+                $result->execute([$getdata4[0], $getdata4[1]]);
+                $apcpCount = $result->rowCount();
+            }
+        } else {
+            echo "APCP-LBP is empty" . "<br>";
+        }
+
+        if ($_FILES['csv6']['size'] > 0) {
+            $filePunla = fopen($punlaLb, "r");
+            while (($getdata4 = fgetcsv($filePunla, 10000, ",")) !== false) {
+                $result = $db->prepare("UPDATE punla2019 SET lslb = ? WHERE idsnumber = ? AND (lslb is NULL OR lslb = 0) ");
+                $result->execute([$getdata4[0], $getdata4[1]]);
+                $punlaCount = $result->rowCount();
+            }
+        } else {
+            echo "ACPC-PUNLA is empty" . "<br>";
+        }
         $db->commit();
     } catch (Exception $e) {
         echo $e->getMessage();
     }
 
+
+
     echo 'rsbsa: ' . $rsCount . '<br>';
     echo 'agriagra: ' . $aaCount . '<br>';
     echo 'yrrp: ' . $yrrpCount . '<br>';
     echo 'SAAD: ' . $saadCount . '<br>';
+    echo 'APCP-LBP: ' . $apcpCount . '<br>';
+    echo 'ACPC-Punla: ' . $punlaCount . '<br>';
 
     #var_dump($agriLb);
 }
@@ -94,6 +124,8 @@ if (isset($_POST['send_csv'])) {
         <label for='csv2'>AGRIAGRA</label> <br><input type="file" name="csv2"><br><br>
         <label for='csv3'>YRRP</label> <br><input type="file" name="csv3"><br><br>
         <label for='csv4'>SAAD</label> <br><input type="file" name="csv4"><br><br>
+        <label for='csv5'>APCP-LBP</label> <br><input type="file" name="csv5"><br><br>
+        <label for='csv6'>PUNLA</label> <br><input type="file" name="csv6"><br><br>
         <input type="submit" name="send_csv">
     </form>
 </body>
